@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Работы - Илья Зубков</title>
+    <meta
+      name="description"
+      content="Избранные проекты Ильи Зубкова: айдентика, визуальные системы, презентации и AI-driven brand workflows."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script>
+      history.scrollRestoration = "manual";
+      if (sessionStorage.getItem("ilya-zubkov-page-fade-in") === "1") {
+        document.documentElement.classList.add("is-page-fading-in");
+      }
+      window.scrollTo(0, 0);
+    </script>
+  </head>
+  <body
+    data-page="work"
+    data-title-ru="Работы - Илья Зубков"
+    data-title-en="Work - Ilya Zubkov"
+    data-description-ru="Избранные проекты Ильи Зубкова: айдентика, визуальные системы, презентации и AI-driven brand workflows."
+    data-description-en="Selected projects by Ilya Zubkov: identities, visual systems, presentations and AI-driven brand workflows."
+  >
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container header-row">
+          <a class="brand-mark" href="index.html" aria-label="Maybe - Ilya Zubkov">
+            <img class="brand-mark__logo" src="assets/maybe-logo.svg" alt="" />
+          </a>
+
+          <div class="header-actions">
+            <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+              <a href="work.html" data-i18n="common.navWork">Работы</a>
+              <a href="about.html" data-i18n="common.navAbout">Обо мне</a>
+              <a href="contact.html" data-i18n="common.navContact">Контакт</a>
+            </nav>
+
+            <div class="lang-switch" aria-label="Language switcher">
+              <button class="lang-switch__button" type="button" data-lang="ru">RU</button>
+              <button class="lang-switch__button" type="button" data-lang="en">EN</button>
+            </div>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="common.menu">
+              Меню
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero hero--page">
+          <div class="container hero__stack">
+            <p class="section-kicker" data-i18n="work.heroKicker">Работы</p>
+            <h1 data-i18n="work.heroTitle">Проекты в области айдентики, визуальных систем и AI-assisted design direction.</h1>
+            <p class="hero__lede hero__lede--narrow" data-i18n="work.heroLead">
+              Подборка кейсов для корпоративных брендов, культурных инициатив, digital-продуктов и агентских задач.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <!-- Сетка проектов автоматически строится из assets/projects.js -->
+            <div class="project-grid project-grid--work" id="work-grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <section class="footer-feature">
+        <div class="container footer-feature__grid">
+          <p class="section-kicker footer-feature__kicker" data-i18n="common.footerFeatureKicker">Открыт к диалогу</p>
+          <p class="footer-feature__text" data-i18n="common.footerFeatureText">Давайте обсудим, что бренд может сделать дальше.</p>
+          <div class="footer-feature__links">
+            <a href="#" data-i18n="common.footerFeatureTop">Наверх</a>
+          </div>
+          <div class="footer-feature__socials">
+            <a href="#">Behance</a>
+            <a href="#">Telegram</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="container footer-row">
+          <p>Ilya Zubkov</p>
+          <p data-i18n="common.footerRole">Brand Designer / Art Director / AI Workflow Design</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="assets/projects.js" defer></script>
+    <script src="assets/script.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обо мне - Илья Зубков</title>
+    <meta
+      name="description"
+      content="Об Илье Зубкове: senior brand designer и art director, работающий на пересечении бренд-систем и AI-powered production."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script>
+      history.scrollRestoration = "manual";
+      if (sessionStorage.getItem("ilya-zubkov-page-fade-in") === "1") {
+        document.documentElement.classList.add("is-page-fading-in");
+      }
+      window.scrollTo(0, 0);
+    </script>
+  </head>
+  <body
+    data-page="about"
+    data-title-ru="Обо мне - Илья Зубков"
+    data-title-en="About - Ilya Zubkov"
+    data-description-ru="Об Илье Зубкове: senior brand designer и art director, работающий на пересечении бренд-систем и AI-powered production."
+    data-description-en="About Ilya Zubkov: a senior brand designer and art director working at the intersection of brand systems and AI-powered production."
+  >
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container header-row">
+          <a class="brand-mark" href="index.html" aria-label="Maybe - Ilya Zubkov">
+            <img class="brand-mark__logo" src="assets/maybe-logo.svg" alt="" />
+          </a>
+
+          <div class="header-actions">
+            <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+              <a href="work.html" data-i18n="common.navWork">Работы</a>
+              <a href="about.html" data-i18n="common.navAbout">Обо мне</a>
+              <a href="contact.html" data-i18n="common.navContact">Контакт</a>
+            </nav>
+
+            <div class="lang-switch" aria-label="Language switcher">
+              <button class="lang-switch__button" type="button" data-lang="ru">RU</button>
+              <button class="lang-switch__button" type="button" data-lang="en">EN</button>
+            </div>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="common.menu">
+              Меню
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero hero--about">
+          <div class="container about-hero">
+            <p class="section-kicker about-hero__kicker" data-i18n="about.heroKicker">Обо мне</p>
+            <!-- Замените блок below на реальный портрет или авторскую фотографию -->
+            <div class="about-portrait reveal">
+              <img
+                class="about-portrait__image"
+                src="assets/about-photo.png"
+                alt="Портрет Ильи Зубкова"
+              />
+            </div>
+
+            <div class="about-hero__copy">
+              <p class="section-kicker" data-i18n="about.heroKicker">Обо мне</p>
+              <h1 data-i18n="about.heroTitle">
+                Я работаю на пересечении бренд-систем, визуального направления и AI-powered production.
+              </h1>
+              <p class="hero__lede hero__lede--narrow" data-i18n="about.heroLead">
+                Илья Зубков — senior brand designer и art director, сфокусированный на identity systems, logo design, visual language, presentations и AI-assisted creative workflows.
+              </p>
+              <p class="about-note" data-i18n="about.heroText">
+                Мне интересны проекты, где бренд должен быть не просто выразительным, а структурным: выдерживать масштаб, разные команды, корпоративный контекст и реальные production-ограничения.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section--about-legacy" hidden>
+          <div class="container about-columns" hidden>
+            <article class="list-block reveal">
+              <p class="section-kicker" data-i18n="about.capabilitiesKicker">Компетенции</p>
+              <ul class="plain-list">
+                <li data-i18n="about.capability1">Бренд-идентика</li>
+                <li data-i18n="about.capability2">Арт-дирекшн</li>
+                <li data-i18n="about.capability3">Логосистемы</li>
+                <li data-i18n="about.capability4">Типографика</li>
+                <li data-i18n="about.capability5">Визуальные системы</li>
+                <li data-i18n="about.capability6">Презентации</li>
+                <li data-i18n="about.capability7">AI image generation</li>
+                <li data-i18n="about.capability8">Prompt engineering</li>
+                <li data-i18n="about.capability9">3D / motion direction</li>
+                <li data-i18n="about.capability10">Бренд-гайдлайны</li>
+              </ul>
+            </article>
+
+            <article class="list-block reveal">
+              <p class="section-kicker" data-i18n="about.collaborationsKicker">Коллаборации</p>
+              <ul class="plain-list">
+                <li data-i18n="about.collaboration1">Gazprom Neft</li>
+                <li data-i18n="about.collaboration2">Агентские команды</li>
+                <li data-i18n="about.collaboration3">Корпоративные продукты</li>
+                <li data-i18n="about.collaboration4">Культурные проекты</li>
+                <li data-i18n="about.collaboration5">Коммерческие запуски</li>
+              </ul>
+            </article>
+
+            <article class="list-block reveal">
+              <p class="section-kicker" data-i18n="about.focusKicker">Фокус</p>
+              <p data-i18n="about.focusText">
+                Brand systems, visual direction, presentations, AI image pipelines and workflows for teams, которым важны структура, качество и скорость без потери авторского контроля.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section--about-board">
+          <div class="container about-board">
+            <div class="about-board__column reveal">
+              <section class="about-group">
+                <p class="section-kicker" data-i18n="about.selectedKicker">Selected collaborations</p>
+                <ul class="about-line-list">
+                  <li data-i18n="about.selected1">Gazprom Neft</li>
+                  <li data-i18n="about.selected2">Corporate product teams</li>
+                  <li data-i18n="about.selected3">Agency partnerships</li>
+                  <li data-i18n="about.selected4">Cultural initiatives</li>
+                </ul>
+              </section>
+
+              <section class="about-group">
+                <p class="section-kicker" data-i18n="about.focusAreasKicker">Primary focus</p>
+                <ul class="about-line-list">
+                  <li data-i18n="about.focusArea1">Brand systems</li>
+                  <li data-i18n="about.focusArea2">Visual systems</li>
+                  <li data-i18n="about.focusArea3">Presentation design</li>
+                  <li data-i18n="about.focusArea4">AI-assisted workflows</li>
+                </ul>
+              </section>
+            </div>
+
+            <div class="about-board__column reveal">
+              <section class="about-group">
+                <div class="about-group__header">
+                  <p class="section-kicker" data-i18n="about.practiceKicker">Capabilities & workflow</p>
+                  <span class="about-group__note" data-i18n="about.practiceNote">identity, rollout and AI production</span>
+                </div>
+                <ul class="about-line-list">
+                  <li data-i18n="about.practice1">Art direction</li>
+                  <li data-i18n="about.practice2">Logo systems</li>
+                  <li data-i18n="about.practice3">Typography</li>
+                  <li data-i18n="about.practice4">AI image generation</li>
+                  <li data-i18n="about.practice5">Prompt engineering</li>
+                  <li data-i18n="about.practice6">3D / motion direction</li>
+                  <li data-i18n="about.practice7">Brand guidelines</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section--cta">
+          <div class="container cta-panel">
+            <p class="section-kicker" data-i18n="about.ctaKicker">Сотрудничество</p>
+            <h2 data-i18n="about.ctaTitle">Стратегия, айдентика и визуальные решения для сложных брендов и продуктовых команд.</h2>
+            <a class="button-link" href="contact.html" data-i18n="about.ctaButton">Связаться</a>
+          </div>
+        </section>
+      </main>
+
+      <section class="footer-feature">
+        <div class="container footer-feature__grid">
+          <p class="section-kicker footer-feature__kicker" data-i18n="common.footerFeatureKicker">Открыт к диалогу</p>
+          <p class="footer-feature__text" data-i18n="common.footerFeatureText">Давайте обсудим, что бренд может сделать дальше.</p>
+          <div class="footer-feature__links">
+            <a href="#" data-i18n="common.footerFeatureTop">Наверх</a>
+          </div>
+          <div class="footer-feature__socials">
+            <a href="#">Behance</a>
+            <a href="#">Telegram</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="container footer-row">
+          <p>Ilya Zubkov</p>
+          <p data-i18n="common.footerRole">Brand Designer / Art Director / AI Workflow Design</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="assets/projects.js" defer></script>
+    <script src="assets/script.js" defer></script>
+  </body>
+</html>
