@@ -5,7 +5,7 @@ const ui = {
   ru: {
     common: {
       brandEyebrow: "Портфолио",
-      navWork: "Работы",
+      navWork: "Проекты",
       navAbout: "Обо мне",
       navContact: "Контакт",
       menu: "Меню",
@@ -58,7 +58,7 @@ const ui = {
       portraitLabel: "Портрет Ильи Зубкова",
       heroKicker: "Обо мне",
       heroTitle:
-        "Я работаю на пересечении бренд-систем, визуального направления и AI-powered production.",
+        "Создаю дизайн-системы, где форма подчинена смыслу, а простота становится главным инструментом красоты.",
       heroLead:
         "Илья Зубков — senior brand designer и art director, сфокусированный на identity systems, logo design, visual language, presentations и AI-assisted creative workflows.",
       heroText:
@@ -136,7 +136,7 @@ const ui = {
       darkSection: "Контрастные носители",
       descriptionKicker: "Коротко о проекте",
       textImageKicker: "Тезис",
-      ctaTitle: "Интересно поработать вместе? Свяжитесь.",
+      ctaTitle: "Давайте создадим, что-то красивое! Вместе.",
       ctaLink: "Написать",
       nextProject: "Следующий проект",
       sectionLabels: {
@@ -205,7 +205,7 @@ const ui = {
       portraitLabel: "Ilya Zubkov portrait",
       heroKicker: "About",
       heroTitle:
-        "I work at the intersection of brand systems, visual direction and AI-powered production.",
+        "I create design systems where form follows meaning and simplicity becomes the main instrument of beauty.",
       heroLead:
         "Ilya Zubkov is a senior brand designer and art director focused on identity systems, logo design, visual language, presentations and AI-assisted creative workflows.",
       heroText:
@@ -283,7 +283,7 @@ const ui = {
       darkSection: "Contrast section",
       descriptionKicker: "Project summary",
       textImageKicker: "Thesis",
-      ctaTitle: "Interested in working together? Get in touch.",
+      ctaTitle: "Let's create something beautiful. Together.",
       ctaLink: "Get in touch",
       nextProject: "Next project",
       sectionLabels: {
@@ -831,14 +831,17 @@ function renderProjectImage(media, className = "") {
   `;
 }
 
+function renderProjectStoryPlaceholder(project, label, className = "") {
+  return `
+    <figure class="story-media ${className}" style="--project-accent: ${project.accent};">
+      <div class="story-media__surface"></div>
+      <figcaption class="story-media__label">${label}</figcaption>
+    </figure>
+  `;
+}
+
 function buildImageProjectStory(project, presentation) {
   const media = project.media;
-  const detailItems = [
-    localize(project.category),
-    presentation.client,
-    project.year,
-    presentation.scope
-  ];
 
   return `
     <section class="project-story project-story--images">
@@ -876,24 +879,6 @@ function buildImageProjectStory(project, presentation) {
         ${renderProjectImage(media[7])}
         ${renderProjectImage(media[8])}
       </div>
-
-      <div class="container">
-        <section class="detail-strip">
-          <p class="section-kicker">${getText("project.detailStrip")}</p>
-          <div class="detail-strip__grid">
-            ${detailItems
-              .map(
-                (item, index) => `
-                  <div class="detail-chip">
-                    <span class="detail-chip__index">0${index + 1}</span>
-                    <span class="detail-chip__text">${item}</span>
-                  </div>
-                `
-              )
-              .join("")}
-          </div>
-        </section>
-      </div>
     </section>
   `;
 }
@@ -905,77 +890,86 @@ function buildProjectStory(project, presentation) {
 
   const gallery = project.gallery.map((item) => localize(item));
   const labels = getText("project.sectionLabels");
-  const detailItems = [
-    localize(project.category),
-    presentation.client,
-    project.year,
-    presentation.scope
-  ];
 
   return `
-    <section class="project-story">
+    <section class="project-story project-story--images">
       <div class="container">
-        <div class="story-block story-block--full">
-          ${renderStoryMedia(project, gallery[0] || getText("project.visualStory"), "story-media--hero")}
-        </div>
+        ${renderProjectStoryPlaceholder(
+          project,
+          gallery[0] || getText("project.visualStory"),
+          "story-media--frame story-media--wide"
+        )}
+      </div>
+
+      <div class="container story-image-grid story-image-grid--two">
+        ${renderProjectStoryPlaceholder(
+          project,
+          gallery[1] || gallery[0] || project.title,
+          "story-media--frame"
+        )}
+        ${renderProjectStoryPlaceholder(
+          project,
+          gallery[2] || localize(project.summary),
+          "story-media--frame"
+        )}
       </div>
 
       <div class="container">
-        <div class="story-grid story-grid--two">
-          ${renderStoryMedia(project, gallery[1] || gallery[0] || project.title)}
-          ${renderStoryMedia(project, gallery[2] || localize(project.summary))}
-        </div>
+        ${renderProjectStoryPlaceholder(
+          project,
+          gallery[3] || labels.visualSystem,
+          "story-media--frame story-media--wide"
+        )}
+      </div>
+
+      <div class="container story-image-grid story-image-grid--portraits">
+        ${renderProjectStoryPlaceholder(
+          project,
+          labels.challenge,
+          "story-media--frame story-media--portrait-frame"
+        )}
+        ${renderProjectStoryPlaceholder(
+          project,
+          labels.aiWorkflow,
+          "story-media--frame story-media--portrait-frame"
+        )}
       </div>
 
       <div class="container">
-        <div class="story-grid story-grid--asymmetric">
-          ${renderStoryMedia(project, gallery[3] || labels.visualSystem, "story-media--large")}
-          <div class="story-grid__stack">
-            ${renderStoryMedia(project, labels.visualSystem, "story-media--compact")}
-            ${renderStoryMedia(project, labels.aiWorkflow, "story-media--compact")}
-          </div>
-        </div>
+        ${renderProjectStoryPlaceholder(
+          project,
+          labels.visualSystem,
+          "story-media--frame story-media--wide"
+        )}
       </div>
 
       <div class="container">
-        <section class="detail-strip">
-          <p class="section-kicker">${getText("project.detailStrip")}</p>
-          <div class="detail-strip__grid">
-            ${detailItems
-              .map(
-                (item, index) => `
-                  <div class="detail-chip" style="--detail-index:'0${index + 1}'">
-                    <span class="detail-chip__index">0${index + 1}</span>
-                    <span class="detail-chip__text">${item}</span>
-                  </div>
-                `
-              )
-              .join("")}
-          </div>
-        </section>
+        ${renderProjectStoryPlaceholder(
+          project,
+          labels.applications,
+          "story-media--frame story-media--wide"
+        )}
       </div>
 
-      <section class="story-dark">
-        <div class="container">
-          <p class="section-kicker">${getText("project.darkSection")}</p>
-          <div class="story-dark__grid">
-            ${renderStoryMedia(project, labels.challenge, "story-media--dark")}
-            ${renderStoryMedia(project, labels.applications, "story-media--dark")}
-            ${renderStoryMedia(project, labels.result, "story-media--dark")}
-          </div>
-        </div>
-      </section>
-
       <div class="container">
-        <section class="story-text-image">
-          <div class="story-text-image__copy">
-            <p class="section-kicker">${getText("project.textImageKicker")}</p>
-            <p>${localize(project.summary)}</p>
-          </div>
-          <div class="story-text-image__media">
-            ${renderStoryMedia(project, gallery[1] || localize(project.summary), "story-media--inline")}
-          </div>
-        </section>
+        ${renderProjectStoryPlaceholder(
+          project,
+          labels.result,
+          "story-media--frame story-media--wide"
+        )}
+      </div>
+
+      <div class="container story-image-grid story-image-grid--two">
+        ${renderProjectStoryPlaceholder(
+          project,
+          presentation.client,
+          "story-media--frame"
+        )}
+        ${renderProjectStoryPlaceholder(
+          project,
+          presentation.scope,
+          "story-media--frame"
+        )}
       </div>
     </section>
   `;
@@ -1011,6 +1005,7 @@ function renderProjectPage() {
 
   const project = getProjectFromQuery();
   const currentIndex = projectStore.findIndex((item) => item.slug === project.slug);
+  const previousProject = projectStore[(currentIndex - 1 + projectStore.length) % projectStore.length];
   const nextProject = projectStore[(currentIndex + 1) % projectStore.length];
   const presentation = getProjectPresentation(project);
   const heroImage = project.cover
@@ -1081,14 +1076,69 @@ function renderProjectPage() {
     </section>
 
     <section class="section">
-      <div class="container next-project next-project--editorial">
-        <p class="section-kicker">${getText("project.nextProject")}</p>
-        <a class="next-project__link" href="project.html?slug=${nextProject.slug}">
-          <span class="next-project__title">${nextProject.title}</span>
-          <span class="next-project__eyebrow">${localize(nextProject.category)}</span>
-        </a>
+      <div class="container project-pagination">
+        <div class="project-pagination__grid">
+          <a class="project-pagination__item project-pagination__item--prev" href="project.html?slug=${previousProject.slug}">
+            <span class="project-pagination__label">PREV</span>
+            <span class="project-pagination__main">
+              <span class="project-pagination__arrow" aria-hidden="true">‹</span>
+              <span class="project-pagination__title">${previousProject.title}</span>
+            </span>
+          </a>
+
+          <a class="project-pagination__item project-pagination__item--next" href="project.html?slug=${nextProject.slug}">
+            <span class="project-pagination__label">NEXT</span>
+            <span class="project-pagination__main">
+              <span class="project-pagination__title">${nextProject.title}</span>
+              <span class="project-pagination__arrow" aria-hidden="true">›</span>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
+  `;
+}
+
+function renderHomeProjectCta() {
+  if (document.body.dataset.page !== "home") {
+    return;
+  }
+
+  const legacySection = document.querySelector(".section--cta, .project-cta[data-home-cta='true']");
+
+  if (!legacySection) {
+    return;
+  }
+
+  legacySection.className = "project-cta";
+  legacySection.dataset.homeCta = "true";
+  legacySection.innerHTML = `
+    <div class="container">
+      <a class="project-cta__link reveal" href="contact.html">
+        <span>${getText("project.ctaTitle")}</span>
+      </a>
+    </div>
+  `;
+}
+
+function renderAboutProjectCta() {
+  if (document.body.dataset.page !== "about") {
+    return;
+  }
+
+  const legacySection = document.querySelector("[data-about-cta='true']");
+
+  if (!legacySection) {
+    return;
+  }
+
+  legacySection.className = "project-cta";
+  legacySection.innerHTML = `
+    <div class="container">
+      <a class="project-cta__link reveal" href="contact.html">
+        <span>${getText("project.ctaTitle")}</span>
+      </a>
+    </div>
   `;
 }
 
@@ -1133,6 +1183,8 @@ function renderPage() {
   renderSelectedWork();
   renderWorkGrid();
   renderProjectPage();
+  renderHomeProjectCta();
+  renderAboutProjectCta();
   revealOnScroll();
 }
 
