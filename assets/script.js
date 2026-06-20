@@ -705,10 +705,20 @@ function setupPageTransitions() {
   });
 }
 
-function createProjectCard(project) {
-  const cardMedia = project.cover
-    ? `<img class="project-card__image" src="${project.cover}" alt="" loading="lazy" />`
+function renderProjectListCover(project, imageClass) {
+  if (!project.cover) {
+    return "";
+  }
+
+  const animatedAttrs = project.coverAnimated
+    ? ` data-static-src="${project.cover}" data-animated-src="${project.coverAnimated}"`
     : "";
+
+  return `<img class="${imageClass}" src="${project.cover}" alt="" loading="lazy"${animatedAttrs} />`;
+}
+
+function createProjectCard(project) {
+  const cardMedia = renderProjectListCover(project, "project-card__image");
 
   return `
     <a class="project-card reveal" href="project.html?slug=${project.slug}">
@@ -733,7 +743,7 @@ function createProjectCard(project) {
 
 function createSelectedProjectRow(project, index) {
   const coverMarkup = project.cover
-    ? `<img class="selected-project__cover-image" src="${project.cover}" alt="" loading="lazy" />`
+    ? renderProjectListCover(project, "selected-project__cover-image")
     : `<span>${getText("project.replaceCardImage")}</span>`;
 
   return `
@@ -775,6 +785,35 @@ function createSelectedProjectRow(project, index) {
   `;
 }
 
+function setupAnimatedProjectCovers() {
+  document.querySelectorAll("[data-static-src][data-animated-src]").forEach((image) => {
+    const staticSrc = image.getAttribute("data-static-src");
+    const animatedSrc = image.getAttribute("data-animated-src");
+    const hoverTarget = image.closest(".project-card, .selected-project");
+
+    if (!staticSrc || !animatedSrc || !hoverTarget) {
+      return;
+    }
+
+    const playAnimatedCover = () => {
+      if (image.getAttribute("src") !== animatedSrc) {
+        image.setAttribute("src", animatedSrc);
+      }
+    };
+
+    const showStaticCover = () => {
+      if (image.getAttribute("src") !== staticSrc) {
+        image.setAttribute("src", staticSrc);
+      }
+    };
+
+    hoverTarget.addEventListener("mouseenter", playAnimatedCover);
+    hoverTarget.addEventListener("mouseleave", showStaticCover);
+    hoverTarget.addEventListener("focusin", playAnimatedCover);
+    hoverTarget.addEventListener("focusout", showStaticCover);
+  });
+}
+
 function renderSelectedWork() {
   const selectedGrid = document.getElementById("selected-work-grid");
 
@@ -800,7 +839,9 @@ function renderWorkGrid() {
 function getProjectFromQuery() {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("slug") || projectStore[0]?.slug;
-  return projectStore.find((project) => project.slug === slug) || projectStore[0];
+  return projectStore.find(
+    (project) => project.slug === slug || project.aliases?.includes(slug)
+  ) || projectStore[0];
 }
 
 function getProjectPresentation(project) {
@@ -825,10 +866,47 @@ function renderStoryMedia(project, label, className = "") {
 
 function renderProjectImage(media, className = "") {
   return `
-    <figure class="story-image ${className}">
+    <figure class="story-image ${className}" style="${[
+      media.aspectRatio ? `aspect-ratio: ${media.aspectRatio}` : "",
+      media.zoom ? `--story-image-zoom: ${media.zoom}` : "",
+      media.position ? `--story-image-position: ${media.position}` : ""
+    ].filter(Boolean).join("; ")}">
       <img src="${media.src}" alt="${localize(media.alt)}" loading="lazy" />
     </figure>
   `;
+}
+
+function renderProjectCoverMedia(project, presentation) {
+  const coverMedia = project.coverMedia;
+
+  if (coverMedia?.type === "vimeo") {
+    return `
+      <div class="project-cover__embed-wrap" style="${[
+        coverMedia.aspectRatio ? `--cover-aspect-ratio: ${coverMedia.aspectRatio}` : "",
+        coverMedia.zoom ? `--cover-zoom: ${coverMedia.zoom}` : ""
+      ].filter(Boolean).join("; ")}">
+        <iframe
+          class="project-cover__embed"
+          src="${coverMedia.src}"
+          title="${coverMedia.title || `${project.title}: ${presentation.subtitle}`}"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    `;
+  }
+
+  if (coverMedia?.type === "image" && coverMedia.src) {
+    return `<img class="project-cover__image" src="${coverMedia.src}" alt="${coverMedia.alt ? localize(coverMedia.alt) : `${project.title}: ${presentation.subtitle}`}" />`;
+  }
+
+  if (project.cover) {
+    return `<img class="project-cover__image" src="${project.cover}" alt="${project.title}: ${presentation.subtitle}" />`;
+  }
+
+  return "";
 }
 
 function renderProjectStoryPlaceholder(project, label, className = "") {
@@ -841,7 +919,65 @@ function renderProjectStoryPlaceholder(project, label, className = "") {
 }
 
 function buildImageProjectStory(project, presentation) {
-  const media = project.media;
+  if (project.slug === "saydo") {
+    const media = project.media;
+
+    return `
+      <section class="project-story project-story--images">
+        <div class="container">
+          ${renderProjectImage(media[0], "story-image--hero")}
+        </div>
+
+        <div class="container story-image-grid story-image-grid--two story-image-grid--saydo-natural">
+          ${renderProjectImage(media[1], "story-image--natural")}
+          ${renderProjectImage(media[2], "story-image--natural")}
+        </div>
+
+        <div class="container">
+          ${renderProjectImage(media[4], "story-image--wide")}
+        </div>
+
+        <div class="container">
+          ${renderProjectImage(media[8], "story-image--wide")}
+        </div>
+
+        <div class="container">
+          ${renderProjectImage(media[9], "story-image--wide")}
+        </div>
+
+        <div class="container">
+          ${renderProjectImage(media[3], "story-image--wide")}
+        </div>
+
+        <div class="container story-image-grid story-image-grid--two story-image-grid--saydo-natural">
+          ${renderProjectImage(media[10], "story-image--natural")}
+          ${renderProjectImage(media[13], "story-image--natural")}
+        </div>
+
+        <div class="container">
+          ${renderProjectImage(media[7], "story-image--wide")}
+        </div>
+
+        <div class="container story-image-grid story-image-grid--two story-image-grid--saydo-natural">
+          ${renderProjectImage(media[5], "story-image--natural")}
+          ${renderProjectImage(media[14], "story-image--natural")}
+        </div>
+
+        <div class="container story-image-grid story-image-grid--two story-image-grid--saydo-natural">
+          ${renderProjectImage(media[11], "story-image--natural")}
+          ${renderProjectImage(media[6], "story-image--natural")}
+        </div>
+
+        <div class="container">
+          ${renderProjectImage(media[12], "story-image--wide")}
+        </div>
+      </section>
+    `;
+  }
+
+  const media = Array.isArray(project.storyMediaOrder)
+    ? project.storyMediaOrder.map((index) => project.media[index]).filter(Boolean)
+    : project.media;
 
   return `
     <section class="project-story project-story--images">
@@ -1008,9 +1144,7 @@ function renderProjectPage() {
   const previousProject = projectStore[(currentIndex - 1 + projectStore.length) % projectStore.length];
   const nextProject = projectStore[(currentIndex + 1) % projectStore.length];
   const presentation = getProjectPresentation(project);
-  const heroImage = project.cover
-    ? `<img class="project-cover__image" src="${project.cover}" alt="${project.title}: ${presentation.subtitle}" />`
-    : "";
+  const heroMedia = renderProjectCoverMedia(project, presentation);
 
   document.title = `${project.title} - Ilya Zubkov`;
 
@@ -1049,9 +1183,9 @@ function renderProjectPage() {
       </div>
       <div class="container reveal">
         <div class="project-cover project-cover--editorial" style="--project-accent: ${project.accent};">
-          ${heroImage}
+          ${heroMedia}
           ${
-            project.cover
+            heroMedia
               ? ""
               : `<div class="project-cover__label">
                   <span>${presentation.subtitle}</span>
@@ -1185,6 +1319,7 @@ function renderPage() {
   renderProjectPage();
   renderHomeProjectCta();
   renderAboutProjectCta();
+  setupAnimatedProjectCovers();
   revealOnScroll();
 }
 

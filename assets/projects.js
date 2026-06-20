@@ -677,4 +677,200 @@ if (kotoMyotoProject) {
   });
 }
 
+const saydoProject = projects.find((project) => project.slug === "veld");
+
+if (saydoProject) {
+  Object.assign(saydoProject, {
+    slug: "saydo",
+    aliases: ["veld"],
+    title: "SAYDO",
+    category: {
+      ru: "Айдентика battery-бренда",
+      en: "Battery Brand Identity"
+    },
+    year: "2025",
+    role: {
+      ru: "Стратегия, айдентика, упаковка, 3D-визуализация",
+      en: "Strategy, identity, packaging, 3D visualization"
+    },
+    accent: "linear-gradient(145deg, #f8f9ff 0%, #dde4ff 42%, #1f37e4 100%)",
+    coverMedia: {
+      type: "vimeo",
+      src: "https://player.vimeo.com/video/1131022053?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1&controls=0&title=0&byline=0&portrait=0",
+      title: "Saydo DNA",
+      aspectRatio: "16 / 9",
+      zoom: "1.14"
+    },
+    cover: "assets/projects/saydo/saydo-cover-static.png",
+    coverAnimated: "assets/projects/saydo/saydo-cover.gif",
+    summary: {
+      ru: "Точная айдентика для бренда батареек SAYDO, где технологичный характер сочетается с чистой упаковочной системой и ярким синим кодом.",
+      en: "A sharp identity for SAYDO, combining a technological tone with a clean packaging system and a vivid electric-blue code."
+    },
+    intro: {
+      ru: "SAYDO строится на идее энергии, которая работает просто, быстро и заметно. Система объединяет продуктовый дизайн, упаковку, промо-носители и цифровые акценты в один собранный бренд-язык.",
+      en: "SAYDO is built around the idea of energy that feels direct, fast and visible. The system brings product design, packaging, promotional media and digital accents into one cohesive brand language."
+    },
+    sections: {
+      context: {
+        ru: "SAYDO — концепт battery-бренда с фокусом на повседневные носители энергии, упаковку и retail-подачу. Важно было сделать систему современной, прикладной и легко масштабируемой.",
+        en: "SAYDO is a battery brand concept focused on everyday energy products, packaging and retail communication. The system needed to feel modern, practical and scalable."
+      },
+      challenge: {
+        ru: "Задача состояла в том, чтобы уйти от визуального шума категории и собрать выразительную айдентику, которая остается предельно понятной на маленьких форматах упаковки.",
+        en: "The challenge was to move away from category clutter and create a distinctive identity that remains crystal clear on small packaging formats."
+      },
+      visualSystem: {
+        ru: "В основе системы — насыщенный синий, лаконичный логотип, направляющая стрелка и контраст белых полей. Графика работает как на батарейках и блистерах, так и на мерче, стикерах и outdoor-носителях.",
+        en: "The system is built around a saturated blue, a concise wordmark, a directional arrow and strong white contrast. The graphics work across batteries, blisters, merch, stickers and outdoor media."
+      },
+      aiWorkflow: {
+        ru: "3D- и mockup-сцены использовались как быстрый способ протестировать масштаб логотипа, читаемость маркировки и поведение системы на разных продуктовых типологиях.",
+        en: "3D and mockup scenes were used to quickly test logo scale, label clarity and system behavior across different product typologies."
+      },
+      applications: {
+        ru: "Айдентика разворачивается в упаковке AA и coin-cell батареек, POS-материалах, билбордах, промо-стикерах, одежде и аксессуарах.",
+        en: "The identity expands across AA and coin-cell packaging, POS materials, billboards, promo stickers, apparel and accessories."
+      },
+      result: {
+        ru: "В результате получилась чистая и уверенная бренд-система с сильным цветовым кодом, которая одинаково хорошо выглядит в digital-среде, на полке и в физическом промо.",
+        en: "The result is a clean and confident brand system with a strong color code that performs equally well in digital, on shelf and in physical promotion."
+      }
+    },
+    gallery: [
+      {
+        ru: "Пространственная бренд-подача",
+        en: "Spatial brand presentation"
+      },
+      {
+        ru: "Продуктовые 3D-сцены",
+        en: "Product 3D scenes"
+      },
+      {
+        ru: "Упаковочная система",
+        en: "Packaging system"
+      },
+      {
+        ru: "Промо- и lifestyle-носители",
+        en: "Promo and lifestyle applications"
+      }
+    ],
+    media: [
+      {
+        src: "assets/projects/saydo/Battery_PS.png",
+        alt: {
+          ru: "Линейка батареек SAYDO",
+          en: "SAYDO battery lineup"
+        }
+      },
+      {
+        src: "assets/projects/saydo/coin-battery.png",
+        alt: {
+          ru: "Кнопочные батарейки SAYDO",
+          en: "SAYDO coin battery composition"
+        }
+      },
+      {
+        src: "assets/projects/saydo/dna-aa.png",
+        alt: {
+          ru: "DNA-композиция с батарейками SAYDO",
+          en: "SAYDO battery DNA composition"
+        }
+      },
+      {
+        src: "assets/projects/saydo/sloy-4-packaging.png",
+        alt: {
+          ru: "Разворот упаковочной системы SAYDO",
+          en: "SAYDO packaging system spread"
+        }
+      },
+      {
+        src: "assets/projects/saydo/free-billboard-mockup.png",
+        alt: {
+          ru: "Билборд SAYDO",
+          en: "SAYDO billboard"
+        }
+      },
+      {
+        src: "assets/projects/saydo/hoodie.png",
+        alt: {
+          ru: "Худи SAYDO",
+          en: "SAYDO hoodie"
+        }
+        ,
+        portrait: true
+      },
+      {
+        src: "assets/projects/saydo/snapback-pouch.png",
+        alt: {
+          ru: "Аксессуар SAYDO",
+          en: "SAYDO accessory pouch"
+        }
+        ,
+        portrait: true
+      },
+      {
+        src: "assets/projects/saydo/laptop-sticker.png",
+        alt: {
+          ru: "Стикер-пак SAYDO на ноутбуке",
+          en: "SAYDO sticker pack on laptop"
+        }
+      },
+      {
+        src: "assets/projects/saydo/saydo-color-crop.gif",
+        alt: {
+          ru: "Цветовая система SAYDO",
+          en: "SAYDO color system"
+        }
+        ,
+        aspectRatio: "1920 / 430",
+        position: "center center"
+      },
+      {
+        src: "assets/projects/saydo/saydo-fonts.gif",
+        alt: {
+          ru: "Типографика SAYDO",
+          en: "SAYDO typography"
+        }
+      },
+      {
+        src: "assets/projects/saydo/mask-group.png",
+        alt: {
+          ru: "Блистерная упаковка SAYDO",
+          en: "SAYDO blister packaging"
+        }
+      },
+      {
+        src: "assets/projects/saydo/woman-holding-bottle.png",
+        alt: {
+          ru: "Lifestyle-носитель SAYDO",
+          en: "SAYDO lifestyle bottle"
+        }
+      },
+      {
+        src: "assets/projects/saydo/A_large_white_wall_with.png",
+        alt: {
+          ru: "SAYDO в выставочном пространстве",
+          en: "SAYDO in exhibition space"
+        }
+      },
+      {
+        src: "assets/projects/saydo/packaging-2.png",
+        alt: {
+          ru: "SAYDO coin battery blister packaging",
+          en: "SAYDO coin battery blister packaging"
+        },
+        portrait: true
+      },
+      {
+        src: "assets/projects/saydo/bag-ps-1-be.png",
+        alt: {
+          ru: "SAYDO canvas bag",
+          en: "SAYDO canvas bag"
+        }
+      }
+    ]
+  });
+}
+
 window.PROJECTS = projects;
