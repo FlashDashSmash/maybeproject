@@ -10,22 +10,23 @@ const ui = {
       navContact: "Контакт",
       menu: "Меню",
       closeMenu: "Закрыть меню",
-      footerRole: "Brand Designer / Art Director / AI Workflow Design",
+      footerRole: "Senior Brand Designer / Art Director / AI-assisted Production",
       footerFeatureKicker: "Открыт к диалогу",
-      footerFeatureText: "Давайте обсудим, что бренд может сделать дальше.",
-      footerFeatureTop: "Наверх"
+      footerFeatureText: "Давайте обсудим айдентику, презентацию или AI-production задачу.",
+      footerFeatureTop: "Наверх",
+      footerFeatureContact: "Контакт"
     },
     home: {
-      heroKicker: "Бренд-системы, арт-дирекшн, AI workflows",
+      heroKicker: "Айдентика, арт-дирекшн и AI-assisted production",
       heroTitle: "AI-driven Brand Designer / Art Director",
       heroLead:
-        "Я создаю бренд-идентику, визуальные системы и AI-powered дизайн-процессы для сложных брендов, корпоративных продуктов и культурных проектов.",
+        "Создаю айдентику, визуальные системы и AI-assisted production-процессы для брендов, которым важны структура, выразительность и скорость.",
       meta1: "Москва / remote",
       meta2: "Системный бренд-дизайн",
       meta3: "Стратегия, визуальный крафт, production",
       workKicker: "Избранные проекты",
       workTitle:
-        "Айдентика, визуальные платформы и AI-производство для брендов со сложной структурой.",
+        "Выборка проектов на стыке айдентики, визуальных систем, презентационного дизайна и AI-assisted art direction.",
       workLink: "Смотреть все проекты",
       servicesKicker: "Услуги",
       servicesTitle:
@@ -42,95 +43,109 @@ const ui = {
       service4Title: "Презентации и rollout",
       service4Text:
         "Презентации, бренд-гайдлайны и материалы внедрения, которые помогают системе работать в реальном бизнесе.",
-      ctaKicker: "Открыт к выборочным коллаборациям",
-      ctaTitle: "Давайте создадим визуальную систему, которая действительно работает.",
+      ctaKicker: "Открыт к проектам и коллаборациям",
+      ctaTitle: "Давайте соберем айдентику, презентацию или AI-production pipeline для вашего проекта.",
       ctaText:
-        "Брендинг, арт-дирекшн, презентации и AI-driven production для корпоративных продуктов, агентств и культурных проектов.",
+        "Работаю с брендингом, арт-дирекшном, презентационными системами и AI-assisted production для агентств, корпоративных команд и независимых брендов.",
       ctaButton: "Обсудить проект"
     },
     work: {
       heroKicker: "Работы",
-      heroTitle: "Проекты в области айдентики, визуальных систем и AI-assisted design direction.",
+      heroTitle: "Проекты в области айдентики, бренд-систем, презентационного дизайна и AI-assisted art direction.",
       heroLead:
-        "Подборка кейсов для корпоративных брендов, культурных инициатив, digital-продуктов и агентских задач."
+        "Клиентские проекты, концепты и экспериментальные направления, в которых я работал с логотипами, типографикой, визуальными языками, презентациями, упаковкой и генеративными инструментами."
     },
     about: {
       portraitLabel: "Портрет Ильи Зубкова",
       heroKicker: "Обо мне",
       heroTitle:
-        "Создаю дизайн-системы, где форма подчинена смыслу, а простота становится главным инструментом красоты.",
+        "Собираю айдентику, визуальные системы и AI-assisted процессы для брендов со сложной структурой.",
       heroLead:
-        "Илья Зубков — senior brand designer и art director, сфокусированный на identity systems, logo design, visual language, presentations и AI-assisted creative workflows.",
+        "Я — Илья Зубков, Senior Brand Designer / Art Director. Работаю с айдентикой, логотипами, типографикой, визуальными системами, презентациями и AI-assisted production.",
       heroText:
-        "Мне интересны проекты, где бренд должен быть не просто выразительным, а структурным: выдерживать масштаб, разные команды, корпоративный контекст и реальные production-ограничения.",
-      selectedKicker: "Избранные коллаборации",
+        "Мой фокус — задачи, где бренду нужна не только выразительность, но и система: понятная логика, масштабирование, работа на разных носителях, в разных командах и внутри реальных production-ограничений.",
+      heroExtra:
+        "AI использую как часть дизайн-процесса: для поиска визуальных гипотез, ресерча, image production, быстрых тестов и подготовки материалов. Финальные решения строятся на дизайнерской логике: композиции, типографике, контексте, отборе и ручной финализации.",
+      selectedKicker: "Коллаборации",
       selected1: "Gazprom Neft",
-      selected2: "Корпоративные product teams",
-      selected3: "Агентские партнерства",
-      selected4: "Культурные инициативы",
-      focusAreasKicker: "Основные направления",
-      focusArea1: "Бренд-системы",
+      selected2: "Бренд-студии и агентские команды",
+      selected3: "Корпоративные продукты",
+      selected4: "Культурные и образовательные инициативы",
+      selected5: "Коммерческие запуски и независимые бренды",
+      focusAreasKicker: "Фокус",
+      focusArea1: "Айдентика и логосистемы",
       focusArea2: "Визуальные системы",
-      focusArea3: "Presentation design",
-      focusArea4: "AI-assisted workflows",
-      practiceKicker: "Практика и инструменты",
-      practiceNote: "identity, rollout and AI production",
-      practice1: "Арт-дирекшн",
-      practice2: "Логосистемы",
+      focusArea3: "Презентационный дизайн",
+      focusArea4: "AI-assisted production",
+      practiceKicker: "Компетенции и процесс",
+      practiceNote: "система, внедрение и AI production",
+      practice1: "Айдентика и логосистемы",
+      practice2: "Визуальные системы",
       practice3: "Типографика",
-      practice4: "AI image generation",
-      practice5: "Prompt engineering",
-      practice6: "3D / motion direction",
-      practice7: "Бренд-гайдлайны",
+      practice4: "Арт-дирекшн",
+      practice5: "Презентационный дизайн",
+      practice6: "Бренд-гайдлайны",
+      practice7: "AI-assisted production",
+      practice8: "Image generation",
+      practice9: "Prompt engineering",
+      practice10: "3D / motion direction",
       capabilitiesKicker: "Компетенции",
-      capability1: "Бренд-идентика",
-      capability2: "Арт-дирекшн",
-      capability3: "Логосистемы",
-      capability4: "Типографика",
-      capability5: "Визуальные системы",
-      capability6: "Презентации",
-      capability7: "AI image generation",
-      capability8: "Prompt engineering",
-      capability9: "3D / motion direction",
-      capability10: "Бренд-гайдлайны",
+      capability1: "Айдентика и логосистемы",
+      capability2: "Визуальные системы",
+      capability3: "Типографика",
+      capability4: "Арт-дирекшн",
+      capability5: "Презентационный дизайн",
+      capability6: "Бренд-гайдлайны",
+      capability7: "AI-assisted production",
+      capability8: "Image generation",
+      capability9: "Prompt engineering",
+      capability10: "3D / motion direction",
       collaborationsKicker: "Коллаборации",
       collaboration1: "Gazprom Neft",
-      collaboration2: "Агентские команды",
+      collaboration2: "Бренд-студии и агентские команды",
       collaboration3: "Корпоративные продукты",
-      collaboration4: "Культурные проекты",
-      collaboration5: "Коммерческие запуски",
+      collaboration4: "Культурные и образовательные инициативы",
+      collaboration5: "Коммерческие запуски и независимые бренды",
       focusKicker: "Фокус",
       focusText:
-        "Brand systems, visual direction, presentations, AI image pipelines and workflows for teams, которым важны структура, качество и скорость без потери авторского контроля.",
+        "Бренд-системы, визуальное направление, презентации и AI-assisted workflows для команд, которым важны структура, качество и скорость без потери дизайнерского контроля.",
       ctaKicker: "Сотрудничество",
-      ctaTitle: "Стратегия, айдентика и визуальные решения для сложных брендов и продуктовых команд.",
+      ctaTitle: "Открыт к freelance-проектам, агентским коллаборациям, арт-дирекшну и задачам на стыке брендинга, презентаций и AI-production.",
       ctaButton: "Связаться"
     },
     contact: {
       heroKicker: "Контакт",
       heroTitle: "Для айдентики, визуальных систем, презентаций и AI-assisted design workflows.",
       heroLead:
-        "Открыт к выборочным freelance-проектам, системному арт-дирекшну и долгим коллаборациям с агентствами и продуктовыми командами.",
+        "Открыт к выборочным freelance-проектам, агентским коллаборациям и задачам на стыке айдентики, арт-дирекшна, презентационного дизайна и AI-assisted production.",
       emailKicker: "Написать",
       emailText:
         "Коротко опишите задачу, сроки и контекст. Особенно интересны brand systems, corporate design, presentation design и AI pipeline setup.",
-      servicesKicker: "Также могу помочь с",
-      service1: "Агентские коллаборации",
-      service2: "Корпоративный brand refresh",
-      service3: "Системы презентаций",
-      service4: "AI image workflow design",
-      service5: "Визуальное направление для запусков",
+      servicesKicker: "С чем могу помочь",
+      service1: "Айдентика и логосистемы",
+      service2: "Визуальные системы бренда",
+      service3: "Презентации и корпоративные шаблоны",
+      service4: "Арт-дирекшн запусков и кампаний",
+      service5: "AI-assisted production",
+      service6: "Визуальные гипотезы для новых продуктов и направлений",
+      firstMessageKicker: "Что можно прислать в первом сообщении",
+      firstMessage1: "Краткое описание задачи",
+      firstMessage2: "Сроки",
+      firstMessage3: "Формат сотрудничества",
+      firstMessage4: "Примерный бюджетный диапазон",
+      firstMessage5: "Ссылки на материалы, если они уже есть",
+      footerFeatureText: "Если вам нужен дизайнер на стыке брендинга, арт-дирекшна и AI-production — напишите мне.",
       socialKicker: "Также здесь"
     },
     project: {
       caseStudy: "Кейс",
       explore: "Смотреть",
-      replaceCardImage: "Замените на изображение проекта",
-      replaceHero: "Замените на обложку проекта или видео",
+      replaceCardImage: "",
+      replaceHero: "",
       client: "Клиент",
       year: "Год",
       role: "Роль",
-      scope: "Scope",
+      scope: "Объем",
       visualStory: "Визуальная лента",
       detailStrip: "Детали системы",
       darkSection: "Контрастные носители",
@@ -143,7 +158,7 @@ const ui = {
         context: "Контекст",
         challenge: "Задача",
         visualSystem: "Визуальная система",
-        aiWorkflow: "AI workflow / process",
+        aiWorkflow: "AI-процесс",
         applications: "Применение",
         result: "Результат"
       }
@@ -157,10 +172,11 @@ const ui = {
       navContact: "Contact",
       menu: "Menu",
       closeMenu: "Close menu",
-      footerRole: "Brand Designer / Art Director / AI Workflow Design",
+      footerRole: "Senior Brand Designer / Art Director / AI-assisted Production",
       footerFeatureKicker: "Open for conversation",
       footerFeatureText: "Let's talk about what a brand could do next.",
-      footerFeatureTop: "Back to top"
+      footerFeatureTop: "Back to top",
+      footerFeatureContact: "Contact"
     },
     home: {
       heroKicker: "Brand systems, art direction, AI workflows",
@@ -272,8 +288,8 @@ const ui = {
     project: {
       caseStudy: "Case study",
       explore: "Explore",
-      replaceCardImage: "Replace with project image",
-      replaceHero: "Replace with hero image or video",
+      replaceCardImage: "",
+      replaceHero: "",
       client: "Client",
       year: "Year",
       role: "Role",
@@ -821,9 +837,20 @@ function renderSelectedWork() {
     return;
   }
 
-  const featuredProjects = projectStore.filter((project) => project.featured).slice(0, 7);
+  const featuredProjects = projectStore.filter((project) => project.featured);
+  const kotoMyotoFeatured = featuredProjects.find(
+    (project) => project.slug === "gpn-custom-type-test"
+  );
+  const orderedFeaturedProjects = featuredProjects.filter(
+    (project) => project.slug !== "gpn-custom-type-test"
+  );
+
+  if (kotoMyotoFeatured) {
+    orderedFeaturedProjects.push(kotoMyotoFeatured);
+  }
+
   selectedGrid.className = "selected-projects";
-  selectedGrid.innerHTML = featuredProjects.map(createSelectedProjectRow).join("");
+  selectedGrid.innerHTML = orderedFeaturedProjects.slice(0, 7).map(createSelectedProjectRow).join("");
 }
 
 function renderWorkGrid() {
@@ -833,7 +860,18 @@ function renderWorkGrid() {
     return;
   }
 
-  workGrid.innerHTML = projectStore.map(createProjectCard).join("");
+  const kotoMyotoProject = projectStore.find(
+    (project) => project.slug === "gpn-custom-type-test"
+  );
+  const orderedProjects = projectStore.filter(
+    (project) => project.slug !== "gpn-custom-type-test"
+  );
+
+  if (kotoMyotoProject) {
+    orderedProjects.push(kotoMyotoProject);
+  }
+
+  workGrid.innerHTML = orderedProjects.map(createProjectCard).join("");
 }
 
 function getProjectFromQuery() {
@@ -909,6 +947,20 @@ function renderProjectCoverMedia(project, presentation) {
   return "";
 }
 
+function renderStoryCopyBlock(copy) {
+  if (!copy) {
+    return "";
+  }
+
+  return `
+    <div class="container story-copy-block">
+      <div class="story-copy-block__inner">
+        <p class="story-copy-block__text">${localize(copy)}</p>
+      </div>
+    </div>
+  `;
+}
+
 function renderProjectStoryPlaceholder(project, label, className = "") {
   return `
     <figure class="story-media ${className}" style="--project-accent: ${project.accent};">
@@ -921,9 +973,12 @@ function renderProjectStoryPlaceholder(project, label, className = "") {
 function buildImageProjectStory(project, presentation) {
   if (project.slug === "saydo") {
     const media = project.media;
+    const notes = project.storyNotes || {};
 
     return `
       <section class="project-story project-story--images">
+        ${renderStoryCopyBlock(notes.manifest)}
+
         <div class="container">
           ${renderProjectImage(media[0], "story-image--hero")}
         </div>
@@ -933,17 +988,25 @@ function buildImageProjectStory(project, presentation) {
           ${renderProjectImage(media[2], "story-image--natural")}
         </div>
 
+        ${renderStoryCopyBlock(notes.logoResult)}
+
         <div class="container">
           ${renderProjectImage(media[4], "story-image--wide")}
         </div>
+
+        ${renderStoryCopyBlock(notes.arrowManifest)}
 
         <div class="container">
           ${renderProjectImage(media[8], "story-image--wide")}
         </div>
 
+        ${renderStoryCopyBlock(notes.palette)}
+
         <div class="container">
           ${renderProjectImage(media[9], "story-image--wide")}
         </div>
+
+        ${renderStoryCopyBlock(notes.typeface)}
 
         <div class="container">
           ${renderProjectImage(media[3], "story-image--wide")}
@@ -953,6 +1016,8 @@ function buildImageProjectStory(project, presentation) {
           ${renderProjectImage(media[10], "story-image--natural")}
           ${renderProjectImage(media[13], "story-image--natural")}
         </div>
+
+        ${renderStoryCopyBlock(notes.packaging)}
 
         <div class="container">
           ${renderProjectImage(media[7], "story-image--wide")}
@@ -1276,6 +1341,36 @@ function renderAboutProjectCta() {
   `;
 }
 
+function renderWorkProjectCta() {
+  if (document.body.dataset.page !== "work") {
+    return;
+  }
+
+  let section = document.querySelector("[data-work-cta='true']");
+
+  if (!section) {
+    section = document.createElement("section");
+    section.dataset.workCta = "true";
+
+    const main = document.querySelector("main");
+
+    if (!main) {
+      return;
+    }
+
+    main.appendChild(section);
+  }
+
+  section.className = "project-cta";
+  section.innerHTML = `
+    <div class="container">
+      <a class="project-cta__link reveal" href="contact.html">
+        <span>${getText("project.ctaTitle")}</span>
+      </a>
+    </div>
+  `;
+}
+
 function resetVisibility(elements) {
   elements.forEach((element) => element.classList.remove("is-visible"));
 }
@@ -1319,6 +1414,7 @@ function renderPage() {
   renderProjectPage();
   renderHomeProjectCta();
   renderAboutProjectCta();
+  renderWorkProjectCta();
   setupAnimatedProjectCovers();
   revealOnScroll();
 }
