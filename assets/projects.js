@@ -616,6 +616,8 @@ const kotoMyotoProject = projects.find((project) => project.slug === "gpn-custom
 
 if (kotoMyotoProject) {
   Object.assign(kotoMyotoProject, {
+    slug: "koto-myoto",
+    aliases: ["gpn-custom-type-test"],
     title: "KOTO MYOTO",
     category: {
       ru: "Айдентика корейского street-food бренда",

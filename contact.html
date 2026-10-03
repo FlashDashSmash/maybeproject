@@ -1,127 +1,21 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Контакт - Илья Зубков</title>
-    <meta
-      name="description"
-      content="Контакт Ильи Зубкова для айдентики, арт-дирекшна, презентационного дизайна и AI-assisted production."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/styles.css" />
-    <script>
-      history.scrollRestoration = "manual";
-      if (sessionStorage.getItem("ilya-zubkov-page-fade-in") === "1") {
-        document.documentElement.classList.add("is-page-fading-in");
-      }
-      window.scrollTo(0, 0);
-    </script>
-  </head>
-  <body
-    data-page="contact"
-    data-title-ru="Контакт - Илья Зубков"
-    data-title-en="Contact - Ilya Zubkov"
-    data-description-ru="Контакт Ильи Зубкова для айдентики, арт-дирекшна, презентационного дизайна и AI-assisted production."
-    data-description-en="Contact Ilya Zubkov for brand identity, art direction, presentations and AI-powered design workflows."
-  >
-    <div class="site-shell">
-      <header class="site-header">
-        <div class="container header-row">
-          <a class="brand-mark" href="index.html" aria-label="Maybe - Ilya Zubkov">
-            <img class="brand-mark__logo" src="assets/maybe-logo.svg" alt="" />
-          </a>
-
-          <div class="header-actions">
-            <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-              <a href="work.html" data-i18n="common.navWork">Работы</a>
-              <a href="about.html" data-i18n="common.navAbout">Обо мне</a>
-              <a href="contact.html" data-i18n="common.navContact">Контакт</a>
-            </nav>
-
-            <div class="lang-switch" aria-label="Language switcher">
-              <button class="lang-switch__button" type="button" data-lang="ru">RU</button>
-              <button class="lang-switch__button" type="button" data-lang="en">EN</button>
-            </div>
-
-            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="common.menu">
-              Меню
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main>
-        <section class="hero hero--page">
-          <div class="container hero__stack">
-            <p class="section-kicker" data-i18n="contact.heroKicker">Контакт</p>
-            <p class="hero__lede hero__lede--narrow" data-i18n="contact.heroLead">
-              Открыт к выборочным freelance-проектам, агентским коллаборациям и задачам на стыке айдентики, арт-дирекшна, презентационного дизайна и AI-assisted production.
-            </p>
-            <h1>
-              <a class="contact-email-display" href="mailto:maybe.dezign@gmail.com">maybe.dezign@gmail.com</a>
-            </h1>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="container contact-layout">
-            <article class="contact-card contact-card--wide reveal">
-              <p class="section-kicker" data-i18n="contact.servicesKicker">С чем могу помочь</p>
-              <ul class="plain-list">
-                <li data-i18n="contact.service1">Айдентика и логосистемы</li>
-                <li data-i18n="contact.service2">Визуальные системы бренда</li>
-                <li data-i18n="contact.service3">Презентации и корпоративные шаблоны</li>
-                <li data-i18n="contact.service4">Арт-дирекшн запусков и кампаний</li>
-                <li data-i18n="contact.service5">AI-assisted production</li>
-                <li data-i18n="contact.service6">Визуальные гипотезы для новых продуктов и направлений</li>
-              </ul>
-            </article>
-
-            <article class="contact-card contact-card--wide reveal">
-              <p class="section-kicker" data-i18n="contact.firstMessageKicker">Что можно прислать в первом сообщении</p>
-              <ul class="plain-list">
-                <li data-i18n="contact.firstMessage1">Краткое описание задачи</li>
-                <li data-i18n="contact.firstMessage2">Сроки</li>
-                <li data-i18n="contact.firstMessage3">Формат сотрудничества</li>
-                <li data-i18n="contact.firstMessage4">Примерный бюджетный диапазон</li>
-                <li data-i18n="contact.firstMessage5">Ссылки на материалы, если они уже есть</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-      </main>
-
-      <section class="footer-feature">
-        <div class="container footer-feature__grid">
-          <p class="section-kicker footer-feature__kicker" data-i18n="common.footerFeatureKicker">Открыт к диалогу</p>
-          <p class="footer-feature__text" data-i18n="contact.footerFeatureText">Если вам нужен дизайнер на стыке брендинга, арт-дирекшна и AI-production — напишите мне.</p>
-          <div class="footer-feature__links">
-            <a href="contact.html" data-i18n="common.footerFeatureContact">Контакт</a>
-            <a href="#" data-i18n="common.footerFeatureTop">Наверх</a>
-          </div>
-          <div class="footer-feature__socials">
-            <a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance</a>
-            <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram</a>
-            <a href="https://www.instagram.com/maybe__project/" target="_blank" rel="noreferrer">Instagram</a>
-          </div>
-        </div>
-      </section>
-
-      <footer class="site-footer">
-        <div class="container footer-row">
-          <p>Ilya Zubkov</p>
-          <p data-i18n="common.footerRole">Senior Brand Designer / Art Director / AI-assisted Production</p>
-        </div>
-      </footer>
+<!doctype html><html lang="ru"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content="Свяжитесь с Ильёй Зубковым по вопросам айдентики, арт-дирекшна, презентаций и AI-assisted production." /><meta name="theme-color" content="#ecece7" /><title>Контакт — Илья Зубков</title><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" /><link rel="stylesheet" href="assets/site.css?v=20261003-mobile-header" /><script src="assets/page-entry.js?v=20261003-mobile-menu"></script><script src="assets/projects.js" defer></script><script src="assets/site.js?v=20261003-mobile-menu" defer></script></head>
+<body id="top" data-page="contact" data-title-ru="Контакт — Илья Зубков" data-title-en="Contact — Ilya Zubkov" data-description-ru="Свяжитесь с Ильёй Зубковым по вопросам айдентики, арт-дирекшна, презентаций и AI-assisted production." data-description-en="Contact Ilya Zubkov for brand identity, art direction, presentations and AI-assisted production."><header class="site-header" id="site-header"></header><main>
+    <section class="contact-hero wrap">
+    <div class="contact-aside">
+      <p class="eyebrow" data-ru="Контакт / Открыт к диалогу" data-en="Contact / Open to talk">Контакт / Открыт к диалогу</p>
+      <p data-ru="Если вам нужен дизайнер на стыке брендинга, арт-дирекшна и AI-assisted production — расскажите о задаче." data-en="If you need a designer working across branding, art direction and AI-assisted production, tell me about your project.">Если вам нужен дизайнер на стыке брендинга, арт-дирекшна и AI-assisted production — расскажите о задаче.</p>
     </div>
-
-    <script src="assets/projects.js" defer></script>
-    <script src="assets/script.js" defer></script>
-  </body>
-</html>
+    <div class="contact-main">
+      <h1 data-motion-lines data-ru="Давайте создадим&#10;что‑то сильное." data-en="Let's make&#10;something strong.">Давайте создадим&#10;что‑то сильное.</h1>
+      <div class="contact-links">
+        <a class="contact-big-mail" href="mailto:maybe.dezign@gmail.com">maybe.dezign@gmail.com <span class="ui-arrow" aria-hidden="true">↗</span></a>
+        <nav class="contact-social-links" aria-label="Другие способы связи">
+          <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram <span class="ui-arrow" aria-hidden="true">↗</span></a>
+          <a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance <span class="ui-arrow" aria-hidden="true">↗</span></a>
+          <a href="https://www.instagram.com/maybe__project/" target="_blank" rel="noreferrer">Instagram <span class="ui-arrow" aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <section class="contact-details dark-section"><div class="wrap"><div><p class="eyebrow" data-ru="С чем могу помочь" data-en="How I can help">С чем могу помочь</p><ul><li data-ru="Айдентика и логосистемы" data-en="Brand identity and logo systems">Айдентика и логосистемы</li><li data-ru="Визуальные системы" data-en="Visual systems">Визуальные системы</li><li data-ru="Презентации и шаблоны" data-en="Presentations and templates">Презентации и шаблоны</li><li data-ru="Арт-дирекшн запусков и кампаний" data-en="Art direction for launches and campaigns">Арт-дирекшн запусков и кампаний</li><li>AI-assisted production</li></ul></div><div><p class="eyebrow" data-ru="Что прислать в первом письме" data-en="What to include in your first email">Что прислать в первом письме</p><ul><li data-ru="Краткое описание задачи" data-en="A short project brief">Краткое описание задачи</li><li data-ru="Сроки и формат сотрудничества" data-en="Timing and collaboration format">Сроки и формат сотрудничества</li><li data-ru="Примерный бюджет" data-en="Approximate budget">Примерный бюджет</li><li data-ru="Ссылки на материалы, если они есть" data-en="Links to materials, if available">Ссылки на материалы, если они есть</li></ul></div></div></section>
+</main><footer class="site-footer" id="site-footer"></footer></body></html>
