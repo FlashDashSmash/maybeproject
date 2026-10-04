@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css?v=20261003-mobile-header" />
+  <link rel="stylesheet" href="assets/site.css?v=20261004-service-cta-left" />
   <script src="assets/page-entry.js?v=20261003-mobile-menu"></script>
-  <script src="assets/projects.js" defer></script><script src="assets/site.js?v=20261003-mobile-menu" defer></script>
+  <script src="assets/projects.js" defer></script><script src="assets/site.js?v=20261004-word-binding" defer></script>
 
 </head>
 <body id="top" data-page="home" data-title-ru="Илья Зубков — Brand Designer / Art Director" data-title-en="Ilya Zubkov — Brand Designer / Art Director" data-description-ru="Портфолио Ильи Зубкова: айдентика, арт-дирекшн, визуальные системы и AI-assisted production." data-description-en="Portfolio of Ilya Zubkov: brand identity, art direction, visual systems and AI-assisted production.">
@@ -20,7 +20,7 @@
     <section class="home-hero wrap" aria-labelledby="hero-title">
       <div class="hero-aside"><p class="eyebrow" data-ru="Независимая дизайн-практика / Илья Зубков" data-en="Independent design practice / Ilya Zubkov">Независимая дизайн-практика / Илья Зубков</p>
         <p data-ru="Создаю айдентику, визуальные системы и AI-assisted production для брендов, которым важны структура, характер и масштаб." data-en="I create identities, visual systems and AI-assisted production for brands that value structure, character and scale.">Создаю айдентику, визуальные системы и AI-assisted production для брендов, которым важны структура, характер и масштаб.</p>
-        <span class="scroll-cue"><span data-ru="Листайте вниз, чтобы узнать больше" data-en="Scroll to explore">Листайте вниз, чтобы узнать больше</span> <span class="ui-arrow ui-arrow--down" aria-hidden="true">↗</span></span>
+        <span class="scroll-cue"><span data-ru="Листайте вниз, чтобы узнать больше" data-en="Scroll to explore">Листайте вниз, чтобы узнать больше</span> <span class="ui-arrow ui-arrow--down" aria-hidden="true"></span></span>
       </div>
       <div class="hero-main"><p class="hero-label">MAYBE / BRAND DESIGN &amp; ART DIRECTION</p><h1 id="hero-title" data-ru="Системы, где форма&#10;подчинена смыслу" data-en="Systems where form&#10;follows meaning">Системы, где форма<br />подчинена смыслу</h1>
         <div class="hero-visual hero-slideshow" id="hero-slideshow" role="region" aria-roledescription="carousel" aria-label="Избранные проекты">
@@ -36,7 +36,7 @@
           <div class="approach-stats" id="approach-stats">
             <div class="approach-stat-progress" aria-hidden="true"><span></span></div>
             <div class="approach-stat-controls">
-              <div><button type="button" data-stat-step="-1" aria-label="Предыдущий факт"><span class="ui-arrow ui-arrow--left" aria-hidden="true">↗</span></button><button type="button" data-stat-step="1" aria-label="Следующий факт"><span class="ui-arrow ui-arrow--right" aria-hidden="true">↗</span></button></div>
+              <div><button type="button" data-stat-step="-1" aria-label="Предыдущий факт"><span class="ui-arrow ui-arrow--left" aria-hidden="true"></span></button><button type="button" data-stat-step="1" aria-label="Следующий факт"><span class="ui-arrow ui-arrow--right" aria-hidden="true"></span></button></div>
               <span class="approach-stat-count">01/02</span>
             </div>
             <div class="approach-stat-content" aria-live="polite" aria-atomic="true"><strong class="approach-stat-number">09</strong><p class="approach-stat-label">Проектов в портфолио</p></div>
@@ -50,13 +50,116 @@
       </div>
     </section>
 
-    <section class="services-section dark-section" id="services"><div class="wrap"><div class="section-title section-title--dark"><p class="eyebrow" data-ru="02 / Услуги" data-en="02 / Services">02 / Услуги</p><div><h2 data-ru="Чем я могу быть полезен" data-en="How I can help">Чем я могу быть полезен</h2></div></div><div class="service-layout"><div class="service-list"><div><span>01</span><h3 data-ru="Айдентика и логосистемы" data-en="Brand identity and logo systems">Айдентика и логосистемы</h3></div><div><span>02</span><h3 data-ru="Арт-дирекшн" data-en="Art direction">Арт-дирекшн</h3></div><div><span>03</span><h3 data-ru="Визуальные системы" data-en="Visual systems">Визуальные системы</h3></div><div><span>04</span><h3 data-ru="Презентационный дизайн" data-en="Presentation design">Презентационный дизайн</h3></div><div><span>05</span><h3>AI-assisted production</h3></div></div></div></div></section>
+    <section class="services-section dark-section" id="services"><div class="wrap">
+      <div class="section-title section-title--dark"><p class="eyebrow" data-ru="02 / Услуги" data-en="02 / Services">02 / Услуги</p><div><h2 data-ru="Чем я могу быть полезен" data-en="How I can help">Чем я могу быть полезен</h2></div></div>
+      <div class="service-layout">
+        <div class="service-tabs" role="tablist" aria-label="Направления услуг" hidden>
+          <button type="button" role="tab" id="service-tab-branding" aria-controls="service-panel-branding" aria-selected="false" tabindex="-1">Брендинг</button>
+          <button type="button" role="tab" id="service-tab-art" aria-controls="service-panel-art" aria-selected="false" tabindex="-1">Арт-дирекшн</button>
+          <button type="button" role="tab" id="service-tab-production" aria-controls="service-panel-production" aria-selected="false" tabindex="-1">Дизайн и AI</button>
+        </div>
+        <div class="service-catalog">
+        <div class="service-panel" id="service-panel-branding" role="tabpanel" aria-labelledby="service-tab-branding" tabindex="0">
+          <details class="service-item" open>
+            <summary><span class="service-number">01</span><h3>Айдентика и логосистемы</h3><span class="service-toggle ui-arrow" aria-hidden="true"></span></summary>
+            <div class="service-content"><div class="service-content-inner">
+              <div class="service-description"><p>Создаю визуальный характер бренда: от ключевой идеи и знака до системы, которая работает в разных масштабах и форматах.</p><p class="service-context">Для запуска нового бренда или обновления существующего.</p><a class="text-button service-cta" href="contact.html">Обсудить задачу <span class="ui-arrow" aria-hidden="true"></span></a></div>
+              <div class="service-result"><p class="eyebrow">Что на выходе</p><ul>
+                <li>Логотип и логосистема</li>
+                <li>Цвет и типографика</li>
+                <li>Применение на ключевых носителях</li>
+                <li>Руководство по использованию</li>
+              </ul></div>
+            </div></div>
+          </details>
+          <details class="service-item">
+            <summary><span class="service-number">03</span><h3>Визуальные системы</h3><span class="service-toggle ui-arrow" aria-hidden="true"></span></summary>
+            <div class="service-content"><div class="service-content-inner">
+              <div class="service-description"><p>Развиваю айдентику в целостный визуальный язык. Задаю правила композиции, графики и изображений, чтобы бренд оставался узнаваемым на каждой точке контакта.</p><p class="service-context">Для брендов, которым нужна последовательная коммуникация.</p><a class="text-button service-cta" href="contact.html">Обсудить задачу <span class="ui-arrow" aria-hidden="true"></span></a></div>
+              <div class="service-result"><p class="eyebrow">Что на выходе</p><ul>
+                <li>Принципы визуального языка</li>
+                <li>Графика и работа с изображениями</li>
+                <li>Система макетов и шаблонов</li>
+                <li>Правила для команды</li>
+              </ul></div>
+            </div></div>
+          </details>
+        </div>
+        <div class="service-panel" id="service-panel-art" role="tabpanel" aria-labelledby="service-tab-art" tabindex="0">
+          <details class="service-item" open>
+            <summary><span class="service-number">02</span><h3>Арт-дирекшн</h3><span class="service-toggle ui-arrow" aria-hidden="true"></span></summary>
+            <div class="service-content"><div class="service-content-inner">
+              <div class="service-description"><p>Нахожу визуальное направление проекта и веду его до реализации. Соединяю идею, типографику, изображение и работу команды в одно высказывание.</p><p class="service-context">Для запусков, кампаний и проектов с несколькими участниками.</p><a class="text-button service-cta" href="contact.html">Обсудить задачу <span class="ui-arrow" aria-hidden="true"></span></a></div>
+              <div class="service-result"><p class="eyebrow">Что на выходе</p><ul>
+                <li>Визуальная концепция</li>
+                <li>Ключевой образ и референсы</li>
+                <li>Направление для команды</li>
+                <li>Контроль целостности реализации</li>
+              </ul></div>
+            </div></div>
+          </details>
+        </div>
+        <div class="service-panel" id="service-panel-production" role="tabpanel" aria-labelledby="service-tab-production" tabindex="0">
+          <details class="service-item" open>
+            <summary><span class="service-number">04</span><h3>Презентационный дизайн</h3><span class="service-toggle ui-arrow" aria-hidden="true"></span></summary>
+            <div class="service-content"><div class="service-content-inner">
+              <div class="service-description"><p>Превращаю содержание в ясную визуальную историю: выстраиваю иерархию, ритм и систему слайдов, которые помогают донести идею.</p><p class="service-context">Для презентаций бренда, продукта или проекта.</p><a class="text-button service-cta" href="contact.html">Обсудить задачу <span class="ui-arrow" aria-hidden="true"></span></a></div>
+              <div class="service-result"><p class="eyebrow">Что на выходе</p><ul>
+                <li>Визуальная логика презентации</li>
+                <li>Дизайн ключевых слайдов</li>
+                <li>Инфографика и визуализация</li>
+                <li>Шаблон для дальнейшей работы</li>
+              </ul></div>
+            </div></div>
+          </details>
+          <details class="service-item">
+            <summary><span class="service-number">05</span><h3>AI-assisted production</h3><span class="service-toggle ui-arrow" aria-hidden="true"></span></summary>
+            <div class="service-content"><div class="service-content-inner">
+              <div class="service-description"><p>Использую AI для поиска визуальных направлений и производства изображений. Отбираю, собираю и дорабатываю результат вручную под задачу и стиль бренда.</p><p class="service-context">Для визуальных экспериментов, кампаний и контентных задач.</p><a class="text-button service-cta" href="contact.html">Обсудить задачу <span class="ui-arrow" aria-hidden="true"></span></a></div>
+              <div class="service-result"><p class="eyebrow">Что на выходе</p><ul>
+                <li>Поиск и проверка направлений</li>
+                <li>Генерация визуальных материалов</li>
+                <li>Отбор и ручная доработка</li>
+                <li>Адаптация под нужные форматы</li>
+              </ul></div>
+            </div></div>
+          </details>
+        </div>
+      </div></div></div></section>
 
-    <section class="process-section dark-section" id="process"><div class="wrap"><p class="eyebrow" data-ru="03 / Процесс" data-en="03 / Process">03 / Процесс</p><h2 class="process-display" data-ru="ОТ ЗАДАЧИ К СИСТЕМЕ" data-en="FROM BRIEF TO SYSTEM">ОТ ЗАДАЧИ К СИСТЕМЕ</h2><div class="process-list"><article><span class="eyebrow">STEP 01</span><div><h3 data-ru="Разобраться в контексте" data-en="Understand the context">Разобраться в контексте</h3><p data-ru="Изучаю задачу, аудиторию, ограничения и то, что уже есть у бренда. Ищу точку, от которой может вырасти сильная идея." data-en="I study the brief, audience, constraints and existing brand. Then I look for a strong starting point.">Изучаю задачу, аудиторию, ограничения и то, что уже есть у бренда. Ищу точку, от которой может вырасти сильная идея.</p></div><span class="process-mark"><span class="ui-arrow ui-arrow--down-right" aria-hidden="true">↗</span></span></article><article><span class="eyebrow">STEP 02</span><div><h3 data-ru="Проверить направления" data-en="Test directions">Проверить направления</h3><p data-ru="Собираю визуальные гипотезы, тестирую композицию, типографику и носители. AI помогает ускорить поиск, а отбор и решение остаются дизайнерскими." data-en="I test visual directions, composition, typography and applications. AI speeds up exploration; selection and decisions remain design-led.">Собираю визуальные гипотезы, тестирую композицию, типографику и носители. AI помогает ускорить поиск, а отбор и решение остаются дизайнерскими.</p></div><span class="process-mark"><span class="ui-arrow ui-arrow--down-right" aria-hidden="true">↗</span></span></article><article><span class="eyebrow">STEP 03</span><div><h3 data-ru="Собрать работающую систему" data-en="Build a working system">Собрать работающую систему</h3><p data-ru="Довожу выбранное направление до набора правил и материалов, с которыми можно последовательно работать в разных форматах." data-en="I turn the selected direction into rules and assets that work consistently across formats.">Довожу выбранное направление до набора правил и материалов, с которыми можно последовательно работать в разных форматах.</p></div><span class="process-mark"><span class="ui-arrow" aria-hidden="true">↗</span></span></article></div></div></section>
+    <section class="process-section dark-section" id="process" aria-labelledby="process-title">
+      <div class="wrap process-layout">
+        <div class="process-aside">
+          <p class="eyebrow" data-ru="03 / Процесс" data-en="03 / Process">03 / Процесс</p>
+          <p class="process-intro" data-ru="От понимания задачи — к визуальному направлению и системе, с которой можно работать дальше." data-en="From understanding the brief to a visual direction and a system you can keep working with.">От понимания задачи — к визуальному направлению и системе, с которой можно работать дальше.</p>
+        </div>
+        <div class="process-main">
+          <h2 class="process-display" id="process-title" data-ru="От задачи к системе" data-en="From brief to system">От задачи к системе</h2>
+          <div class="process-list"><article><span class="eyebrow">01</span><div><h3 data-ru="Разобраться в контексте" data-en="Understand the context">Разобраться в контексте</h3><p data-ru="Изучаю задачу, аудиторию, ограничения и то, что уже есть у бренда. Ищу точку, от которой может вырасти сильная идея." data-en="I study the brief, audience, constraints and existing brand. Then I look for a strong starting point.">Изучаю задачу, аудиторию, ограничения и то, что уже есть у бренда. Ищу точку, от которой может вырасти сильная идея.</p></div></article><article><span class="eyebrow">02</span><div><h3 data-ru="Проверить направления" data-en="Test directions">Проверить направления</h3><p data-ru="Собираю визуальные гипотезы, тестирую композицию, типографику и носители. AI помогает ускорить поиск, а отбор и решение остаются дизайнерскими." data-en="I test visual directions, composition, typography and applications. AI speeds up exploration; selection and decisions remain design-led.">Собираю визуальные гипотезы, тестирую композицию, типографику и носители. AI помогает ускорить поиск, а отбор и решение остаются дизайнерскими.</p></div></article><article><span class="eyebrow">03</span><div><h3 data-ru="Собрать работающую систему" data-en="Build a working system">Собрать работающую систему</h3><p data-ru="Довожу выбранное направление до набора правил и материалов, с которыми можно последовательно работать в разных форматах." data-en="I turn the selected direction into rules and assets that work consistently across formats.">Довожу выбранное направление до набора правил и материалов, с которыми можно последовательно работать в разных форматах.</p></div></article></div>
+        </div>
+      </div>
+    </section>
 
-    <section class="faq-section wrap"><div class="faq-heading"><p class="eyebrow" data-ru="04 / Перед началом" data-en="04 / Before we start">04 / Перед началом</p><h2 data-ru="Давайте начнём с разговора." data-en="Let's start with a conversation.">Давайте начнём с разговора.</h2></div><div class="faq-list"><details><summary><span data-ru="С какими задачами можно обратиться?" data-en="What can we work on together?">С какими задачами можно обратиться?</span><b>+</b></summary><p data-ru="Айдентика, логосистемы, визуальные системы, презентации, арт-дирекшн и AI-assisted production. Если задача на стыке направлений — тем интереснее." data-en="Brand identity, logo systems, visual systems, presentations, art direction and AI-assisted production. Cross-disciplinary challenges are welcome.">Айдентика, логосистемы, визуальные системы, презентации, арт-дирекшн и AI-assisted production. Если задача на стыке направлений — тем интереснее.</p></details><details><summary><span data-ru="Что написать в первом сообщении?" data-en="What should I include in the first message?">Что написать в первом сообщении?</span><b>+</b></summary><p data-ru="Кратко опишите задачу, сроки, формат сотрудничества и примерный бюджет. Если уже есть материалы или референсы, добавьте ссылки." data-en="Share a short brief, timing, collaboration format and approximate budget. Add links to existing materials or references if you have them.">Кратко опишите задачу, сроки, формат сотрудничества и примерный бюджет. Если уже есть материалы или референсы, добавьте ссылки.</p></details><details><summary><span data-ru="Как AI входит в процесс?" data-en="How does AI fit into the process?">Как AI входит в процесс?</span><b>+</b></summary><p data-ru="Использую его для исследования, быстрых визуальных гипотез и production-задач. Финальная композиция, типографика и отбор решений дорабатываются вручную." data-en="I use it for research, rapid visual hypotheses and production tasks. Final composition, typography and selection are refined by hand.">Использую его для исследования, быстрых визуальных гипотез и production-задач. Финальная композиция, типографика и отбор решений дорабатываются вручную.</p></details></div></section>
+    <section class="brief-section wrap" aria-labelledby="brief-title">
+      <div class="brief-aside">
+        <p class="eyebrow">04 / Перед началом</p>
+        <p class="brief-intro">Расскажите о проекте в нескольких пунктах. Это поможет понять задачу и предложить подход.</p>
+        <p class="brief-note">Не всё определено? Обсудим и разберёмся вместе.</p>
+      </div>
+      <div class="brief-heading">
+        <h2 id="brief-title">С чего начнём?</h2>
+        <ol class="brief-list">
+        <li><span class="eyebrow brief-number" aria-hidden="true">01</span><h3>Что за бизнес?</h3><p>Чем вы занимаетесь, для кого работаете и на каком этапе сейчас ваш бренд.</p></li>
+        <li><span class="eyebrow brief-number" aria-hidden="true">02</span><h3>Что нужно сделать?</h3><p>Создать айдентику с нуля, обновить существующую или развить визуальную систему.</p></li>
+        <li><span class="eyebrow brief-number" aria-hidden="true">03</span><h3>Какой эффект должна дать айдентика?</h3><p>Что должно измениться: восприятие бренда, узнаваемость или выход на новую аудиторию.</p></li>
+        <li><span class="eyebrow brief-number" aria-hidden="true">04</span><h3>Где она будет использоваться?</h3><p>На сайте, в соцсетях, на упаковке, в презентациях или в пространстве.</p></li>
+        <li><span class="eyebrow brief-number" aria-hidden="true">05</span><h3>Какие сроки вы планируете?</h3><p>Когда нужен результат и есть ли дата запуска, к которой важно всё подготовить.</p></li>
+        <li><span class="eyebrow brief-number" aria-hidden="true">06</span><h3>Какой бюджет вы рассматриваете?</h3><p>Примерный диапазон поможет подобрать объём работы и расставить приоритеты.</p></li>
+        </ol>
+      </div>
+    </section>
 
-    <section class="big-cta"><div class="wrap"><p class="eyebrow" data-ru="Есть задача?" data-en="Have a project?">Есть задача?</p><h2 data-ru="Давайте создадим то, что запомнится и будет работать." data-en="Let's make something memorable that works.">Давайте создадим то, что запомнится и будет работать.</h2><a href="contact.html" class="cta-arrow" aria-label="Перейти к контакту"><span class="ui-arrow" aria-hidden="true">↗</span></a></div></section>
+    <section class="big-cta home-cta"><div class="wrap"><p class="eyebrow" data-ru="Есть задача?" data-en="Have a project?">Есть задача?</p><h2 data-ru="Давайте создадим,&#10;что-то красивое! Вместе!" data-en="Let's create&#10;something beautiful! Together!">Давайте создадим,&#10;что-то красивое! Вместе!</h2><a href="contact.html" class="cta-arrow" aria-label="Перейти к контакту"><span class="ui-arrow" aria-hidden="true"></span></a></div></section>
   </main>
   <footer class="site-footer" id="site-footer"></footer>
 </body>

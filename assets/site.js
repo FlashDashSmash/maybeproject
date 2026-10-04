@@ -65,8 +65,28 @@ function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 }
 
+function bindTextWords(text) {
+  if (currentLanguage !== "ru") return text;
+  // Repeat for adjacent short words, so combinations like "и на сайте" stay together.
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(/(^|[^\p{L}\p{N}_])(из-за|из-под|в|во|на|к|ко|с|со|у|о|об|обо|от|до|из|за|по|без|для|при|про|под|над|перед|через|между|около|и|а|но|или|это|который|которая|которое|которые|которых|которым|которой|которую|которыми)[ \t]+(?=[\p{L}\p{N}])/giu, "$1$2\u00a0");
+  } while (text !== previous);
+  return text;
+}
+
+function applyTypography(root = document.body) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (!node.parentElement || node.parentElement.closest("script, style, code, pre, svg, [data-typography-skip]")) continue;
+    node.nodeValue = bindTextWords(node.nodeValue);
+  }
+}
+
 function arrowIcon(direction = "up-right") {
-  return `<span class="ui-arrow ui-arrow--${direction}" aria-hidden="true">↗</span>`;
+  return `<span class="ui-arrow ui-arrow--${direction}" aria-hidden="true"></span>`;
 }
 
 function setMobileMenu(open, restoreFocus = false) {
@@ -90,16 +110,18 @@ function renderShell() {
       <div class="header-inner">
         <a class="brand-link" href="index.html" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
         <nav class="desktop-nav" aria-label="Primary navigation">
-          <button type="button" data-open-about>${phrase("navAbout")}</button><a href="work.html">${phrase("navWork")}</a>
+          <button type="button" data-open-about>${phrase("navAbout")}</button>
           <a href="index.html#services">${phrase("navServices")}</a><a href="index.html#process">${phrase("navProcess")}</a>
+          <a href="work.html">${phrase("navWork")}</a>
         </nav>
         <div class="header-actions"><a class="header-cta" href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">${phrase("menu")}</button></div>
       </div>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
         <div class="mobile-menu-primary">
-        <button type="button" data-open-about>${phrase("navAbout")} ${arrowIcon()}</button><a href="work.html">${phrase("navWork")} ${arrowIcon()}</a>
+        <button type="button" data-open-about>${phrase("navAbout")} ${arrowIcon()}</button>
         <a href="index.html#services">${phrase("navServices")} ${arrowIcon()}</a><a href="index.html#process">${phrase("navProcess")} ${arrowIcon()}</a>
+        <a href="work.html">${phrase("navWork")} ${arrowIcon()}</a>
         <a href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
         </div>
         <div class="mobile-menu-socials" aria-label="Социальные сети">
@@ -115,6 +137,7 @@ function renderShell() {
       <div class="footer-main wrap"><p>${phrase("footerLine")}</p><a class="footer-mail" href="mailto:maybe.dezign@gmail.com">maybe.dezign@gmail.com</a></div>
       <div class="footer-bottom wrap"><span>© ${new Date().getFullYear()} Ilya Zubkov</span><span>${phrase("footerNote")}</span>
         <div><a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance ${arrowIcon()}</a>
+        <a href="https://dprofile.ru/maybeproject" target="_blank" rel="noreferrer">Dprofile ${arrowIcon()}</a>
         <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram ${arrowIcon()}</a>
         <a href="https://www.instagram.com/maybe__project/" target="_blank" rel="noreferrer">Instagram ${arrowIcon()}</a>
         <a href="#top">${phrase("footerTop")} ${arrowIcon("up")}</a></div></div>`;
@@ -336,28 +359,80 @@ function renderHeroSlideshow() {
 }
 
 let approachStatIndex = 0;
+let destroyApproachStats;
 
 function renderApproachStats() {
+  destroyApproachStats?.();
   const target = document.getElementById("approach-stats");
   if (!target) return;
   const stats = [
     { number: projectStore.length, ru: "Проектов в портфолио", en: "Projects in the portfolio" },
-    { number: document.querySelectorAll(".service-list>div").length, ru: "Направлений дизайна", en: "Design disciplines" }
+    { number: document.querySelectorAll(".service-item").length, ru: "Направлений дизайна", en: "Design disciplines" }
   ];
+  const duration = 7000;
   const content = target.querySelector(".approach-stat-content");
-  const update = (animate = false) => {
+  const progress = target.querySelector(".approach-stat-progress span");
+  let elapsed = 0, frame = 0, last = 0, inView = false, focused = false, hovered = false;
+  let contentAnimation;
+  const update = (animate = false, manual = false) => {
     const stat = stats[approachStatIndex];
+    content.setAttribute("aria-live", manual ? "polite" : "off");
     target.querySelector(".approach-stat-number").textContent = String(stat.number).padStart(2, "0");
-    target.querySelector(".approach-stat-label").textContent = stat[currentLanguage];
+    target.querySelector(".approach-stat-label").textContent = bindTextWords(stat[currentLanguage]);
     target.querySelector(".approach-stat-count").textContent = `${String(approachStatIndex + 1).padStart(2, "0")}/${String(stats.length).padStart(2, "0")}`;
-    target.querySelector(".approach-stat-progress span").style.transform = `scaleX(${(approachStatIndex + 1) / stats.length})`;
-    if (animate && motionEnabled()) content.animate([{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 280, easing: "ease-out" });
+    contentAnimation?.cancel();
+    if (animate && motionEnabled()) contentAnimation = content.animate([{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 280, easing: "ease-out" });
+  };
+  const paint = () => { progress.style.transform = `scaleX(${elapsed / duration})`; };
+  const stop = () => { cancelAnimationFrame(frame); frame = 0; last = 0; };
+  const tick = (now) => {
+    elapsed += now - last;
+    last = now;
+    if (elapsed >= duration) {
+      elapsed %= duration;
+      approachStatIndex = (approachStatIndex + 1) % stats.length;
+      update(true);
+    }
+    paint();
+    frame = requestAnimationFrame(tick);
+  };
+  const schedule = () => {
+    if (!inView || document.hidden || focused || hovered) { stop(); return; }
+    if (!frame) { last = performance.now(); frame = requestAnimationFrame(tick); }
   };
   target.querySelectorAll("[data-stat-step]").forEach((button) => {
     button.setAttribute("aria-label", currentLanguage === "ru" ? (button.dataset.statStep === "1" ? "Следующий факт" : "Предыдущий факт") : (button.dataset.statStep === "1" ? "Next fact" : "Previous fact"));
-    button.onclick = () => { approachStatIndex = (approachStatIndex + Number(button.dataset.statStep) + stats.length) % stats.length; update(true); };
+    button.onclick = () => {
+      stop();
+      elapsed = 0;
+      approachStatIndex = (approachStatIndex + Number(button.dataset.statStep) + stats.length) % stats.length;
+      update(true, true); paint(); schedule();
+    };
   });
-  update();
+  const enter = () => { hovered = true; schedule(); };
+  const leave = () => { hovered = false; schedule(); };
+  const focus = () => { focused = true; schedule(); };
+  const blur = (event) => { focused = target.contains(event.relatedTarget); schedule(); };
+  target.addEventListener("pointerenter", enter);
+  target.addEventListener("pointerleave", leave);
+  target.addEventListener("focusin", focus);
+  target.addEventListener("focusout", blur);
+  document.addEventListener("visibilitychange", schedule);
+  window.addEventListener("pagehide", stop);
+  window.addEventListener("pageshow", schedule);
+  const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; schedule(); }, { threshold: .2 });
+  observer.observe(target);
+  destroyApproachStats = () => {
+    stop(); observer.disconnect(); contentAnimation?.cancel();
+    target.removeEventListener("pointerenter", enter);
+    target.removeEventListener("pointerleave", leave);
+    target.removeEventListener("focusin", focus);
+    target.removeEventListener("focusout", blur);
+    document.removeEventListener("visibilitychange", schedule);
+    window.removeEventListener("pagehide", stop);
+    window.removeEventListener("pageshow", schedule);
+  };
+  update(); paint();
 }
 
 function renderWork() {
@@ -418,7 +493,7 @@ function motionEnabled() {
 }
 
 function splitMotionLines(element) {
-  const source = element.hasAttribute("data-ru") ? element.dataset[currentLanguage] : (element.dataset.motionSource || element.textContent);
+  const source = bindTextWords(element.hasAttribute("data-ru") ? element.dataset[currentLanguage] : (element.dataset.motionSource || element.textContent));
   if (!source.trim()) return;
   const wasVisible = element.classList.contains("is-visible");
   element.dataset.motionSource = source;
@@ -430,8 +505,8 @@ function splitMotionLines(element) {
   } else {
     const measured = [];
     let space = "";
-    (source.match(/\S+|\s+/gu) || []).forEach((part) => {
-      if (/^\s+$/u.test(part)) { element.append(document.createTextNode(part)); space += part; return; }
+    (source.match(/(?:\S|\u00a0)+|[^\S\u00a0]+/gu) || []).forEach((part) => {
+      if (/^[^\S\u00a0]+$/u.test(part)) { element.append(document.createTextNode(part)); space += part; return; }
       const word = document.createElement("span");
       word.textContent = part;
       word.style.whiteSpace = "nowrap";
@@ -468,15 +543,15 @@ function splitMotionLines(element) {
 
 function splitMotionLetters(element, segmenter) {
   if (element.children.length && !element.classList.contains("motion-fill")) return null;
-  const source = element.hasAttribute("data-ru") ? element.dataset[currentLanguage] : (element.dataset.motionSource || element.textContent);
+  const source = bindTextWords(element.hasAttribute("data-ru") ? element.dataset[currentLanguage] : (element.dataset.motionSource || element.textContent));
   if (!source.trim()) return null;
   element.dataset.motionSource = source;
   element.setAttribute("aria-label", source.replace(/\s+/gu, " ").trim());
   element.replaceChildren();
   const letters = [];
-  source.split(/(\s+)/u).forEach((piece) => {
+  source.split(/([^\S\u00a0]+)/u).forEach((piece) => {
     if (!piece) return;
-    if (/^\s+$/u.test(piece)) { element.append(document.createTextNode(piece)); return; }
+    if (/^[^\S\u00a0]+$/u.test(piece)) { element.append(document.createTextNode(piece)); return; }
     const word = document.createElement("span");
     word.className = "motion-word";
     word.setAttribute("aria-hidden", "true");
@@ -507,14 +582,16 @@ function updateMotion() {
   motionTargets.forEach(({ element, letters }) => {
     const box = element.getBoundingClientRect();
     if (box.top > height * 1.1 || box.bottom < -height * .2) return;
+    // Fill every line together so the whole block is readable near the middle of the screen.
+    const anchor = element.closest(".approach-copy") || element;
+    const progress = Math.max(0, Math.min(1, (height - anchor.getBoundingClientRect().top) / (height * .5)));
     const lines = new Map();
     letters.forEach((letter) => {
       const top = Math.round(letter.getBoundingClientRect().top / 3) * 3;
       if (!lines.has(top)) lines.set(top, []);
       lines.get(top).push(letter);
     });
-    lines.forEach((line, top) => {
-      const progress = Math.max(0, Math.min(1, (height * .9 - top) / (height * .58)));
+    lines.forEach((line) => {
       const filled = progress * (line.length + 4);
       line.forEach((letter, index) => {
         const amount = Math.max(0, Math.min(1, (filled - index) / 4));
@@ -552,7 +629,7 @@ function setupMotion() {
   lineObserver?.disconnect();
   const segmenter = typeof Intl.Segmenter === "function" ? new Intl.Segmenter(document.documentElement.lang, { granularity: "grapheme" }) : null;
   motionTargets = [];
-  const fillSelector = ".statement h2, .approach-body, .section-title h2, .about-slice h2, .process-display, .faq-heading h2, .big-cta h2, .about-page-copy h2";
+  const fillSelector = ".statement h2, .approach-body, .section-title h2, .about-slice h2, .process-display, .brief-heading h2, .big-cta h2, .about-page-copy h2";
   document.querySelectorAll(fillSelector).forEach((element) => {
     const target = splitMotionLetters(element, segmenter);
     if (target) motionTargets.push(target);
@@ -649,6 +726,73 @@ function setupPageTransitions() {
   });
 }
 
+function setupServices() {
+  const catalog = document.querySelector(".service-layout");
+  if (!catalog || catalog.dataset.ready) return;
+  catalog.dataset.ready = "true";
+  const tabs = [...catalog.querySelectorAll('[role="tab"]')];
+  const panels = [...catalog.querySelectorAll(".service-panel")];
+  const select = (tab, focus = false) => {
+    tabs.forEach((item) => {
+      const active = item === tab;
+      item.setAttribute("aria-selected", String(active));
+      item.tabIndex = active ? 0 : -1;
+    });
+    panels.forEach((panel) => { panel.hidden = panel.id !== tab.getAttribute("aria-controls"); });
+    if (focus) tab.focus({ preventScroll: true });
+    queueHeaderContrast();
+    queueMotionUpdate();
+  };
+  const tabList = catalog.querySelector(".service-tabs");
+  tabList.hidden = false;
+  const verticalTabs = window.matchMedia("(min-width: 561px)");
+  const setOrientation = () => tabList.setAttribute("aria-orientation", verticalTabs.matches ? "vertical" : "horizontal");
+  setOrientation();
+  verticalTabs.addEventListener("change", setOrientation);
+  select(tabs[0]);
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("keydown", (event) => {
+      let next;
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % tabs.length;
+      if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index + tabs.length - 1) % tabs.length;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = tabs.length - 1;
+      if (next !== undefined) { event.preventDefault(); select(tabs[next], true); }
+    });
+  });
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  catalog.querySelectorAll(".service-item").forEach((item) => {
+    const content = item.querySelector(".service-content");
+    let animation = null;
+    let expanded = item.open;
+    item.querySelector("summary").addEventListener("click", (event) => {
+      if (reducedMotion.matches || typeof content.animate !== "function") {
+        animation?.cancel();
+        animation = null;
+        expanded = !item.open;
+        return;
+      }
+      event.preventDefault();
+      const height = item.open ? content.getBoundingClientRect().height : 0;
+      animation?.cancel();
+      expanded = !expanded;
+      if (expanded) item.open = true;
+      const next = content.animate(
+        [{ height: `${height}px`, opacity: expanded ? .3 : 1 }, { height: `${expanded ? content.scrollHeight : 0}px`, opacity: expanded ? 1 : 0 }],
+        { duration: 320, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
+      );
+      animation = next;
+      next.finished.then(() => {
+        if (animation !== next) return;
+        item.open = expanded;
+        next.cancel();
+        animation = null;
+      }).catch(() => {});
+    });
+  });
+}
+
 function applyLanguage() {
   document.documentElement.lang = currentLanguage;
   document.querySelectorAll("[data-ru][data-en]").forEach((element) => { element.textContent = element.dataset[currentLanguage]; });
@@ -656,13 +800,14 @@ function applyLanguage() {
   if (document.body.dataset.page !== "project") document.title = document.body.dataset[`title${languageSuffix}`] || document.title;
   const description = document.querySelector('meta[name="description"]');
   if (description && document.body.dataset.page !== "project") description.content = document.body.dataset[`description${languageSuffix}`] || description.content;
-  renderShell(); renderHeroSlideshow(); renderApproachStats(); renderWork(); renderProject();
+  renderShell(); renderHeroSlideshow(); setupServices(); renderApproachStats(); renderWork(); renderProject();
+  applyTypography();
   setupHeaderContrast();
   setupMotion();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => { currentFilter = button.dataset.filter; renderWork(); setupMotion(); }));
+  document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => { currentFilter = button.dataset.filter; renderWork(); applyTypography(document.getElementById("work-grid")); setupMotion(); }));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       const menu = document.getElementById("mobile-menu");

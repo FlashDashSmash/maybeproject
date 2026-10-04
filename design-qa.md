@@ -202,3 +202,129 @@ final result: passed
 - Open/close resets expanded state and removes background inertness. Services navigation still lands at ~88 px with the menu closed; About opens its drawer and closes the menu. Checked automatic menu closure when returning to desktop. Browser error logs empty; JavaScript syntax check passed.
 
 final result: passed
+
+
+## 2026-10-04 — Services inspired by Lines Design
+
+- Inspected https://linesdesign.ru/#services in the browser: category tabs switch service groups; each service expands independently with descriptive content and a contact action. Used the interaction structure with original MAYBE styling and copy.
+- Replaced the five static service rows with three tabs (Branding, Art Direction, Design and AI). Preserved all five disciplines, including the statistics count. Added original descriptions, use cases, deliverables and contact links; no invented prices or delivery times.
+- Native details remain usable without JavaScript. Added interruptible 320 ms expansion/collapse, native reduced-motion behavior, tab ARIA relationships and keyboard navigation. Open headers use brand orange; buttons remain capsules and content follows the shared 30% rail.
+- Verified category switching, independent expansion, collapse and three rapid repeated clicks. Finished content height matches its natural height. Contact action opens contact.html.
+- Visually inspected desktop 1440 × 1000, tablet 768 × 1024 and phones 390 × 844 / 320 × 568. No horizontal overflow. The three tabs fit one row at 390 px and wrap at 320 px.
+- Projects → Services retains an active page transition and arrives at target top ~88 px with Branding selected. Browser error logs empty; JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Service tabs in the left column
+
+- Moved the service tabs into the left 30% column, aligned with the section label. The service catalog stays aligned with the heading and navigation rail. Mobile keeps tabs above the cards at the left page margin.
+- Verified at 1440 px: tabs x=18, catalog and heading x=434.69. Category switching remains functional. At 390 px both tabs and catalog start at x=18, with horizontal tab semantics and no horizontal overflow. JavaScript syntax check passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Services without card backgrounds
+
+- Removed gray surfaces, outlines and outer corner radii from all service items. Closed summary hover remains transparent with orange text; the orange open summary and content expansion are preserved.
+- Verified both open and closed items have transparent backgrounds and zero-width borders. AI service expands correctly; no horizontal overflow. Inspected the rendered desktop section.
+
+final result: passed locally
+
+
+## 2026-10-04 — Services as divided rows
+
+- Restyled service accordions as transparent rows with thin top/bottom dividers, matching the Process section. Removed orange summary surfaces and rounded summary corners.
+- Replaced plus/minus marks with the shared arrow glyph: down-right when collapsed, up-right when expanded. The arrow rotates during state changes; expansion animation remains intact.
+- Verified rendered desktop rows, expansion and arrow rotation. At 390 px, heading and description share x=54 and there is no horizontal overflow. Whitespace check passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Earlier Approach text fill
+
+- Both Approach paragraphs now share progress based on the top of their text column, beginning at viewport entry and finishing when that top reaches 55% of viewport height. Other text-fill sections retain their existing timing.
+- Verified at 2551 × 1314 with the Approach text beginning at 57% of viewport height, matching the screenshot: average letter opacity ~0.997 for both paragraphs, with 97–99% of letters above 0.9 opacity. Earlier scroll position retains a partial fill. JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Earlier text fill across all blocks
+
+- Applied the same viewport-entry timing to every existing text-fill target on all pages. All lines of each target share progress; the two Approach paragraphs retain their common anchor. Fill finishes at 55% of viewport height.
+- At 1440 × 1000 and a 57% top position: Process and FAQ headings had opacity 1; the two-line home CTA averaged 0.997 and the two-line Projects CTA averaged 0.999. At an earlier 85% position the Projects CTA averaged 0.461, confirming gradual fill remains.
+- At 390 × 844 the two-line Process heading was fully filled at 57%, with no horizontal overflow. Shared script version updated in all five pages. JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Slightly slower text fill
+
+- Extended the shared scroll-fill range from 45% to 50% of viewport height (about 10% slower). Text is fully filled when its anchor reaches the middle of the screen.
+- At 1440 × 1000, Approach paragraphs averaged opacity 0.928 and 0.925 at a 57% top position; both reached opacity 1 at 50%. Updated the shared script version in all five pages. JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Open project brief
+
+- Replaced the homepage FAQ accordion with an open six-question brief covering business context, required work, identity impact, applications, timing and budget. Added short prompts and a note that unresolved details can be discussed together.
+- Desktop layout follows the shared 30% content rail: the brief list and hero content both start at x=434.69 at 1440 px. Six numbered rows have thin dividers and separate question/prompt columns. Retained the shared text-fill animation on the new heading.
+- Verified desktop and 390 px mobile screenshots. Mobile rows stack question and prompt at the same x=54, all six are present, with no horizontal overflow and no browser errors. JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Brief heading aligned with the homepage
+
+- Moved the brief heading above the questions in the right content column. The section label, introduction and note remain in the left rail. Matched the introduction typography and spacing to the homepage aside.
+- At 2536 px the heading, list and hero content share x=768.47; the label sits 5 px below the heading top. Checked the rendered wide-screen composition.
+- At 390 px verified the visual order (label, heading, introduction, note, six questions), with no horizontal overflow. Shared CSS version updated in all five pages; whitespace check passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Process in the shared site style
+
+- Rebuilt Process around the shared content rail: section label and short introduction on the left, sentence-case heading and all three stages on the right. Kept existing stage descriptions, arrow directions and text animations.
+- Matched the heading scale to the brief and the stage typography, numbers and arrows to Services. Removed the superseded oversized heading and mobile layout overrides.
+- At 1440 px, hero content, Process heading and stage dividers share x=434.69; Process and brief headings both use 51.84 px type. Checked desktop and 390 px screenshots. Mobile stage headings/descriptions align at x=54, all arrows remain within their rows, and there is no horizontal overflow. CSS version updated across all five pages; whitespace check passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Vector arrows instead of emoji glyphs
+
+- Replaced all static and generated Unicode arrows with empty decorative spans using a shared SVG mask. Explicit WebKit and standard mask rules render the same sharp monochrome shape independent of iOS emoji fonts; currentColor retains light/dark and hover colors. Existing rotation classes and accordion transitions remain.
+- Updated both shared asset versions in all five pages. Parsed the SVG and verified there are no diagonal Unicode arrow glyphs in page templates or script.
+- At 390 px checked rendered Services, full-screen menu and Contact screenshots. Home had 30 vector arrows and zero glyph-bearing arrow spans; expanded/collapsed service rotations remained 0/90 degrees. Contact icons and email arrow rendered correctly with no horizontal overflow. Physical iPhone rendering was not tested. JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Stats timeline, typography and footer
+
+- Centered both Approach controls using a horizontal SVG mask, rotating only the left arrow by 180 degrees. At 2560 px both rendered arrows had identical top/bottom bounds (253.55 / 275.55 px).
+- Added a 7000 ms elapsed-time progress bar and automatic fact rotation. Time pauses offscreen, in hidden tabs and while interacting with the widget; manual navigation resets it. Checked manual 01→02 switching, zeroed progress and automatic 02→01 switching after a 7.2 second wait.
+- Added shared Russian preposition binding using nonbreaking spaces, including generated content and both motion text splitters. Prepositions move with the next word only when needed; no hard breaks are inserted. Checked grouped Approach words and no trailing prepositions in measured animation lines on 390/320 px homepage and 320 px Projects.
+- Changed the homepage CTA to the supplied copy with an explicit line break: “Давайте создадим,” / “что-то красивое! Вместе!”. Verified two rendered lines at 2560, 390 and 320 px.
+- Added Dprofile (https://dprofile.ru/maybeproject) to the shared footer. Checked homepage and Projects links and kept the footer contact arrow beside its label. No horizontal overflow or browser errors in the checked mobile views. Shared asset versions updated in all five pages; SVG, JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Bind hanging conjunctions and introductory words
+
+- Extended the shared Russian word binding to conjunctions, relative pronouns and “Это”, covering all six annotated cases. Repeated binding also keeps adjacent combinations such as “и на каком” together; wrapping remains responsive without inserted hard breaks.
+- At 2560 px verified Range bounds for “которая работает”, “и системе”, “и на каком”, “Это поможет” and “и предложить”: each marked word shares the following word's line. The second Process stage now starts its next line with “и носители”.
+- At 320 px checked no horizontal overflow and no marked conjunctions/introductory words left at animation-line ends. The CTA still has two lines, and bound words survive letter splitting. No browser errors; shared JS version updated in all five pages. JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Service contact buttons in the left column
+
+- Moved all five service contact buttons from the deliverables column into the description column, below the context text. Buttons share the heading/description alignment and retain a minimum 24 px gap; taller columns align the button toward the bottom.
+- Checked the rendered 1440 px layout: heading, description and button share x=518.69. All five buttons are in descriptions and none remain in the deliverables column. At 390 px heading/button share x=54 and the button appears before deliverables, without horizontal overflow. Shared CSS version updated in all five pages; whitespace check passed.
+
+final result: passed locally
