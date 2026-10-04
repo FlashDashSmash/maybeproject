@@ -23,7 +23,7 @@ const copy = {
     ai: "AI в процессе", applications: "Применение", result: "Результат",
     gallery: "Визуальная история", backWork: "Ко всем проектам", noMedia: "Кейс в разработке",
     footerLine: "Айдентика, арт-дирекшн и визуальные системы с ясной логикой.",
-    footerNote: "Открыт к выборочным проектам и коллаборациям.",
+    footerNote: "Открыт к проектам и коллаборациям.",
     footerTop: "Наверх", footerContact: "Написать мне", filterCount: "проектов",
     aboutHeadline: "Я собираю сильные визуальные системы для брендов с характером.",
     aboutIntro: "Я — Илья Зубков, Senior Brand Designer / Art Director.\nРаботаю с айдентикой, типографикой, визуальными системами и AI-продакшеном.",
@@ -44,7 +44,7 @@ const copy = {
     ai: "AI in the process", applications: "Applications", result: "Result",
     gallery: "Visual story", backWork: "All projects", noMedia: "Case in progress",
     footerLine: "Brand identities, art direction and visual systems with clear logic.",
-    footerNote: "Open to selected projects and collaborations.",
+    footerNote: "Open to projects and collaborations.",
     footerTop: "Back to top", footerContact: "Email me", filterCount: "projects",
     aboutHeadline: "I build distinct visual systems for brands with character.",
     aboutIntro: "I'm Ilya Zubkov, Senior Brand Designer / Art Director.\nI work with identity, typography, visual systems and AI production.",
@@ -133,7 +133,7 @@ function renderShell() {
   }
   if (footer) {
     footer.innerHTML = `
-      <div class="footer-top wrap"><p class="eyebrow">MAYBE / ILYA ZUBKOV</p><a href="contact.html">${phrase("footerContact")} ${arrowIcon()}</a></div>
+      <div class="footer-top wrap"><p class="eyebrow">${phrase("aboutSignature")}</p><a href="contact.html">${phrase("footerContact")} ${arrowIcon()}</a></div>
       <div class="footer-main wrap"><p>${phrase("footerLine")}</p><a class="footer-mail" href="mailto:maybe.dezign@gmail.com">maybe.dezign@gmail.com</a></div>
       <div class="footer-bottom wrap"><span>© ${new Date().getFullYear()} Ilya Zubkov</span><span>${phrase("footerNote")}</span>
         <div><a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance ${arrowIcon()}</a>

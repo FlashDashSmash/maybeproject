@@ -492,5 +492,22 @@ body.page-leaving{pointer-events:none}
 .approach-stat-controls .ui-arrow{-webkit-mask-image:url("arrow-right.svg");mask-image:url("arrow-right.svg");vertical-align:middle}
 .approach-stat-controls .ui-arrow--right{transform:none}
 .approach-stat-controls .ui-arrow--left{transform:rotate(180deg)}
-.home-cta h2{white-space:pre-line;padding-right:calc(clamp(65px,9vw,145px) + 32px)}
-@media(max-width:560px){.home-cta h2{font-size:clamp(21px,6.3vw,28px);padding-right:0;padding-bottom:90px}}
+.home-cta{--cta-size:clamp(56px,6vw,88px)}
+.home-cta h2{white-space:pre-line;padding-right:calc(var(--cta-size) + 32px)}
+.home-cta .cta-arrow{width:var(--cta-size);height:var(--cta-size);font-size:clamp(32px,4vw,52px);border-width:1.5px}
+@media(max-width:820px){
+  .home-cta{--cta-size:48px;padding:52px 0}
+  .home-cta .wrap{display:grid;gap:28px}
+  .home-cta h2{margin:0;padding:0;font-size:clamp(21px,6.6vw,48px);line-height:1.15;letter-spacing:-.035em}
+  .home-cta .cta-arrow{position:static;justify-self:end;font-size:28px}
+}
+
+/* Desktop homepage chapters settle on a section boundary after scrolling. */
+@media(min-width:821px) and (hover:hover) and (pointer:fine){
+  html:has(body[data-page="home"]){scroll-snap-type:y mandatory;scroll-padding-top:0}
+  body[data-page="home"] main>section,body[data-page="home"] .site-footer{scroll-snap-align:start;scroll-snap-stop:always}
+  body[data-page="home"] main>section:not(.home-hero):not(.home-cta){min-height:100svh;padding-top:clamp(88px,10svh,112px);padding-bottom:64px}
+  body[data-page="home"] .statement-grid{align-items:start}
+  body[data-page="home"] .site-footer{scroll-snap-align:end}
+}
+@media(prefers-reduced-motion:reduce){html:has(body[data-page="home"]){scroll-behavior:auto}}

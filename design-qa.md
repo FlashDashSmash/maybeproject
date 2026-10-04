@@ -328,3 +328,28 @@ final result: passed locally
 - Checked the rendered 1440 px layout: heading, description and button share x=518.69. All five buttons are in descriptions and none remain in the deliverables column. At 390 px heading/button share x=54 and the button appears before deliverables, without horizontal overflow. Shared CSS version updated in all five pages; whitespace check passed.
 
 final result: passed locally
+
+
+## 2026-10-04 — Compact homepage CTA on mobile
+
+- Replaced the mobile absolute arrow and heading spacer with a normal grid flow: label, two-line headline, then a 56 px arrow aligned right. Reduced section padding from 85 to 52 px, kept 28 px content gaps and relaxed the mobile headline tracking. Desktop layout remains governed by the existing rules.
+- Checked 320, 390 and 820 px: exactly two headline lines, no horizontal overflow and no overlapping button. At 390 px the section height is 288.69 px (previously 366.53 px); at 320 px the button starts 28 px after the title. Reviewed the 390 px screenshot. At 1440 px the title still has two lines and the button retains its absolute desktop positioning. No browser errors. Physical iPhone rendering was not tested. Shared CSS version updated in all five pages; whitespace check passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — Identity labels and smaller homepage CTA arrow
+
+- Updated the hero signature and shared footer to “Илья Зубков / MAYBE PROJECT”. Removed the MAYBE prefix from the hero discipline label. Removed “выборочным” / “selected” from the shared availability note.
+- Reduced the homepage CTA circle to 56–88 px on desktop and 48 px on mobile, with proportionate vector arrows. Checked 1462 px: circle 87.72 px, correct rendered labels and no horizontal overflow. Checked 320 px: circle 48 px, footer signature wraps within its column with a 20 px gap before the contact link, correct availability note and no horizontal overflow. Reviewed the mobile footer screenshot. Shared asset versions updated in all five pages.
+
+final result: passed locally
+
+
+## 2026-10-04 — Desktop homepage scroll chapters
+
+- Added native vertical mandatory scroll snapping only for the homepage on fine-pointer desktop viewports above 820 px. Main sections stop at their starts; the footer also has an end snap point so its final links remain reachable. Hero, Approach, Services, Process and Brief occupy at least one viewport. Intrinsic heights can grow with content; no clipping, nested scroll containers or wheel handlers were introduced. Reduced-motion users retain instant programmatic scrolling.
+- At 1462×1044 the five primary sections each measured 1044 px. A 760 px scroll settled at the Approach start, and navigation to Process settled at its start. At 1440×768 both branding details expanded Services to 952.72 px: scrolling inside it kept the lower button visible before continuing to Process. Checked upward scrolling to Approach, Projects retaining scroll-snap-type none, Projects→Services landing at top=0, and reaching all footer links at document end.
+- At 390×844 snapping is none and section heights remain intrinsic; a 270 px scroll retained its exact position without snapping. No horizontal overflow or browser errors. Shared CSS version updated in all five pages; whitespace check passed.
+
+final result: passed locally
