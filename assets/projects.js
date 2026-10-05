@@ -135,72 +135,316 @@ const projects = [
     ]
   },
   {
-    slug: "axonic",
-    title: "AXONIC",
-    category: {
-      ru: "Визуальная система нейротехнологического бренда",
-      en: "Neurotechnology Brand Platform"
+    "slug": "axonic",
+    "nextProject": "redsoft",
+    "coverEmbed": "https://kinescope.io/embed/rZMBnw32v3BxvCwgQm6HxQ",
+    "layout": "chapters",
+    "textSide": "left",
+    "title": "AXONIC",
+    "category": {
+      "ru": "Визуальная система нейротехнологического бренда",
+      "en": "Neurotechnology Brand Visual System"
     },
-    year: "2026",
-    role: {
-      ru: "Бренд-платформа, визуальная система, AI process design",
-      en: "Brand platform, visual system, AI process design"
+    "year": "2026",
+    "type": {
+      "ru": "Концептуальный проект",
+      "en": "Concept project"
     },
-    featured: true,
-    tags: ["Brand system", "Tech", "AI-assisted", "Art direction"],
-    accent: "linear-gradient(145deg, #101114 0%, #181c22 60%, #ff3c00 140%)",
-    summary: {
-      ru: "Визуальная система для технологического бренда в области нейроинтерфейсов: точность, сигнал, человеческое ощущение и масштабируемая графика.",
-      en: "A precise identity platform for a brand positioned between research, product and future-facing communication."
+    "role": {
+      "ru": "Концепция бренда, айдентика, арт-дирекшн, генеративная графика",
+      "en": "Brand concept, visual identity, art direction, generative graphics"
     },
-    intro: {
-      ru: "AXONIC требовался техно-бренд без визуальных клише, но с ощущением интеллекта, связи, сигнала и внутренней дисциплины.",
-      en: "AXONIC needed a technology brand without visual clichés, but with a sense of intelligence, signal and discipline."
+    "featured": true,
+    "tags": [
+      "Concept project",
+      "Brand system",
+      "Tech",
+      "AI-assisted",
+      "Art direction"
+    ],
+    "accent": "linear-gradient(145deg, #101114 0%, #181c22 60%, #ff3c00 140%)",
+    "summary": {
+      "ru": "Концепт нейротехнологического бренда: от идеи импульса к знаку, генеративной графике и системе коммуникаций.",
+      "en": "A neurotechnology brand concept: from the idea of an impulse to a symbol, generative graphics and a communication system."
     },
-    sections: {
-      context: {
-        ru: "Бренд работает на стыке науки, продукта и инвесторской коммуникации, поэтому визуальный язык должен быть технологичным, понятным и не холодным.",
-        en: "The brand needs to speak to researchers, product audiences and investor stakeholders at the same time."
+    "intro": {
+      "ru": "AXONIC — концепт нейротехнологического бренда, который разрабатывает протезные системы и нейроинтерфейсы, преобразующие нейронные сигналы в движение и обратную связь.\n\nОбъединяя биомеханическую инженерию, сенсорные интерфейсы и адаптивные технологии, AXONIC стремится восстановить связь между телом и окружающим миром.",
+      "en": "AXONIC is a concept for a neurotechnology brand developing prosthetic systems and neural interfaces that translate neural signals into movement and sensory feedback.\n\nBy combining biomechanical engineering, sensory interfaces and adaptive technologies, AXONIC aims to restore the connection between the body and the surrounding world."
+    },
+    "caseBlocks": [
+      {
+        "title": {
+          "ru": "Всё начинается с импульса",
+          "en": "Everything starts with an impulse"
+        },
+        "media": [{
+          "embed": "https://kinescope.io/embed/v9ZnXjjUSDPFN5Bxpbs34j",
+          "alt": {
+            "ru": "Семантика знака AXONIC: от импульса к контакту",
+            "en": "AXONIC symbol semantics: from impulse to contact"
+          }
+        }, {
+          "src": "assets/projects/axonic/axonic-impulse.png?v=20261005-frame251",
+          "alt": {
+            "ru": "Построение знака и логотипа AXONIC: кривые и опорные точки",
+            "en": "AXONIC symbol and logotype construction: curves and anchor points"
+          }
+        }, {
+          "src": "assets/projects/axonic/axonic-symbol-grid.png",
+          "alt": {
+            "ru": "Пропорции знака AXONIC на модульной сетке: 5X и 2.5X",
+            "en": "AXONIC symbol proportions on a modular grid: 5X and 2.5X"
+          }
+        }],
+        "paragraphs": [
+          {
+            "ru": "Символ построен вокруг простой идеи: всё начинается с импульса.",
+            "en": "The symbol is built around a simple idea: everything starts with an impulse."
+          },
+          {
+            "ru": "Соединяясь и взаимодействуя, сигналы формируют отклик, превращая нейронную активность в то, что человек способен почувствовать.",
+            "en": "Signals connect and interact to form a response, turning neural activity into something a person can feel."
+          }
+        ]
       },
-      challenge: {
-        ru: "Нужно было избежать абстрактной tech-эстетики и при этом сохранить ощущение высокой технологичности, точности и доверия.",
-        en: "The challenge was to avoid cold abstraction while still feeling highly technological."
+      {
+        "title": {
+          "ru": "От знака к системе",
+          "en": "From the symbol to the system"
+        },
+        "media": [{
+          "embed": "https://kinescope.io/embed/8U4njiWwk3FwrZiiWRU6Vj",
+          "alt": {
+            "ru": "AXONIC: от знака к визуальной системе",
+            "en": "AXONIC: from the symbol to the visual system"
+          }
+        }, {
+          "embed": "https://kinescope.io/embed/0kYeR1NvBHFUsmKy3yKKZp",
+          "alt": {
+            "ru": "Визуальная система AXONIC: второй кадр",
+            "en": "AXONIC visual system: second frame"
+          }
+        }],
+        "paragraphs": [
+          {
+            "ru": "Графические константы AXONIC продолжают логику знака. Типографика и цвет задают иерархию: помогают разделять информацию и сохранять узнаваемость в разных форматах.",
+            "en": "AXONIC’s visual constants extend the logic of its symbol. Typography and colour establish a hierarchy, organising information and maintaining recognition across formats."
+          },
+          {
+            "ru": "Сетка для носителей связывает текст, изображения и свободное пространство. Форма текстовых блоков рождается из геометрии логотипа и переносит его характер в композицию.",
+            "en": "The application grid connects text, images and open space. Text blocks take their shape from the geometry of the logotype, bringing its character into the composition."
+          },
+          {
+            "ru": "Графика тоже возникает из знака — как его отпечаток. Так логотип становится основой визуального языка, который развивается от одного носителя к другому.",
+            "en": "The graphics also emerge from the symbol, like its imprint. The logo becomes the basis of a visual language that develops from one application to the next."
+          }
+        ]
       },
-      visualSystem: {
-        ru: "Система строится на сигнальной графике, светлой технологичной базе, точных акцентах, структурной типографике и визуальной метафоре связи.",
-        en: "The visual base combines signal-inspired graphics, dense contrast and rare orange accents at points of emphasis."
+      {
+        "title": {
+          "ru": "Инструмент генеративной графики",
+          "en": "Generative graphics tool"
+        },
+        "media": {
+          "src": "assets/projects/axonic/axonic-graphic-tool-ipad.png",
+          "width": 2400,
+          "height": 1640,
+          "alt": {
+            "ru": "Инструмент генеративной графики AXONIC на экране iPad",
+            "en": "AXONIC generative graphics tool on an iPad screen"
+          }
+        },
+        "paragraphs": [
+          {
+            "ru": "Я разработал инструмент, который генерирует и анимирует графику AXONIC.",
+            "en": "I developed a tool that generates and animates AXONIC graphics."
+          },
+          {
+            "ru": "В его основе лежат правила визуальной системы бренда, благодаря чему новые композиции можно создавать быстрее, сохраняя единый визуальный язык в разных форматах.",
+            "en": "The tool is based on the rules of the brand’s visual system, making it possible to create new compositions faster while preserving a consistent visual language across formats."
+          }
+        ]
       },
-      aiWorkflow: {
-        ru: "AI использовался для исследования diagram-based imagery, быстрых визуальных гипотез и сценариев для презентаций. Финальная система собиралась вручную через отбор, композицию и типографику.",
-        en: "AI was used for directed exploration of diagram-based imagery and rapid iterations in presentation scenarios."
+      {
+        "title": {
+          "ru": "От носителей к коммуникации",
+          "en": "From applications to communication"
+        },
+        "media": [
+          {
+            "src": "assets/projects/axonic/axonic-branding-set.png",
+            "width": 2388,
+            "height": 1620,
+            "alt": {
+              "ru": "Фирменные носители AXONIC: документы, папки и визитки",
+              "en": "AXONIC branded applications: documents, folders and business cards"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-card-interface-folder.png",
+            "width": 2400,
+            "height": 1360,
+            "alt": {
+              "ru": "Визитка AXONIC и папка с протоколами интерфейса",
+              "en": "AXONIC business card and interface protocol folder"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-technical-protocol.png",
+            "width": 2400,
+            "height": 1362,
+            "alt": {
+              "ru": "Папка AXONIC с техническим протоколом и документацией системы",
+              "en": "AXONIC folder with technical protocols and system documentation"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-system-overview-uniform.png",
+            "width": 2400,
+            "height": 1545,
+            "alt": {
+              "ru": "Обзор системы AXONIC и фирменная медицинская форма",
+              "en": "AXONIC system overview and branded medical uniform"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-billboard.png",
+            "width": 2400,
+            "height": 1606,
+            "alt": {
+              "ru": "Наружная реклама AXONIC: Чувствовать мир как прежде",
+              "en": "AXONIC outdoor advertising: feel the world as before"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-website-macbook.png",
+            "width": 2560,
+            "height": 1622,
+            "alt": {
+              "ru": "Сайт AXONIC на экране MacBook",
+              "en": "AXONIC website on a MacBook screen"
+            }
+          },
+          {
+            "embed": "https://kinescope.io/embed/hKF9WAnBcwQuSUSvGAJNs6",
+            "width": 2560,
+            "height": 1706,
+            "alt": {
+              "ru": "AXONIC: коммуникации бренда",
+              "en": "AXONIC brand communication"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-prosthesis-cyclist.png",
+            "width": 2560,
+            "height": 1440,
+            "alt": {
+              "ru": "AXONIC: схемы протеза кисти и велосипедист с протезом руки",
+              "en": "AXONIC: prosthetic hand drawings and a cyclist with a prosthetic arm"
+            }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-prosthesis-football.png",
+            "width": 2560,
+            "height": 1440,
+            "alt": {
+              "ru": "AXONIC: футболист с протезом ноги и технические схемы протеза",
+              "en": "AXONIC: football player with a prosthetic leg and technical prosthesis drawings"
+            }
+          }
+        ],
+        "paragraphs": [
+          {
+            "ru": "Визуальная система раскрывается в исследовательской документации, протоколах интерфейса, упаковке и брендированных материалах.",
+            "en": "The visual system extends across research documentation, interface protocols, packaging and branded materials."
+          },
+          {
+            "ru": "За пределами основных носителей визуальный язык AXONIC выходит в публичное пространство — в рекламные кампании, наружную рекламу и digital-форматы.",
+            "en": "Beyond its core applications, AXONIC’s visual language extends into public communication: campaigns, outdoor advertising and digital formats."
+          }
+        ]
       },
-      applications: {
-        ru: "Система может работать в key visuals, investor decks, digital-носителях, motion-ready паттернах и структурных презентационных материалах.",
-        en: "The system informed key visuals, investor decks, motion-ready patterns and structured digital applications."
-      },
-      result: {
-        ru: "AXONIC получил визуальную платформу, которая выглядит серьезно, технологично и при этом не растворяется в типовой tech-эстетике.",
-        en: "AXONIC gained a serious, technological visual platform that avoids dissolving into generic tech aesthetics."
+      {
+        "title": {
+          "ru": "AI-пайплайн проекта",
+          "en": "The project’s AI workflow"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "title": {
+              "ru": "Нейминг",
+              "en": "Naming"
+            },
+            "tool": "DeepSeek / ChatGPT",
+            "text": {
+              "ru": "Поиск и развитие нейминговых гипотез, работа с семантикой названия.",
+              "en": "Exploring and developing naming hypotheses and the semantics of the name."
+            }
+          },
+          {
+            "title": {
+              "ru": "Позиционирование",
+              "en": "Positioning"
+            },
+            "tool": "ChatGPT",
+            "text": {
+              "ru": "Исследование темы, разработка и проверка смысловых гипотез, формулировка концепции бренда.",
+              "en": "Researching the subject, developing and testing conceptual hypotheses and defining the brand concept."
+            }
+          },
+          {
+            "title": {
+              "ru": "Графика",
+              "en": "Graphics"
+            },
+            "tool": "Generative Brand Tool / Codex",
+            "text": {
+              "ru": "Собственный инструмент, разработанный с помощью Codex. Генерирует фирменные композиции AXONIC по заложенным правилам визуальной системы и позволяет быстро адаптировать графику под разные форматы.",
+              "en": "A custom tool developed with Codex. It generates AXONIC compositions according to the visual system’s rules and makes it possible to adapt graphics quickly for different formats."
+            }
+          },
+          {
+            "title": {
+              "ru": "Фотостиль",
+              "en": "Image direction"
+            },
+            "tool": "Weavy",
+            "text": {
+              "ru": "Нодовый пайплайн для создания и последовательной доработки изображений с интеграцией нескольких AI-моделей. Внутри пайплайна использовались модели для точечного редактирования, сохранения консистентности объектов и финального повышения качества изображений.",
+              "en": "A node-based workflow for creating and refining images with several integrated AI models. Models were used for targeted editing, maintaining object consistency and final image enhancement."
+            }
+          },
+          {
+            "title": {
+              "ru": "Анимация",
+              "en": "Animation"
+            },
+            "tool": "Codex / Figma MCP / After Effects",
+            "text": {
+              "ru": "Codex использовался для работы с motion: через Figma MCP — для взаимодействия с макетами и анимации интерфейсных элементов; для After Effects — для разработки логики анимации, выражений и автоматизации отдельных задач.",
+              "en": "Codex supported motion work: through Figma MCP, it was used to work with layouts and animate interface elements; for After Effects, it supported animation logic, expressions and task automation."
+            }
+          }
+        ]
       }
-    },
-    gallery: [
-      {
-        ru: "Обложка и сигнальная графика",
-        en: "Cover system and signal graphics"
+    ],
+    "caseIntro": {
+      "title": {
+        "ru": "О проекте",
+        "en": "About the project"
       },
-      {
-        ru: "Технические схемы и презентационная логика",
-        en: "Technical diagrams and deck language"
-      },
-      {
-        ru: "AI-гипотезы и направления",
-        en: "AI-generated concept directions"
-      },
-      {
-        ru: "Digital-носители и motion-ready материалы",
-        en: "Digital assets and motion-ready outputs"
-      }
-    ]
+      "paragraphs": [
+        {
+          "ru": "AXONIC — концепт нейротехнологического бренда, который разрабатывает протезные системы и нейроинтерфейсы, преобразующие нейронные сигналы в движение и обратную связь.",
+          "en": "AXONIC is a concept for a neurotechnology brand developing prosthetic systems and neural interfaces that translate neural signals into movement and sensory feedback."
+        },
+        {
+          "ru": "Объединяя биомеханическую инженерию, сенсорные интерфейсы и адаптивные технологии, AXONIC стремится восстановить связь между телом и окружающим миром.",
+          "en": "By combining biomechanical engineering, sensory interfaces and adaptive technologies, AXONIC aims to restore the connection between the body and the surrounding world."
+        }
+      ]
+    }
   },
   {
     slug: "assoro",
@@ -909,5 +1153,15 @@ if (saydoProject) {
     ]
   });
 }
+
+projects.push({
+  slug: "redsoft",
+  title: "Redsoft",
+  pending: true,
+  summary: {
+    ru: "Кейс готовится.",
+    en: "Case study coming soon."
+  }
+});
 
 window.PROJECTS = projects;

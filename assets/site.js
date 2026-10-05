@@ -111,7 +111,7 @@ function renderShell() {
         <a class="brand-link" href="index.html" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
         <nav class="desktop-nav" aria-label="Primary navigation">
           <button type="button" data-open-about>${phrase("navAbout")}</button>
-          <a href="index.html#services">${phrase("navServices")}</a><a href="index.html#process">${phrase("navProcess")}</a>
+          <a href="index.html#services">${phrase("navServices")}</a>
           <a href="work.html">${phrase("navWork")}</a>
         </nav>
         <div class="header-actions"><a class="header-cta" href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
@@ -120,7 +120,7 @@ function renderShell() {
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
         <div class="mobile-menu-primary">
         <button type="button" data-open-about>${phrase("navAbout")} ${arrowIcon()}</button>
-        <a href="index.html#services">${phrase("navServices")} ${arrowIcon()}</a><a href="index.html#process">${phrase("navProcess")} ${arrowIcon()}</a>
+        <a href="index.html#services">${phrase("navServices")} ${arrowIcon()}</a>
         <a href="work.html">${phrase("navWork")} ${arrowIcon()}</a>
         <a href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
         </div>
@@ -216,7 +216,7 @@ function updateHeaderContrast() {
     if (channels && (channels.length === 3 || channels[3] > 0)) break;
     background = background.parentElement;
   }
-  const dark = channels && (.2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2] < 150);
+  const dark = surface.classList.contains("case-opening-cover--video") || (channels && (.2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2] < 150));
   header.classList.toggle("header--light", Boolean(dark));
 }
 
@@ -249,7 +249,7 @@ function renderHeroSlideshow() {
   const target = document.getElementById("hero-slideshow");
   if (!target) return;
   destroyHeroSlideshow?.();
-  const selected = ["saydo", "koto-myoto", "gfpa", "axonic", "assoro"]
+  const selected = ["axonic", "saydo", "koto-myoto", "gfpa", "assoro"]
     .map((slug) => projectStore.find((project) => project.slug === slug)).filter(Boolean);
   if (!selected.length) return;
   heroSlideIndex %= selected.length;
@@ -257,7 +257,7 @@ function renderHeroSlideshow() {
   target.innerHTML = `<div class="hero-slides">${selected.map((project, index) => `
     <div class="hero-slide ${index === heroSlideIndex ? "is-active" : ""}" role="group" aria-roledescription="slide" aria-label="${index + 1} / ${selected.length}: ${escapeHtml(project.title)}" aria-hidden="${index !== heroSlideIndex}">
       <a href="project.html?slug=${encodeURIComponent(project.slug)}" tabindex="${index === heroSlideIndex ? "0" : "-1"}" style="--project-accent:${escapeHtml(project.accent)}" aria-label="${escapeHtml(project.title)} — ${phrase("viewCase")}">
-        ${project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" ${index === 0 ? 'fetchpriority="high"' : 'decoding="async"'} />` : `<strong>${escapeHtml(project.title)}</strong>`}
+        ${project.coverEmbed ? `<iframe data-hero-video="${escapeHtml(project.coverEmbed)}" ${index === heroSlideIndex ? `src="${escapeHtml(project.coverEmbed)}"` : ""} title="${escapeHtml(project.title)}" tabindex="-1" aria-hidden="true" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" loading="lazy"></iframe>` : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" ${index === 0 ? 'fetchpriority="high"' : 'decoding="async"'} />` : `<strong>${escapeHtml(project.title)}</strong>`}
       </a>
     </div>`).join("")}</div>
     <div class="hero-slide-progress" role="progressbar" aria-label="${currentLanguage === "ru" ? "Время до следующего проекта" : "Time until the next project"}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="hero-slide-progress-fill"></div></div>
@@ -295,6 +295,13 @@ function renderHeroSlideshow() {
   };
   const schedule = () => {
     stop();
+    slides.forEach((slide) => {
+      const video = slide.querySelector("[data-hero-video]");
+      if (!video) return;
+      const visible = inView && !document.hidden && (slide.classList.contains("is-active") || slide.classList.contains("is-previous"));
+      if (visible && !video.hasAttribute("src")) video.src = video.dataset.heroVideo;
+      if (!visible && video.hasAttribute("src")) video.removeAttribute("src");
+    });
     if (!heroSlideshowPaused && inView && !focused && !document.hidden && !transitionAnimation) {
       frame = requestAnimationFrame(tick);
     }
@@ -444,7 +451,7 @@ function renderApproachStats() {
 function renderWork() {
   const target = document.getElementById("work-grid");
   if (!target) return;
-  const matches = projectStore.filter((project) => currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter));
+  const matches = projectStore.filter((project) => !project.pending && (currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter)));
   target.innerHTML = matches.map((project, index) => `
     <a class="work-card" href="project.html?slug=${encodeURIComponent(project.slug)}">
       <div class="work-media ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent)}">
@@ -456,32 +463,92 @@ function renderWork() {
   document.querySelectorAll("[data-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === currentFilter)));
 }
 
+function renderProjectChapters(project, next) {
+  const blocks = [...project.caseBlocks];
+  const placeholder = (index, title) => `<figure class="case-chapter-media" role="img" aria-label="${escapeHtml(localize(title))} — ${currentLanguage === "ru" ? "заглушка изображения" : "image placeholder"} 16:9">
+    <span class="case-placeholder-ratio" aria-hidden="true">16:9</span><figcaption aria-hidden="true">${escapeHtml(project.title)} / ${String(index).padStart(2, "0")}</figcaption>
+  </figure>`;
+  const mediaList = (block) => Array.isArray(block.media) ? block.media : [block.media];
+  const renderVideo = (src, title) => `<iframe src="${escapeHtml(src)}" title="${escapeHtml(title)}" tabindex="-1" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock" allowfullscreen loading="lazy"></iframe>`;
+  const renderMedia = (media, index, title) => media?.embed ? `<figure class="case-chapter-media case-chapter-media--video">${renderVideo(media.embed, localize(media.alt || title))}</figure>` : media?.src ? `<figure class="case-chapter-media case-chapter-media--image"><img${media.width && media.height ? ` width="${Number(media.width)}" height="${Number(media.height)}"` : ""} src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt || title))}" loading="lazy" decoding="async" /></figure>` : placeholder(index, title);
+  return `<section class="case-opening wrap" id="case-intro">
+    <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+    <div class="case-opening-heading">
+      <p class="eyebrow">${phrase("project")} / ${escapeHtml(project.year)}</p>
+      <h1>${escapeHtml(project.title)}</h1>
+      <p class="case-opening-subtitle">${escapeHtml(localize(project.category))}</p>
+      ${project.type ? `<p class="case-kind">${escapeHtml(localize(project.type))}</p>` : ""}
+    </div>
+    <div class="case-opening-details">
+      ${project.caseIntro ? `<div class="case-opening-description"><h2>${escapeHtml(localize(project.caseIntro.title))}</h2>${project.caseIntro.paragraphs.map(paragraph => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}</div>` : `<p>${escapeHtml(localize(project.summary))}</p>`}
+      <dl class="case-meta"><div><dt>${phrase("role")}</dt><dd>${escapeHtml(localize(project.role))}</dd></div><div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div></dl>
+    </div>
+  </section>
+  <section class="case-opening-cover${project.coverEmbed ? " case-opening-cover--video" : ""}" id="case-cover">
+    ${project.coverEmbed ? renderVideo(project.coverEmbed, `${project.title} — ${localize(project.category)}`) : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(localize(project.category))}" />` : placeholder(0, project.category)}
+  </section>
+  ${blocks.map((block, index) => `<section class="case-chapter wrap${block.items?.length ? " case-chapter--pipeline" : ""}${mediaList(block).length > 1 ? " case-chapter--sequence" : ""}" id="case-chapter-${index + 1}" aria-labelledby="case-chapter-title-${index + 1}">
+    <div class="case-chapter-copy">
+      <p class="eyebrow case-chapter-label">${String(index + 1).padStart(2, "0")} / ${escapeHtml(project.title)}</p>
+      <h2 id="case-chapter-title-${index + 1}">${escapeHtml(localize(block.title))}</h2>
+      ${block.paragraphs.map((paragraph) => `<p class="case-chapter-text">${escapeHtml(localize(paragraph))}</p>`).join("")}
+      ${block.items?.length ? `<div class="case-chapter-pipeline">${block.items.map((item) => `<div><h3>${escapeHtml(localize(item.title))}</h3><p class="case-pipeline-tool">${escapeHtml(item.tool)}</p><p>${escapeHtml(localize(item.text))}</p></div>`).join("")}</div>` : ""}
+    </div>${mediaList(block).length > 1 ? `<div class="case-chapter-visuals">${mediaList(block).map((media, slideIndex) => `<div class="case-chapter-slide" data-case-slide>${renderMedia(media, `${index + 1}.${slideIndex + 1}`, block.title)}</div>`).join("")}</div>` : renderMedia(mediaList(block)[0], index + 1, block.title)}
+  </section>`).join("")}
+  <section class="case-next-screen"><a class="next-project" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong>${escapeHtml(next.title)}</strong><span class="round-arrow">${arrowIcon()}</span></a></section>`;
+}
+
 function renderProject() {
   const target = document.getElementById("project-content");
   if (!target || !projectStore.length) return;
   const slug = new URLSearchParams(location.search).get("slug");
   const project = projectStore.find((item) => item.slug === slug || item.aliases?.includes(slug)) || projectStore[0];
-  const next = projectStore[(projectStore.indexOf(project) + 1) % projectStore.length];
+  const publishedProjects = projectStore.filter(item => !item.pending);
+  const next = projectStore.find(item => item.slug === project.nextProject)
+    || publishedProjects[(publishedProjects.indexOf(project) + 1) % publishedProjects.length];
   const captureParams = new URLSearchParams(location.search);
   const figmaOffset = Number(captureParams.get("figma-offset") || 0);
   const caseMedia = captureParams.has("figma-summary") ? project.media?.slice(figmaOffset, figmaOffset + 3) : project.media;
   const sections = ["context", "challenge", "visualSystem", "aiWorkflow", "applications", "result"];
   const names = { context: "context", challenge: "challenge", visualSystem: "system", aiWorkflow: "ai", applications: "applications", result: "result" };
+  const storyBlocks = project.caseBlocks || sections.map((key) => ({
+    title: phrase(names[key]), paragraphs: [project.sections?.[key]]
+  }));
   document.title = `${project.title} — Ilya Zubkov`;
   const description = document.querySelector('meta[name="description"]');
   description?.setAttribute("content", localize(project.summary));
+  const chapters = project.layout === "chapters";
+  document.body.classList.toggle("has-case-chapters", chapters);
+  target.classList.toggle("case-chapters--text-right", chapters && project.textSide === "right");
+  if (project.pending) {
+    target.innerHTML = `<section class="case-opening wrap" id="case-intro">
+      <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+      <div class="case-opening-heading"><p class="eyebrow">${phrase("project")}</p><h1>${escapeHtml(project.title)}</h1><p class="case-opening-subtitle">${escapeHtml(localize(project.summary))}</p></div>
+    </section>`;
+    return;
+  }
+  if (chapters) {
+    target.innerHTML = renderProjectChapters(project, next);
+    return;
+  }
   target.innerHTML = `
     <section class="case-hero wrap">
-      <aside class="case-aside"><a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a><p class="case-intro-text">${escapeHtml(localize(project.intro))}</p></aside>
+      <aside class="case-aside"><a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+        ${project.caseIntro ? `<div class="case-aside-story"><h2>${escapeHtml(localize(project.caseIntro.title))}</h2>${project.caseIntro.paragraphs.map((paragraph) => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}</div>` : `<p class="case-intro-text">${escapeHtml(localize(project.intro))}</p>`}
+      </aside>
       <div class="case-heading"><p class="hero-label">${phrase("project")} / ${escapeHtml(project.year)}</p><h1>${escapeHtml(project.title)}</h1>
       <p class="case-subtitle">${escapeHtml(localize(project.category))}</p>
+      ${project.type ? `<p class="case-kind">${escapeHtml(localize(project.type))}</p>` : ""}
       <dl class="case-meta"><div><dt>${phrase("role")}</dt><dd>${escapeHtml(localize(project.role))}</dd></div><div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div></dl></div>
     </section>
-    <div class="case-cover ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent)}">
+    ${project.cover || !project.caseBlocks ? `<div class="case-cover ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent)}">
       ${project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" />` : `<strong>${escapeHtml(project.title)}</strong>`}
-    </div>
-    <section class="case-story wrap"><p class="eyebrow">${phrase("project")} / ${escapeHtml(project.title)}</p><div>
-      ${sections.map((key, index) => `<article class="case-story-row"><span class="case-step">0${index + 1}</span><div><h2>${phrase(names[key])}</h2><p>${escapeHtml(localize(project.sections?.[key]))}</p></div></article>`).join("")}
+    </div>` : ""}
+    <section class="case-story wrap${project.caseBlocks ? " case-story--editorial" : ""}"><p class="eyebrow">${phrase("project")} / ${escapeHtml(project.title)}</p><div>
+      ${storyBlocks.map((block, index) => `<article class="case-story-row"><span class="case-step">${String(index + 1).padStart(2, "0")}</span><div><h2>${escapeHtml(localize(block.title))}</h2>
+        ${block.paragraphs.map((paragraph) => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}
+        ${block.items?.length ? `<div class="case-pipeline">${block.items.map((item) => `<div><h3>${escapeHtml(localize(item.title))}</h3><p class="case-pipeline-tool">${escapeHtml(item.tool)}</p><p>${escapeHtml(localize(item.text))}</p></div>`).join("")}</div>` : ""}
+      </div></article>`).join("")}
     </div></section>
     ${caseMedia?.length ? `<section class="case-gallery wrap"><div class="section-title"><p class="eyebrow">${phrase("gallery")}</p><h2>${escapeHtml(project.title)}<span> / ${String(caseMedia.length).padStart(2, "0")}</span></h2></div><div class="gallery-grid">${caseMedia.map((media, index) => `<figure class="gallery-item ${index % 5 === 0 ? "gallery-item--wide" : ""}"><img src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt))}" loading="lazy" /><figcaption>${String(index + 1).padStart(2, "0")} / ${escapeHtml(localize(media.alt))}</figcaption></figure>`).join("")}</div></section>` : ""}
     <a class="next-project" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong>${escapeHtml(next.title)}</strong><span class="round-arrow">${arrowIcon()}</span></a>`;
@@ -702,8 +769,10 @@ function preparePageEntry() {
   });
 }
 
-function setupHomeScroll() {
-  if (document.body.dataset.page !== "home") return;
+function setupChapterScroll() {
+  const isHome = document.body.dataset.page === "home";
+  const isCase = document.body.classList.contains("has-case-chapters");
+  if (!isHome && !isCase) return;
   const desktop = matchMedia("(min-width:821px) and (hover:hover) and (pointer:fine)");
   const reduced = matchMedia("(prefers-reduced-motion:reduce)");
   const root = document.documentElement;
@@ -720,7 +789,7 @@ function setupHomeScroll() {
     destination = null;
     wheelTotal = 0;
   };
-  const sync = () => { cancel(); root.classList.toggle("home-smooth-scroll", enabled()); };
+  const sync = () => { cancel(); root.classList.toggle(isHome ? "home-smooth-scroll" : "case-smooth-scroll", enabled()); };
   const stops = () => {
     const max = Math.max(0, root.scrollHeight - innerHeight);
     const points = [0, max];
@@ -729,7 +798,13 @@ function setupHomeScroll() {
       const start = box.top + scrollY;
       points.push(Math.max(0, Math.min(max, start)));
       // A chapter taller than the viewport has a readable lower stop too.
-      if (box.height > innerHeight + 2) points.push(Math.max(0, Math.min(max, start + box.height - innerHeight)));
+      const minOverflow = section.classList.contains("case-opening-cover") ? 64 : 2;
+      if (!section.classList.contains("case-chapter--sequence") && box.height > innerHeight + minOverflow) {
+        points.push(Math.max(0, Math.min(max, start + box.height - innerHeight)));
+      }
+    });
+    document.querySelectorAll("[data-case-slide]").forEach((slide) => {
+      points.push(Math.max(0, Math.min(max, slide.getBoundingClientRect().top + scrollY)));
     });
     return points.sort((a, b) => a - b).filter((point, index, all) => !index || point - all[index - 1] > 2);
   };
@@ -943,7 +1018,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   window.matchMedia("(min-width: 821px)").addEventListener("change", (event) => { if (event.matches) setMobileMenu(false); });
   applyLanguage();
-  setupHomeScroll();
+  setupChapterScroll();
   setupPageTransitions();
   if (document.fonts?.status !== "loaded") document.fonts?.ready.then(() => setupMotion());
   if (location.hash === "#about" || new URLSearchParams(location.search).get("figma-capture") === "about-panel") document.querySelector("[data-open-about]")?.click();
