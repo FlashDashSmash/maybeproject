@@ -353,3 +353,67 @@ final result: passed locally
 - At 390×844 snapping is none and section heights remain intrinsic; a 270 px scroll retained its exact position without snapping. No horizontal overflow or browser errors. Shared CSS version updated in all five pages; whitespace check passed.
 
 final result: passed locally
+
+
+## 2026-10-04 — Smooth desktop chapter transitions
+
+- Added a homepage-only desktop scroll controller with a cosine ease and a 900 ms viewport transition (650–1100 ms for shorter/longer distances). Wheel input moves to the adjacent chapter; remaining trackpad momentum is discarded until the gesture ends. A taller chapter has a lower reading stop. Same-page menu links and keyboard chapter navigation use the same motion. Native snapping remains the no-script fallback; mobile and reduced-motion users keep native scrolling. Resize, history traversal, page entry/hide and pointer input cancel pending animations. Nested scroll containers and the About dialog retain their own wheel scrolling; zoom and horizontal wheel input are not intercepted.
+- At 1440×900, a strong 2800 px scroll settled at Approach (y=900), without skipping sections. Sampled the Services→Process transition: y=1800 at 35 ms, 1833 at 139 ms, 2180 at 436 ms, 2589 at 723 ms and 2700 at 917 ms, confirming gradual acceleration/deceleration and the exact final boundary. Same-page Services link finished at top=0. About dialog scrolled by 500 px while the page stayed at y=1800. At 1440×768 the expanded Services lower stop landed at y=1721 and kept its final button visible (bottom=666.72).
+- At 390×844 the controller is inactive and a 270 px scroll remains y=270, with no horizontal overflow or browser errors. An isolated controller check passed keyboard section order, tall-section reading stop, Home, history cancellation and reduced-motion/mobile fallbacks. JavaScript syntax and whitespace checks passed; shared asset versions updated in all five pages.
+
+final result: passed locally
+
+
+## 2026-10-04 — Visible letter fill after chapter arrival
+
+- On the desktop homepage, letter fill now follows scroll progress with a 1450 ms full-range rate, continuing via animation frames after the chapter scroll ends. Both Approach paragraphs share one state. Offscreen future chapters reset their state; mobile and reduced-motion behavior retain their existing rendering.
+- At 1440×900 measured Approach fill during the 900 ms scroll: 42/43% at 893 ms, 51/52% at 1012 ms (scroll settled at y=900), 78/78% at 1367 ms and 100/100% at 1728 ms. This leaves a visible fill tail after arrival. A direct menu jump to Process likewise arrived with 22% fill at 1081 ms and completed at 2139 ms.
+- At 390 px the desktop controller remains inactive, the Process heading is fully filled at its normal anchored position, and there is no horizontal overflow or browser error. Updated the shared JS version in all five pages. Syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-04 — About content only in the side panel
+
+- Removed the standalone About page content, its CSS selectors and motion hooks. About remains in the shared side dialog on all pages. Replaced about.html with a noindex redirect to index.html#about; that fragment opens the dialog automatically and is removed when it closes. Updated README and shared asset versions. No page links target the legacy route.
+- Checked the old address at 1440 px: redirected to index.html#about with a 960 px open dialog; closing removed the fragment. On Projects the About navigation button opened the dialog without changing pages. At 390 px the mobile menu closed while About opened at full width, with no overflow. The old address also redirected to an open full-width dialog on mobile. No browser errors. CSS braces balanced, dialog styles retained, standalone selectors absent; JavaScript syntax and whitespace checks passed.
+
+final result: passed locally
+
+
+## 2026-10-05 — Four Approach facts
+
+- Replaced portfolio/design counts with the supplied four facts: 50+ completed projects; Direct / Agency / In-house; From zero → Beyond launch; Available, with the supplied Russian explanations. Updated the no-script first fact and counter to 01/04. Preserved the 7000 ms timeline, manual cycling and pause behavior.
+- Text facts use smaller responsive headings; the From zero arrow uses the horizontal SVG mask with an accessible full title. A reserved content height prevents jumps when switching between numerical and text facts.
+- Checked all four titles and labels on desktop and at 390 px: no text or horizontal overflow, the content height stays at 150 px, and the third fact uses arrow-right.svg. Observed automatic cycling after focus and hover left the widget. Saved the desktop preview of 50+. No browser errors, JavaScript syntax and whitespace checks passed. Shared asset versions updated in the four active pages.
+
+final result: passed locally
+
+
+## 2026-10-05 — Каталог задач бренда
+
+- Четыре вкладки «Создать / Обновить / Развить / Внедрить» содержат 3 / 3 / 4 / 4 задачи с пояснениями из предоставленных таблиц.
+- Проверено переключение всех вкладок и раскрытие четвёртой задачи «Развить».
+- На ширине 390 px длинные названия помещаются, горизонтального переполнения нет. Временный размер предпросмотра сброшен.
+- Кнопка «Обсудить задачу» остаётся под пояснением; добавлены английские переводы задач и описаний.
+
+
+## 2026-10-05 — Четыре услуги вместо вкладок
+
+- Вместо кнопок категорий слева размещён текст «Масштаб может быть разным» с пояснением в стилистике вводных текстов сайта.
+- Справа ровно четыре основных раскрывающихся услуги: «Создать», «Обновить», «Развить», «Внедрить». Внутри сохранены 14 ранее согласованных уточнений задач; это не отдельные услуги.
+- Удалена логика вкладок. Проверены раскрытие и закрытие «Обновить», отсутствие ошибок в консоли.
+- На ширине 390 px вводный текст и каталог расположены последовательно, уточнения в одну колонку, горизонтального переполнения нет. Размер предпросмотра восстановлен.
+- Проверки `node --check assets/site.js` и `git diff --check` пройдены.
+
+
+## 2026-10-05 — Одновременно раскрыта одна услуга
+
+- При открытии услуги остальные плавно закрываются; повторное нажатие закрывает текущую.
+- В браузере проверены переход к «Обновить», быстрое переключение «Развить → Внедрить», закрытие текущей и открытие клавишей Enter. После каждой завершённой анимации открыта только выбранная услуга (либо ни одной при повторном нажатии).
+- `node --check assets/site.js` и `git diff --check` пройдены.
+
+## 2026-10-05 — Финальные описания услуг
+
+- В каждой из четырёх услуг уточнения задач заменены одним согласованным абзацем. Сохранены английские переводы и кнопки «Обсудить задачу».
+- В браузере проверены финальные описания «Создать», «Обновить», «Развить» и «Внедрить». Сохранены предпросмотры; одновременно раскрыта одна услуга.

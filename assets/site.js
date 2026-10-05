@@ -157,6 +157,7 @@ function renderShell() {
     aboutDialog.addEventListener("close", () => {
       document.body.classList.remove("about-open");
       aboutDialog.classList.remove("is-closing");
+      if (location.hash === "#about") history.replaceState(null, "", location.pathname + location.search);
     });
     aboutDialog.addEventListener("cancel", (event) => { event.preventDefault(); closeAboutDialog(aboutDialog); });
     aboutDialog.addEventListener("pointerdown", (event) => {
@@ -366,8 +367,10 @@ function renderApproachStats() {
   const target = document.getElementById("approach-stats");
   if (!target) return;
   const stats = [
-    { number: projectStore.length, ru: "Проектов в портфолио", en: "Projects in the portfolio" },
-    { number: document.querySelectorAll(".service-item").length, ru: "Направлений дизайна", en: "Design disciplines" }
+    { title: "50+", numeric: true, ru: "реализованных проектов", en: "completed projects" },
+    { title: "Direct / Agency / In-house", ru: "работаю напрямую и в составе команд", en: "working directly and as part of teams" },
+    { title: "From zero → Beyond launch", ru: "от поиска идеи до развития системы после внедрения", en: "from finding the idea to evolving the system after implementation" },
+    { title: "Available", ru: "открыт к новым проектам", en: "open to new projects" }
   ];
   const duration = 7000;
   const content = target.querySelector(".approach-stat-content");
@@ -377,7 +380,10 @@ function renderApproachStats() {
   const update = (animate = false, manual = false) => {
     const stat = stats[approachStatIndex];
     content.setAttribute("aria-live", manual ? "polite" : "off");
-    target.querySelector(".approach-stat-number").textContent = String(stat.number).padStart(2, "0");
+    const title = target.querySelector(".approach-stat-number");
+    title.classList.toggle("approach-stat-number--text", !stat.numeric);
+    title.setAttribute("aria-label", stat.title);
+    title.innerHTML = stat.title.split(" → ").map(escapeHtml).join(` ${arrowIcon("right")} `);
     target.querySelector(".approach-stat-label").textContent = bindTextWords(stat[currentLanguage]);
     target.querySelector(".approach-stat-count").textContent = `${String(approachStatIndex + 1).padStart(2, "0")}/${String(stats.length).padStart(2, "0")}`;
     contentAnimation?.cancel();
@@ -482,6 +488,7 @@ function renderProject() {
 }
 
 let motionTargets = [];
+let motionFillStates = new WeakMap();
 let motionFrame = 0;
 let motionStarted = false;
 let lineObserver;
@@ -579,12 +586,29 @@ function queueMotionUpdate() {
 
 function updateMotion() {
   const height = window.innerHeight || 1;
+  const smoothFill = document.documentElement.classList.contains("home-smooth-scroll") && motionEnabled();
+  const now = performance.now();
+  let filling = false;
   motionTargets.forEach(({ element, letters }) => {
-    const box = element.getBoundingClientRect();
-    if (box.top > height * 1.1 || box.bottom < -height * .2) return;
-    // Fill every line together so the whole block is readable near the middle of the screen.
     const anchor = element.closest(".approach-copy") || element;
-    const progress = Math.max(0, Math.min(1, (height - anchor.getBoundingClientRect().top) / (height * .5)));
+    const anchorBox = anchor.getBoundingClientRect();
+    const box = element.getBoundingClientRect();
+    if (box.top > height * 1.1 || box.bottom < -height * .2) {
+      if (anchorBox.top > height * 1.1) motionFillStates.delete(anchor);
+      return;
+    }
+    // Lines share one progress, including the two Approach paragraphs.
+    const goal = Math.max(0, Math.min(1, (height - anchorBox.top) / (height * .5)));
+    let progress = goal;
+    if (smoothFill) {
+      let state = motionFillStates.get(anchor);
+      if (!state) { state = { progress: 0, updatedAt: now }; motionFillStates.set(anchor, state); }
+      const step = Math.min(64, now - state.updatedAt) / 1450;
+      state.progress += Math.max(-step, Math.min(step, goal - state.progress));
+      state.updatedAt = now;
+      progress = state.progress;
+      filling ||= Math.abs(goal - progress) > .0001;
+    }
     const lines = new Map();
     letters.forEach((letter) => {
       const top = Math.round(letter.getBoundingClientRect().top / 3) * 3;
@@ -599,6 +623,8 @@ function updateMotion() {
       });
     });
   });
+  // Keep the fill moving after the chapter scroll has settled.
+  if (filling && !document.hidden) queueMotionUpdate();
 }
 
 function setupAboutMotion(dialog) {
@@ -629,12 +655,13 @@ function setupMotion() {
   lineObserver?.disconnect();
   const segmenter = typeof Intl.Segmenter === "function" ? new Intl.Segmenter(document.documentElement.lang, { granularity: "grapheme" }) : null;
   motionTargets = [];
-  const fillSelector = ".statement h2, .approach-body, .section-title h2, .about-slice h2, .process-display, .brief-heading h2, .big-cta h2, .about-page-copy h2";
+  motionFillStates = new WeakMap();
+  const fillSelector = ".statement h2, .approach-body, .section-title h2, .about-slice h2, .process-display, .brief-heading h2, .big-cta h2";
   document.querySelectorAll(fillSelector).forEach((element) => {
     const target = splitMotionLetters(element, segmenter);
     if (target) motionTargets.push(target);
   });
-  const revealSelector = "main h1, .hero-aside>p:not(.eyebrow), .page-lead, .feature-info h3, .feature-info p, .work-card-info h2, .work-card-info p, .about-slice-copy>p:not(.eyebrow), .service-list h3, .process-list h3, .process-list p, .about-page-copy>p:not(.eyebrow), .about-board-grid li, .case-intro-text, .case-story-row h2, .case-story-row p, .contact-aside>p:not(.eyebrow), .contact-details li";
+  const revealSelector = "main h1, .hero-aside>p:not(.eyebrow), .page-lead, .feature-info h3, .feature-info p, .work-card-info h2, .work-card-info p, .about-slice-copy>p:not(.eyebrow), .service-list h3, .process-list h3, .process-list p, .case-intro-text, .case-story-row h2, .case-story-row p, .contact-aside>p:not(.eyebrow), .contact-details li";
   const reveals = [...document.querySelectorAll(revealSelector)];
   reveals.forEach(splitMotionLines);
   lineObserver = new IntersectionObserver((entries) => {
@@ -649,6 +676,7 @@ function setupMotion() {
   if (motionStarted) return;
   motionStarted = true;
   window.addEventListener("scroll", queueMotionUpdate, { passive: true });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) queueMotionUpdate(); });
   window.addEventListener("resize", () => {
     clearTimeout(motionResizeTimer);
     motionResizeTimer = window.setTimeout(() => { setupMotion(); queueMotionUpdate(); }, 180);
@@ -672,6 +700,120 @@ function preparePageEntry() {
     const box = element.getBoundingClientRect();
     if (box.top < innerHeight && box.bottom > 0) element.classList.add("is-visible");
   });
+}
+
+function setupHomeScroll() {
+  if (document.body.dataset.page !== "home") return;
+  const desktop = matchMedia("(min-width:821px) and (hover:hover) and (pointer:fine)");
+  const reduced = matchMedia("(prefers-reduced-motion:reduce)");
+  const root = document.documentElement;
+  let frame = 0;
+  let destination = null;
+  let wheelTotal = 0;
+  let lastWheel = 0;
+  let lastDirection = 0;
+  let wheelLocked = false;
+  const enabled = () => desktop.matches && !reduced.matches;
+  const cancel = () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    destination = null;
+    wheelTotal = 0;
+  };
+  const sync = () => { cancel(); root.classList.toggle("home-smooth-scroll", enabled()); };
+  const stops = () => {
+    const max = Math.max(0, root.scrollHeight - innerHeight);
+    const points = [0, max];
+    document.querySelectorAll("main>section, .site-footer").forEach((section) => {
+      const box = section.getBoundingClientRect();
+      const start = box.top + scrollY;
+      points.push(Math.max(0, Math.min(max, start)));
+      // A chapter taller than the viewport has a readable lower stop too.
+      if (box.height > innerHeight + 2) points.push(Math.max(0, Math.min(max, start + box.height - innerHeight)));
+    });
+    return points.sort((a, b) => a - b).filter((point, index, all) => !index || point - all[index - 1] > 2);
+  };
+  const moveTo = (target) => {
+    cancel();
+    const from = scrollY;
+    const distance = target - from;
+    if (Math.abs(distance) < 2) return;
+    destination = target;
+    const began = performance.now();
+    const duration = Math.min(1100, Math.max(650, 900 * Math.sqrt(Math.abs(distance) / innerHeight)));
+    const tick = (now) => {
+      const progress = Math.min(1, (now - began) / duration);
+      const ease = .5 - Math.cos(Math.PI * progress) / 2;
+      window.scrollTo({ top: from + distance * ease, behavior: "instant" });
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else { frame = 0; destination = null; }
+    };
+    frame = requestAnimationFrame(tick);
+  };
+  const step = (direction) => {
+    const position = destination ?? scrollY;
+    const points = stops();
+    const target = direction > 0 ? points.find((point) => point > position + 2) : points.findLast((point) => point < position - 2);
+    if (target !== undefined) moveTo(target);
+  };
+  const insideScroller = (target) => {
+    for (let element = target instanceof Element ? target : null; element && element !== document.body; element = element.parentElement) {
+      if (element.matches("dialog[open]")) return true;
+      if (element.scrollHeight > element.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(element).overflowY)) return true;
+    }
+    return false;
+  };
+  window.addEventListener("wheel", (event) => {
+    if (!enabled() || event.defaultPrevented || event.ctrlKey || event.metaKey || Math.abs(event.deltaX) > Math.abs(event.deltaY) || insideScroller(event.target)) return;
+    if (!event.deltaY) return;
+    const now = performance.now();
+    const gap = now - lastWheel;
+    const direction = Math.sign(event.deltaY);
+    lastWheel = now;
+    event.preventDefault();
+    // Discard the remainder of a trackpad gesture rather than queueing more chapters.
+    if (frame || (wheelLocked && gap < 180)) { wheelTotal = 0; return; }
+    wheelLocked = false;
+    if (gap > 180 || direction !== lastDirection) wheelTotal = 0;
+    lastDirection = direction;
+    wheelTotal += event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
+    if (Math.abs(wheelTotal) >= 24) { wheelTotal = 0; step(direction); wheelLocked = true; }
+  }, { passive: false });
+  document.addEventListener("keydown", (event) => {
+    if (!enabled() || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || insideScroller(event.target)) return;
+    if (event.target instanceof Element && event.target.closest("a,button,input,textarea,select,summary,[contenteditable]")) return;
+    const direction = ["ArrowDown", "PageDown"].includes(event.key) || (event.key === " " && !event.shiftKey) ? 1 : ["ArrowUp", "PageUp"].includes(event.key) || (event.key === " " && event.shiftKey) ? -1 : 0;
+    if (direction || event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      if (event.repeat || frame) return;
+      if (direction) step(direction);
+      else moveTo(event.key === "Home" ? 0 : Math.max(0, root.scrollHeight - innerHeight));
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (!enabled() || event.defaultPrevented || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const link = event.target instanceof Element ? event.target.closest("a[href]") : null;
+    if (!link || link.target || link.hasAttribute("download")) return;
+    const url = new URL(link.href);
+    if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search || !url.hash) return;
+    let id;
+    try { id = decodeURIComponent(url.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    if (url.hash !== location.hash) history.pushState(null, "", url.hash);
+    moveTo(Math.max(0, Math.min(root.scrollHeight - innerHeight, target.getBoundingClientRect().top + scrollY)));
+  });
+  window.addEventListener("pointerdown", cancel, { passive: true });
+  window.addEventListener("resize", sync);
+  window.addEventListener("pagehide", cancel);
+  window.addEventListener("popstate", cancel);
+  window.addEventListener("hashchange", cancel);
+  document.addEventListener("page-entry", cancel);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) cancel(); });
+  desktop.addEventListener("change", sync);
+  reduced.addEventListener("change", sync);
+  sync();
 }
 
 function setupPageTransitions() {
@@ -730,65 +872,44 @@ function setupServices() {
   const catalog = document.querySelector(".service-layout");
   if (!catalog || catalog.dataset.ready) return;
   catalog.dataset.ready = "true";
-  const tabs = [...catalog.querySelectorAll('[role="tab"]')];
-  const panels = [...catalog.querySelectorAll(".service-panel")];
-  const select = (tab, focus = false) => {
-    tabs.forEach((item) => {
-      const active = item === tab;
-      item.setAttribute("aria-selected", String(active));
-      item.tabIndex = active ? 0 : -1;
-    });
-    panels.forEach((panel) => { panel.hidden = panel.id !== tab.getAttribute("aria-controls"); });
-    if (focus) tab.focus({ preventScroll: true });
-    queueHeaderContrast();
-    queueMotionUpdate();
-  };
-  const tabList = catalog.querySelector(".service-tabs");
-  tabList.hidden = false;
-  const verticalTabs = window.matchMedia("(min-width: 561px)");
-  const setOrientation = () => tabList.setAttribute("aria-orientation", verticalTabs.matches ? "vertical" : "horizontal");
-  setOrientation();
-  verticalTabs.addEventListener("change", setOrientation);
-  select(tabs[0]);
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => select(tab));
-    tab.addEventListener("keydown", (event) => {
-      let next;
-      if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % tabs.length;
-      if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index + tabs.length - 1) % tabs.length;
-      if (event.key === "Home") next = 0;
-      if (event.key === "End") next = tabs.length - 1;
-      if (next !== undefined) { event.preventDefault(); select(tabs[next], true); }
-    });
-  });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  catalog.querySelectorAll(".service-item").forEach((item) => {
-    const content = item.querySelector(".service-content");
-    let animation = null;
-    let expanded = item.open;
-    item.querySelector("summary").addEventListener("click", (event) => {
-      if (reducedMotion.matches || typeof content.animate !== "function") {
-        animation?.cancel();
-        animation = null;
-        expanded = !item.open;
-        return;
-      }
+  const entries = [...catalog.querySelectorAll(".service-item")].map((item) => ({
+    item, content: item.querySelector(".service-content"), animation: null, expanded: item.open
+  }));
+  const setExpanded = (entry, expanded) => {
+    if (entry.expanded === expanded) return;
+    const { item, content } = entry;
+    const height = item.open ? content.getBoundingClientRect().height : 0;
+    entry.animation?.cancel();
+    entry.animation = null;
+    entry.expanded = expanded;
+    if (reducedMotion.matches || typeof content.animate !== "function") {
+      item.open = expanded;
+      queueHeaderContrast();
+      queueMotionUpdate();
+      return;
+    }
+    if (expanded) item.open = true;
+    const next = content.animate(
+      [{ height: `${height}px`, opacity: expanded ? .3 : 1 }, { height: `${expanded ? content.scrollHeight : 0}px`, opacity: expanded ? 1 : 0 }],
+      { duration: 320, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
+    );
+    entry.animation = next;
+    next.finished.then(() => {
+      if (entry.animation !== next) return;
+      item.open = entry.expanded;
+      next.cancel();
+      entry.animation = null;
+      queueHeaderContrast();
+      queueMotionUpdate();
+    }).catch(() => {});
+  };
+  entries.forEach((entry) => {
+    entry.item.querySelector("summary").addEventListener("click", (event) => {
       event.preventDefault();
-      const height = item.open ? content.getBoundingClientRect().height : 0;
-      animation?.cancel();
-      expanded = !expanded;
-      if (expanded) item.open = true;
-      const next = content.animate(
-        [{ height: `${height}px`, opacity: expanded ? .3 : 1 }, { height: `${expanded ? content.scrollHeight : 0}px`, opacity: expanded ? 1 : 0 }],
-        { duration: 320, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
-      );
-      animation = next;
-      next.finished.then(() => {
-        if (animation !== next) return;
-        item.open = expanded;
-        next.cancel();
-        animation = null;
-      }).catch(() => {});
+      const expanded = !entry.expanded;
+      if (expanded) entries.forEach((other) => { if (other !== entry) setExpanded(other, false); });
+      setExpanded(entry, expanded);
     });
   });
 }
@@ -822,7 +943,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   window.matchMedia("(min-width: 821px)").addEventListener("change", (event) => { if (event.matches) setMobileMenu(false); });
   applyLanguage();
+  setupHomeScroll();
   setupPageTransitions();
   if (document.fonts?.status !== "loaded") document.fonts?.ready.then(() => setupMotion());
-  if (new URLSearchParams(location.search).get("figma-capture") === "about-panel") document.querySelector(".desktop-nav [data-open-about]")?.click();
+  if (location.hash === "#about" || new URLSearchParams(location.search).get("figma-capture") === "about-panel") document.querySelector("[data-open-about]")?.click();
 });
