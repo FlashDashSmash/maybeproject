@@ -730,7 +730,7 @@ function setupMotion() {
     const target = splitMotionLetters(element, segmenter);
     if (target) motionTargets.push(target);
   });
-  const revealSelector = "main h1, .hero-aside>p:not(.eyebrow), .page-lead, .feature-info h3, .feature-info p, .work-card-info h2, .work-card-info p, .about-slice-copy>p:not(.eyebrow), .service-list h3, .process-list h3, .process-list p, .case-intro-text, .case-story-row h2, .case-story-row p, .contact-aside>p:not(.eyebrow), .contact-details li";
+  const revealSelector = "main h1:not(:has(a)), .hero-aside>p:not(.eyebrow), .page-lead, .feature-info h3, .feature-info p, .work-card-info h2, .work-card-info p, .about-slice-copy>p:not(.eyebrow), .service-list h3, .process-list h3, .process-list p, .case-intro-text, .case-story-row h2, .case-story-row p, .contact-aside>p:not(.eyebrow), .contact-details li";
   const reveals = [...document.querySelectorAll(revealSelector)];
   reveals.forEach(splitMotionLines);
   lineObserver = new IntersectionObserver((entries) => {

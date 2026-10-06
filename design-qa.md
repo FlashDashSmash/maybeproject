@@ -576,3 +576,44 @@ final result: passed locally
 - Chapter scrolling now adds lower stops only when content extends below the viewport, excluding trailing padding on the homepage. Case study scrolling retains its existing behavior.
 - At 1280x650, all four main chapters fit in 650px, including the longest open Services entry. One wheel step moves Services to the brief (scrollY 1300 to 1950).
 - JavaScript syntax and git diff whitespace checks passed. Verified rendered content and no horizontal overflow.
+
+
+## 2026-10-06 — Contact image placeholder template
+
+### Comparison target and evidence
+- Source: https://www.secondeight.net/contact; captures `C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/secondeight-contact-01.png` and `C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/secondeight-contact-02.png`.
+- Implementation: http://127.0.0.1:8767/contact.html?preview=contact-template; captures `C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/contact-template-desktop.png` and `C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/contact-template-footer.png`.
+- Source and implementation compared together in one image input at top and bottom states. Both use a 1280x720 CSS viewport, 1265x712 screenshot pixels at the same browser capture density; no rescaling or device frame normalization was necessary.
+- Additional implementation evidence: `C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/contact-template-mobile.png` (390x844 CSS viewport), `C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/contact-template-full.png` (whole page).
+- Full-view comparison was sufficient: email, rail copy and footer labels were readable, with no dense controls requiring separate focused crops.
+
+### Required surfaces
+- Typography: retained the site's Inter and Roboto Mono, with a bold primary email in place of the reference's regular-weight email. Email is intact, one line on desktop, two lines at the @ break on mobile, no underline or clipping. This is an intentional adaptation to the existing brand.
+- Spacing/layout: retained the 30% side rail; image is full width at 2:1 desktop, 4:3 tablet, 1:1 phone. Copy sits above the image. No horizontal overflow at widths 320, 390, 1280, 1512 and 1920. Side copy placement differs intentionally from the reference's text below email, as requested.
+- Colors/tokens: existing warm page background and dark footer retained. The image frame fades continuously into the footer's exact dark token. Contact navigation receives a solid matching surface when scrolling above the image, keeping links legible.
+- Imagery: neutral labeled placeholder is explicitly requested by the user while preparing the final image. No reference collage was copied. Fade belongs to the frame and will survive replacing the placeholder with an img.
+- Copy/content: existing business email, side copy, copyright and ordered footer social links retained. Former primary invitation moved into the rail. No duplicate social links beside email.
+
+### Comparison history and fixes
+- Initial layout inspection found an unwanted blank line before the linked email caused by inherited white-space: pre-line. Set the contact heading to white-space: normal; final top capture confirms alignment.
+- Addressed header contrast on the upper light portion of the placeholder by adding a contact-only opaque header surface. Final bottom capture confirms visible navigation.
+- Removed an extra closing div before browser verification.
+- Final combined source/implementation comparison: no remaining actionable P0/P1/P2 findings. Reference deviations above are intentional under the user's brief.
+
+### Interaction and technical checks
+- Browser confirms primary link href is mailto:maybe.dezign@gmail.com, with zero bottom border. Preserved the anchor by excluding linked h1 elements from destructive line splitting.
+- Checked footer continuity, desktop and phone wrapping, and console errors (none captured).
+- node --check assets/site.js and git diff --check passed.
+- The final user image is pending by design; its crop and subject quality will be checked after delivery. Template is local, not published in this step.
+
+final result: passed
+
+
+## 2026-10-07 — Contact collage
+
+- Replaced the contact placeholder with the user-supplied Frame 1.png, copied unchanged to assets/contact-collage.png (2162x851).
+- Desktop frame now uses the source aspect ratio, preserving all columns. Mobile retains the square crop, aligned left to show the filled project columns rather than the empty right side.
+- Retained the continuous fade to the dark footer. Removed placeholder styles and updated the contact CSS cache version.
+- Browser verified successful image loading, natural dimensions, desktop and 390px mobile appearance, and no horizontal overflow.
+- Evidence: C:/Users/gagao/.codex/visualizations/2026/09/29/01a0ede5-e228-74c3-884b-40a5e59820f2/contact-collage-full.png.
+- git diff --check passed. Local preview updated; publication not requested in this step.
