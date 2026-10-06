@@ -22,9 +22,7 @@ const copy = {
     context: "Контекст", challenge: "Задача", system: "Визуальная система",
     ai: "AI в процессе", applications: "Применение", result: "Результат",
     gallery: "Визуальная история", backWork: "Ко всем проектам", noMedia: "Кейс в разработке",
-    footerLine: "Айдентика, арт-дирекшн и визуальные системы с ясной логикой.",
-    footerNote: "Открыт к проектам и коллаборациям.",
-    footerTop: "Наверх", footerContact: "Написать мне", filterCount: "проектов",
+    filterCount: "проектов",
     aboutHeadline: "Я собираю сильные визуальные системы для брендов с характером.",
     aboutIntro: "Я — Илья Зубков, Senior Brand Designer / Art Director.\nРаботаю с айдентикой, типографикой, визуальными системами и AI-продакшеном.",
     aboutMethod: "Мой подход", aboutMethodText: "Сначала — контекст и идея. Затем — точная композиция, проверка на носителях и система, которая выдерживает рост.",
@@ -43,9 +41,7 @@ const copy = {
     context: "Context", challenge: "Challenge", system: "Visual system",
     ai: "AI in the process", applications: "Applications", result: "Result",
     gallery: "Visual story", backWork: "All projects", noMedia: "Case in progress",
-    footerLine: "Brand identities, art direction and visual systems with clear logic.",
-    footerNote: "Open to projects and collaborations.",
-    footerTop: "Back to top", footerContact: "Email me", filterCount: "projects",
+    filterCount: "projects",
     aboutHeadline: "I build distinct visual systems for brands with character.",
     aboutIntro: "I'm Ilya Zubkov, Senior Brand Designer / Art Director.\nI work with identity, typography, visual systems and AI production.",
     aboutMethod: "My approach", aboutMethodText: "Context and concept first. Then precise composition, application testing and a system designed to grow.",
@@ -133,14 +129,15 @@ function renderShell() {
   }
   if (footer) {
     footer.innerHTML = `
-      <div class="footer-top wrap"><p class="eyebrow">${phrase("aboutSignature")}</p><a href="contact.html">${phrase("footerContact")} ${arrowIcon()}</a></div>
-      <div class="footer-main wrap"><p>${phrase("footerLine")}</p><a class="footer-mail" href="mailto:maybe.dezign@gmail.com">maybe.dezign@gmail.com</a></div>
-      <div class="footer-bottom wrap"><span>© ${new Date().getFullYear()} Ilya Zubkov</span><span>${phrase("footerNote")}</span>
-        <div><a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance ${arrowIcon()}</a>
-        <a href="https://dprofile.ru/maybeproject" target="_blank" rel="noreferrer">Dprofile ${arrowIcon()}</a>
-        <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram ${arrowIcon()}</a>
-        <a href="https://www.instagram.com/maybe__project/" target="_blank" rel="noreferrer">Instagram ${arrowIcon()}</a>
-        <a href="#top">${phrase("footerTop")} ${arrowIcon("up")}</a></div></div>`;
+      <div class="footer-inner wrap">
+        <p class="footer-copyright">© Ilya Zubkov / Maybe Project ${new Date().getFullYear()}</p>
+        <nav class="footer-links" aria-label="${currentLanguage === "ru" ? "Контакты и социальные сети" : "Contact and social links"}">
+          <a href="https://dprofile.ru/maybeproject" target="_blank" rel="noreferrer">Dprofile ${arrowIcon()}</a>
+          <a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance ${arrowIcon()}</a>
+          <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram ${arrowIcon()}</a>
+          <a href="https://www.instagram.com/maybe__project/" target="_blank" rel="noreferrer">Instagram ${arrowIcon()}</a>
+        </nav>
+      </div>`;
   }
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("mobile-menu");
@@ -653,6 +650,8 @@ function queueMotionUpdate() {
 
 function updateMotion() {
   const height = window.innerHeight || 1;
+  const scrollTop = window.scrollY;
+  const maxScroll = Math.max(0, document.documentElement.scrollHeight - height);
   const smoothFill = document.documentElement.classList.contains("home-smooth-scroll") && motionEnabled();
   const now = performance.now();
   let filling = false;
@@ -665,7 +664,10 @@ function updateMotion() {
       return;
     }
     // Lines share one progress, including the two Approach paragraphs.
-    const goal = Math.max(0, Math.min(1, (height - anchorBox.top) / (height * .5)));
+    // The last heading must finish within the page's available scroll distance.
+    const fillStart = anchorBox.top + scrollTop - height;
+    const fillEnd = Math.min(fillStart + height * .5, maxScroll);
+    const goal = Math.max(0, Math.min(1, (scrollTop - fillStart) / Math.max(1, fillEnd - fillStart)));
     let progress = goal;
     if (smoothFill) {
       let state = motionFillStates.get(anchor);
@@ -797,10 +799,13 @@ function setupChapterScroll() {
       const box = section.getBoundingClientRect();
       const start = box.top + scrollY;
       points.push(Math.max(0, Math.min(max, start)));
-      // A chapter taller than the viewport has a readable lower stop too.
+      // Only content below the viewport needs another stop; bottom padding does not.
+      const contentEnd = isHome
+        ? Math.max(start, ...Array.from(section.children, (child) => child.getBoundingClientRect().bottom + scrollY))
+        : start + box.height;
       const minOverflow = section.classList.contains("case-opening-cover") ? 64 : 2;
-      if (!section.classList.contains("case-chapter--sequence") && box.height > innerHeight + minOverflow) {
-        points.push(Math.max(0, Math.min(max, start + box.height - innerHeight)));
+      if (!section.classList.contains("case-chapter--sequence") && contentEnd > start + innerHeight + minOverflow) {
+        points.push(Math.max(0, Math.min(max, contentEnd - innerHeight)));
       }
     });
     document.querySelectorAll("[data-case-slide]").forEach((slide) => {
@@ -944,7 +949,7 @@ function setupPageTransitions() {
 }
 
 function setupServices() {
-  const catalog = document.querySelector(".service-layout");
+  const catalog = document.querySelector(".service-catalog");
   if (!catalog || catalog.dataset.ready) return;
   catalog.dataset.ready = "true";
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");

@@ -553,3 +553,26 @@ final result: passed locally
 - Все изображения глав кейса заполняют рамку 16:9 через `object-fit: cover`, вместо вписывания по исходным пропорциям. Боковые края соседних кадров совпадают; центральная обрезка и скругления едины для шаблона на всех ширинах. Статичная обложка также заполняет рамку.
 - Iframe занимает всю рамку; удалены вычисляемые боковые отступы для видео других исходных пропорций. Внутреннее отображение видео определяется плеером Kinescope.
 - В браузере у всех 15 заполненных рамок глав проверено совпадение координат и размеров дочернего медиа с рамкой; визуально проверен ранее суженный кадр с медицинской формой. Синтаксис JS и `git diff --check` проверены.
+
+
+## 2026-10-06 — Компактный тёмный футер
+
+- Общий футер всех страниц сокращён до копирайта и пяти ссылок: Email, Behance, Dprofile, Telegram, Instagram. Удалены описание услуг, подпись о доступности, большой email, верхний блок и стрелки.
+- На десктопе копирайт слева, ссылки справа, высота 144 px. На мобильных копирайт сверху, ссылки в сетке из трёх колонок. Проверены внешний вид и отсутствие горизонтального переполнения при ширине 390 px; JS и diff проходят проверки.
+
+
+## 2026-10-06 — Общий ритм боковых текстов
+
+- Боковые колонки главной, каталога, контактов и глав кейса используют одинаковые 5 px верхнего смещения и 48 px от метки до первого текста, Inter 630 с интерлиньяжем 1.3. Дополнительные пояснения имеют размер 16 px, интерлиньяж 1.45 и отступ 20 px.
+- Колонка услуг перестроена: метка и пояснения находятся в одном aside напротив заголовка и каталога. Первый текст больше не зависит от высоты правого заголовка. На мобильном порядок: метка, заголовок, вступление, пояснение, каталог.
+- В браузере измерены совпадающие параметры трёх колонок главной при ширине 2560 px и колонок каталога, контактов и AXONIC при ширине 1280 px; во всех случаях отступ 48 px и верхнее смещение 5 px. При 390 px подтверждены правильный порядок и отсутствие горизонтального переполнения. Синтаксис JS и diff проверены.
+
+
+## 2026-10-06 — Laptop chapter scrolling
+
+- Verified homepage browser viewports: 1280x650, 1280x720, 1440x800, 1512x850, 1728x1000.
+- Before the fix, Services exceeded a 720px viewport by 125px and the brief by 60px. Lower chapter stops also included bottom padding.
+- Added height-based spacing for laptop viewports; retained body copy sizes and all four accordion entries.
+- Chapter scrolling now adds lower stops only when content extends below the viewport, excluding trailing padding on the homepage. Case study scrolling retains its existing behavior.
+- At 1280x650, all four main chapters fit in 650px, including the longest open Services entry. One wheel step moves Services to the brief (scrollY 1300 to 1950).
+- JavaScript syntax and git diff whitespace checks passed. Verified rendered content and no horizontal overflow.
