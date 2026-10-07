@@ -115,10 +115,10 @@ function renderShell() {
       </div>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
         <div class="mobile-menu-primary">
-        <button type="button" data-open-about>${phrase("navAbout")} ${arrowIcon()}</button>
-        <a href="index.html#services">${phrase("navServices")} ${arrowIcon()}</a>
-        <a href="work.html">${phrase("navWork")} ${arrowIcon()}</a>
-        <a href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
+        <button type="button" data-open-about><span class="menu-item-reveal">${phrase("navAbout")} ${arrowIcon()}</span></button>
+        <a href="index.html#services"><span class="menu-item-reveal">${phrase("navServices")} ${arrowIcon()}</span></a>
+        <a href="work.html"><span class="menu-item-reveal">${phrase("navWork")} ${arrowIcon()}</span></a>
+        <a href="contact.html"><span class="menu-item-reveal">${phrase("navContact")} ${arrowIcon()}</span></a>
         </div>
         <div class="mobile-menu-socials" aria-label="Социальные сети">
           <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram ${arrowIcon()}</a>

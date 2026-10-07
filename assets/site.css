@@ -444,12 +444,18 @@ button,.header-cta,.text-button{border-radius:999px}
 @media(max-width:820px){
   .site-header .header-cta{display:none}
   html:has(body.menu-open){overflow:hidden;overscroll-behavior:none}
-  .mobile-menu:not([hidden]){position:fixed;inset:62px 0 0;max-height:none;height:calc(100dvh - 62px);padding:20px var(--gutter) max(24px,env(safe-area-inset-bottom));overflow:hidden;overscroll-behavior:contain;box-shadow:none;gap:32px}
+  .mobile-menu:not([hidden]){--menu-open-duration:440ms;position:fixed;inset:62px 0 0;max-height:none;height:calc(100dvh - 62px);padding:20px var(--gutter) max(24px,env(safe-area-inset-bottom));overflow:hidden;overscroll-behavior:contain;box-shadow:none;gap:32px;animation:menu-panel-reveal var(--menu-open-duration) cubic-bezier(.76,0,.24,1) both}
   .mobile-menu-primary{display:flex;flex-direction:column;flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
-  .mobile-menu-primary>a,.mobile-menu-primary>button{align-items:center;min-height:60px;border-radius:0;line-height:1.1}
+  .mobile-menu-primary>a,.mobile-menu-primary>button{--menu-row-delay:0ms;align-items:center;min-height:60px;border-radius:0;line-height:1.1;overflow:hidden}
+  .mobile-menu-primary>:nth-child(2){--menu-row-delay:90ms}
+  .mobile-menu-primary>:nth-child(3){--menu-row-delay:180ms}
+  .mobile-menu-primary>:nth-child(4){--menu-row-delay:270ms}
+  .menu-item-reveal{display:flex;width:100%;align-items:center;justify-content:space-between;animation:menu-content-rise 420ms cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--menu-open-duration) + 40ms + var(--menu-row-delay))}
   .mobile-menu-socials{display:flex;flex-wrap:wrap;gap:8px 22px;flex:none;margin-top:auto;border-top:1px solid var(--dark-line);padding-top:16px}
-  .mobile-menu .mobile-menu-socials a{align-items:center;justify-content:flex-start;gap:6px;border:0;padding:10px 0;font-size:14px;font-weight:650;letter-spacing:-.025em;line-height:1.2}
+  .mobile-menu .mobile-menu-socials a{align-items:center;justify-content:flex-start;gap:6px;border:0;padding:10px 0;font-size:14px;font-weight:650;letter-spacing:-.025em;line-height:1.2;animation:menu-content-rise 320ms cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--menu-open-duration) + 730ms)}
 }
+@keyframes menu-panel-reveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+@keyframes menu-content-rise{from{opacity:0;transform:translateY(125%)}to{opacity:1;transform:translateY(0)}}
 
 /* Page content slides upward; the fixed navigation keeps its position. */
 @view-transition{navigation:auto}
