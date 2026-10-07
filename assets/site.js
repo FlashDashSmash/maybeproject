@@ -122,6 +122,7 @@ function renderShell() {
         </div>
         <div class="mobile-menu-socials" aria-label="Социальные сети">
           <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram ${arrowIcon()}</a>
+          <a href="https://dprofile.ru/maybeproject" target="_blank" rel="noreferrer">Dprofile ${arrowIcon()}</a>
           <a href="https://www.behance.net/maybe_project" target="_blank" rel="noreferrer">Behance ${arrowIcon()}</a>
           <a href="https://www.instagram.com/maybe__project/" target="_blank" rel="noreferrer">Instagram ${arrowIcon()}</a>
         </div>
