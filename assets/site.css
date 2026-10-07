@@ -683,3 +683,6 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
   .contact-heading .contact-big-mail>.ui-arrow{margin-top:.15em}
   .contact-visual{aspect-ratio:1/1}
 }
+
+/* Preserve the intentional sentence breaks in the homepage copy. */
+.editorial-breaks{white-space:pre-line}
