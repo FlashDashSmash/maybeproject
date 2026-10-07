@@ -451,14 +451,16 @@ function renderApproachStats() {
 function renderWork() {
   const target = document.getElementById("work-grid");
   if (!target) return;
-  const matches = projectStore.filter((project) => !project.pending && (currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter)));
+  const matches = projectStore
+    .filter((project) => !project.pending && (currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter)))
+    .sort((a, b) => Number(b.slug === "axonic") - Number(a.slug === "axonic"));
   target.innerHTML = matches.map((project, index) => `
     <a class="work-card" href="project.html?slug=${encodeURIComponent(project.slug)}">
       <div class="work-media ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent)}">
         ${project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" loading="lazy" />` : `<strong>${escapeHtml(project.title)}</strong>`}
         <span class="work-number">${String(index + 1).padStart(2, "0")}</span>
       </div>
-      <div class="work-card-info"><div><span class="eyebrow">${escapeHtml(localize(project.category))} / ${escapeHtml(project.year)}</span><h2>${escapeHtml(project.title)}</h2><p>${escapeHtml(localize(project.summary))}</p></div><span class="round-arrow">${arrowIcon()}</span></div>
+      <div class="work-card-info"><div><h2>${escapeHtml(project.title)}</h2><span class="eyebrow">${escapeHtml(localize(project.category))} / ${escapeHtml(project.year)}</span><p>${escapeHtml(localize(project.summary))}</p></div><span class="round-arrow">${arrowIcon()}</span></div>
     </a>`).join("");
   document.querySelectorAll("[data-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === currentFilter)));
 }

@@ -721,3 +721,7 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
 :root{--display-weight:700}
 .home-hero h1,.page-hero h1,.contact-hero h1,.case-heading h1,.case-opening h1,.case-chapter h1,.section-title h2,.brief-heading h2,.process-display,.big-cta h2{font-weight:var(--display-weight)}
 .work-hero .page-lead{font-size:26px}
+
+/* Lead each project card with its name, followed by discipline and year. */
+.work-card-info h2{margin:0 0 12px}
+.work-card-info .eyebrow{display:block;margin-bottom:12px}
