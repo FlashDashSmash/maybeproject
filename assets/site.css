@@ -665,8 +665,8 @@ body.page-leaving{pointer-events:none}
 
 /* Contact template: email and side copy above a large image fading into the footer. */
 .contact-hero{padding-top:clamp(120px,12svh,160px);padding-bottom:clamp(80px,9svh,120px)}
-.contact-hero .contact-main{padding-top:var(--hero-heading-offset)}
-.contact-hero h1.contact-heading{font-size:clamp(42px,5.2vw,100px);line-height:1.06;letter-spacing:-.065em;white-space:normal}
+.contact-hero .contact-main{padding-top:var(--hero-heading-offset);container-type:inline-size}
+.contact-hero h1.contact-heading{font-size:min(clamp(42px,5.2vw,100px),7.5cqw);line-height:1.06;letter-spacing:-.065em;white-space:normal}
 .contact-hero .contact-heading .contact-big-mail{display:inline-flex;align-items:center;justify-content:flex-start;gap:24px;margin:0;padding:0;border:0;font-size:inherit;font-weight:700;line-height:inherit;letter-spacing:inherit}
 .contact-heading .contact-big-mail>span:first-child{flex:0 1 auto;min-width:0;white-space:nowrap;overflow-wrap:normal}
 .contact-heading .contact-big-mail>.ui-arrow{font-size:1em}
