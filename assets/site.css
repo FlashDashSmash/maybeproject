@@ -716,3 +716,8 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
 /* Match the three homepage rail introductions to the contact invitation. */
 .home-hero .hero-aside>p:not(.eyebrow),.services-section .service-intro,.brief-section .brief-intro{font-size:26px}
 @media(max-width:820px){.brief-list{grid-row:4}}
+
+/* One weight for display headings across pages and major sections. */
+:root{--display-weight:700}
+.home-hero h1,.page-hero h1,.contact-hero h1,.case-heading h1,.case-opening h1,.case-chapter h1,.section-title h2,.brief-heading h2,.process-display,.big-cta h2{font-weight:var(--display-weight)}
+.work-hero .page-lead{font-size:26px}
