@@ -674,6 +674,16 @@ body.page-leaving{pointer-events:none}
 .contact-invitation{white-space:pre-line}
 .contact-hero .contact-aside .contact-invitation{margin-top:64px}
 .contact-hero .contact-aside .contact-note{margin-top:28px;font-size:var(--rail-body-size);font-weight:400;line-height:1.45;letter-spacing:normal}
+/* Share the invitation's last text baseline with the email on desktop. */
+@media(min-width:821px){
+  .contact-hero{container-type:inline-size;row-gap:0}
+  .contact-hero .contact-aside{display:contents}
+  .contact-aside>.eyebrow{grid-column:1;grid-row:1;margin-top:var(--rail-top)}
+  .contact-aside>.contact-invitation{grid-column:1;grid-row:2;align-self:last baseline}
+  .contact-aside>.contact-note{grid-column:1;grid-row:3}
+  .contact-hero .contact-main{grid-row:2;align-self:last baseline;padding-top:0;container-type:normal}
+  .contact-hero h1.contact-heading{font-size:min(clamp(42px,5.2vw,100px),5.25cqw)}
+}
 body[data-page="contact"] main{display:flex;flex-direction:column}
 .contact-visual{position:relative;isolation:isolate;margin-top:auto;background:var(--dark);overflow:hidden}
 .contact-visual>img{display:block;width:100%;height:auto}
