@@ -669,7 +669,7 @@ body.page-leaving{pointer-events:none}
 .contact-hero h1.contact-heading{font-size:clamp(42px,5.2vw,100px);line-height:1.06;letter-spacing:-.065em;white-space:normal}
 .contact-hero .contact-heading .contact-big-mail{display:inline-flex;align-items:center;justify-content:flex-start;gap:24px;margin:0;padding:0;border:0;font-size:inherit;font-weight:700;line-height:inherit;letter-spacing:inherit}
 .contact-heading .contact-big-mail>span:first-child{flex:0 1 auto;min-width:0;white-space:nowrap;overflow-wrap:normal}
-.contact-heading .contact-big-mail>.ui-arrow{font-size:.52em}
+.contact-heading .contact-big-mail>.ui-arrow{font-size:1em}
 .contact-heading .contact-big-mail:focus-visible{outline:2px solid currentColor;outline-offset:8px}
 .contact-invitation{white-space:pre-line}
 .contact-hero .contact-aside .contact-invitation{margin-top:64px}
