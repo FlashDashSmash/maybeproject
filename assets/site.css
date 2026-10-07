@@ -616,7 +616,7 @@ body.page-leaving{pointer-events:none}
 .case-chapter-copy{max-width:none;padding-top:var(--rail-top);padding-right:var(--rail-padding)}
 .case-chapter-copy>.case-chapter-label{margin-bottom:var(--rail-label-gap)}
 .case-chapter-copy>h2,.case-chapter-copy>.case-chapter-text{max-width:var(--intro-width)}
-.services-section>.wrap{display:grid;grid-template-columns:var(--content-rail) minmax(0,1fr);align-items:start;border-top:1px solid var(--dark-line);padding-top:24px}
+.services-section>.wrap{display:grid;grid-template-columns:var(--content-rail) minmax(0,1fr);align-items:start;padding-top:24px}
 .service-main{min-width:0}
 .services-section .section-title{display:block;padding:0;border:0;margin:0 0 48px}
 .services-section .section-title h2{max-width:none;font-size:var(--section-title-size);line-height:1.02}
