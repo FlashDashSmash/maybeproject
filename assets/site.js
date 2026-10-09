@@ -517,15 +517,19 @@ function renderProject() {
     title: phrase(names[key]), paragraphs: [project.sections?.[key]]
   }));
   document.title = `${project.title} — Ilya Zubkov`;
+  const isCasePending = project.pending || project.slug !== "axonic";
+  const descriptionText = isCasePending
+    ? (currentLanguage === "ru" ? "Кейс готовится." : "Case study coming soon.")
+    : localize(project.summary);
   const description = document.querySelector('meta[name="description"]');
-  description?.setAttribute("content", localize(project.summary));
-  const chapters = project.layout === "chapters";
+  description?.setAttribute("content", descriptionText);
+  const chapters = !isCasePending && project.layout === "chapters";
   document.body.classList.toggle("has-case-chapters", chapters);
   target.classList.toggle("case-chapters--text-right", chapters && project.textSide === "right");
-  if (project.pending) {
+  if (isCasePending) {
     target.innerHTML = `<section class="case-opening wrap" id="case-intro">
       <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
-      <div class="case-opening-heading"><p class="eyebrow">${phrase("project")}</p><h1>${escapeHtml(project.title)}</h1><p class="case-opening-subtitle">${escapeHtml(localize(project.summary))}</p></div>
+      <div class="case-opening-heading"><p class="eyebrow">${phrase("project")}</p><h1>${escapeHtml(project.title)}</h1><p class="case-opening-subtitle">${escapeHtml(descriptionText)}</p></div>
     </section>`;
     return;
   }
