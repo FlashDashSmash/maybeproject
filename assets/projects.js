@@ -334,6 +334,16 @@ const projects = [
           "ru": "AI как часть производственной системы",
           "en": "The project’s AI workflow"
         },
+        "media": {
+          "src": "assets/projects/axonic/axonic-ai-production-collage.png",
+          "width": 2560,
+          "height": 1757,
+          "naturalRatio": true,
+          "alt": {
+            "ru": "AI-продакшен Axonic: коллаж сцен с протезами и технических изображений",
+            "en": "Axonic AI production: a collage of prosthesis scenes and technical imagery"
+          }
+        },
         "paragraphs": [
           {
             "ru": "В Axonic AI использовался не как способ автоматически получить готовый дизайн, а как инфраструктура для исследования, производства и масштабирования системы. Для разных этапов проекта были собраны отдельные процессы — от проверки смысловых гипотез до работы с изображениями, генеративной графикой и motion."
