@@ -17,7 +17,7 @@ const copy = {
   ru: {
     navAbout: "Обо мне", navWork: "Проекты", navServices: "Услуги", navProcess: "Процесс",
     navContact: "Обсудить проект", menu: "Меню", close: "Закрыть", viewCase: "Смотреть кейс",
-    allWork: "Все проекты", project: "Проект", role: "Роль", year: "Год", next: "Следующий проект",
+    allWork: "Все проекты", project: "Проект", role: "Роль", year: "Год", previous: "Предыдущий проект", next: "Следующий проект",
     context: "Контекст", challenge: "Задача", system: "Визуальная система",
     ai: "AI в процессе", applications: "Применение", result: "Результат",
     gallery: "Визуальная история", backWork: "Ко всем проектам", noMedia: "Кейс в разработке",
@@ -36,7 +36,7 @@ const copy = {
   en: {
     navAbout: "About", navWork: "Projects", navServices: "Services", navProcess: "Process",
     navContact: "Start a project", menu: "Menu", close: "Close", viewCase: "View case",
-    allWork: "All projects", project: "Project", role: "Role", year: "Year", next: "Next project",
+    allWork: "All projects", project: "Project", role: "Role", year: "Year", previous: "Previous project", next: "Next project",
     context: "Context", challenge: "Challenge", system: "Visual system",
     ai: "AI in the process", applications: "Applications", result: "Result",
     gallery: "Visual story", backWork: "All projects", noMedia: "Case in progress",
@@ -460,14 +460,21 @@ function renderWork() {
   document.querySelectorAll("[data-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === currentFilter)));
 }
 
-function renderProjectChapters(project, next) {
+function renderProjectNavigation(previous, next) {
+  return `<section class="case-next-screen"><nav class="case-project-navigation" aria-label="${currentLanguage === "ru" ? "Навигация по проектам" : "Project navigation"}">
+    <a class="next-project previous-project" href="project.html?slug=${encodeURIComponent(previous.slug)}"><span class="eyebrow">${phrase("previous")}</span><strong>${escapeHtml(previous.title)}</strong><span class="round-arrow">${arrowIcon("left")}</span></a>
+    <a class="next-project" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong>${escapeHtml(next.title)}</strong><span class="round-arrow">${arrowIcon("right")}</span></a>
+  </nav></section>`;
+}
+
+function renderProjectChapters(project, previous, next) {
   const blocks = [...project.caseBlocks];
   const placeholder = (index, title) => `<figure class="case-chapter-media" role="img" aria-label="${escapeHtml(localize(title))} — ${currentLanguage === "ru" ? "заглушка изображения" : "image placeholder"} 16:9">
     <span class="case-placeholder-ratio" aria-hidden="true">16:9</span><figcaption aria-hidden="true">${escapeHtml(project.title)} / ${String(index).padStart(2, "0")}</figcaption>
   </figure>`;
   const mediaList = (block) => Array.isArray(block.media) ? block.media : [block.media];
   const renderVideo = (src, title) => `<iframe src="${escapeHtml(src)}" title="${escapeHtml(title)}" tabindex="-1" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock" allowfullscreen loading="lazy"></iframe>`;
-  const renderMedia = (media, index, title) => media?.embed ? `<figure class="case-chapter-media case-chapter-media--video">${renderVideo(media.embed, localize(media.alt || title))}</figure>` : media?.src ? `<figure class="case-chapter-media case-chapter-media--image"${media.naturalRatio && media.width && media.height ? ` style="aspect-ratio:${Number(media.width)} / ${Number(media.height)}"` : ""}><img${media.width && media.height ? ` width="${Number(media.width)}" height="${Number(media.height)}"` : ""} src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt || title))}" loading="lazy" decoding="async" /></figure>` : placeholder(index, title);
+  const renderMedia = (media, index, title) => media?.embed ? `<figure class="case-chapter-media case-chapter-media--video">${renderVideo(media.embed, localize(media.alt || title))}</figure>` : media?.src ? `<figure class="case-chapter-media case-chapter-media--image"${media.naturalRatio && media.width && media.height ? ` style="--case-media-ratio:${Number(media.width) / Number(media.height)};aspect-ratio:${Number(media.width)} / ${Number(media.height)}"` : ""}><img${media.width && media.height ? ` width="${Number(media.width)}" height="${Number(media.height)}"` : ""} src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt || title))}" loading="lazy" decoding="async" /></figure>` : placeholder(index, title);
   return `<section class="case-opening wrap" id="case-intro">
     <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
     <div class="case-opening-heading">
@@ -492,7 +499,7 @@ function renderProjectChapters(project, next) {
       ${block.items?.length ? `<div class="case-chapter-pipeline">${block.items.map((item) => `<div><h3>${escapeHtml(localize(item.title))}</h3><p class="case-pipeline-tool">${escapeHtml(item.tool)}</p><p>${escapeHtml(localize(item.text))}</p></div>`).join("")}</div>` : ""}
     </div>${mediaList(block).length > 1 ? `<div class="case-chapter-visuals">${mediaList(block).map((media, slideIndex) => `<div class="case-chapter-slide" data-case-slide>${renderMedia(media, `${index + 1}.${slideIndex + 1}`, block.title)}</div>`).join("")}</div>` : renderMedia(mediaList(block)[0], index + 1, block.title)}
   </section>`).join("")}
-  <section class="case-next-screen"><a class="next-project" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong>${escapeHtml(next.title)}</strong><span class="round-arrow">${arrowIcon()}</span></a></section>`;
+  ${renderProjectNavigation(previous, next)}`;
 }
 
 function renderProject() {
@@ -500,9 +507,9 @@ function renderProject() {
   if (!target || !projectStore.length) return;
   const slug = new URLSearchParams(location.search).get("slug");
   const project = projectStore.find((item) => item.slug === slug || item.aliases?.includes(slug)) || projectStore[0];
-  const publishedProjects = projectStore.filter(item => !item.pending);
-  const next = projectStore.find(item => item.slug === project.nextProject)
-    || publishedProjects[(publishedProjects.indexOf(project) + 1) % publishedProjects.length];
+  const projectIndex = projectStore.indexOf(project);
+  const previous = projectStore[(projectIndex - 1 + projectStore.length) % projectStore.length];
+  const next = projectStore[(projectIndex + 1) % projectStore.length];
   const captureParams = new URLSearchParams(location.search);
   const figmaOffset = Number(captureParams.get("figma-offset") || 0);
   const caseMedia = captureParams.has("figma-summary") ? project.media?.slice(figmaOffset, figmaOffset + 3) : project.media;
@@ -525,11 +532,11 @@ function renderProject() {
     target.innerHTML = `<section class="case-opening wrap" id="case-intro">
       <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
       <div class="case-opening-heading"><p class="eyebrow">${phrase("project")}</p><h1>${escapeHtml(project.title)}</h1><p class="case-opening-subtitle">${escapeHtml(descriptionText)}</p></div>
-    </section>`;
+    </section>${renderProjectNavigation(previous, next)}`;
     return;
   }
   if (chapters) {
-    target.innerHTML = renderProjectChapters(project, next);
+    target.innerHTML = renderProjectChapters(project, previous, next);
     return;
   }
   target.innerHTML = `
@@ -552,7 +559,7 @@ function renderProject() {
       </div></article>`).join("")}
     </div></section>
     ${caseMedia?.length ? `<section class="case-gallery wrap"><div class="section-title"><p class="eyebrow">${phrase("gallery")}</p><h2>${escapeHtml(project.title)}<span> / ${String(caseMedia.length).padStart(2, "0")}</span></h2></div><div class="gallery-grid">${caseMedia.map((media, index) => `<figure class="gallery-item ${index % 5 === 0 ? "gallery-item--wide" : ""}"><img src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt))}" loading="lazy" /><figcaption>${String(index + 1).padStart(2, "0")} / ${escapeHtml(localize(media.alt))}</figcaption></figure>`).join("")}</div></section>` : ""}
-    <a class="next-project" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong>${escapeHtml(next.title)}</strong><span class="round-arrow">${arrowIcon()}</span></a>`;
+    ${renderProjectNavigation(previous, next)}`;
 }
 
 let motionTargets = [];
