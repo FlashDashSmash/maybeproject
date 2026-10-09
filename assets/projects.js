@@ -323,52 +323,6 @@ const projects = [
           {
             "ru": "Ключевые решения — позиционирование, дизайн-принципы, типографика, композиция и финальный отбор — оставались дизайнерской задачей. AI ускорял проверку и производство там, где ручной процесс ограничивал количество итераций или масштаб."
           }
-        ],
-        "items": [
-          {
-            "title": {
-              "ru": "Исследование и стратегия",
-              "en": "Naming / Positioning"
-            },
-            "tool": "ChatGPT / DeepSeek",
-            "text": {
-              "ru": "AI использовался для работы с большим массивом контекста вокруг нейропротезирования, нейроинтерфейсов и сенсорной обратной связи, а также для разработки и проверки нейминговых и смысловых гипотез. Так формировалась территория бренда вокруг перехода от функции к ощущению.",
-              "en": "Exploring and developing naming hypotheses and the semantics of the name. Researching the subject, developing and testing conceptual hypotheses and defining the brand concept."
-            }
-          },
-          {
-            "title": {
-              "ru": "Image production",
-              "en": "Image direction"
-            },
-            "tool": "Weavy / Nano Banana / Magnific",
-            "text": {
-              "ru": "Для изображения был собран нодовый пайплайн, который объединял генерацию, локальное редактирование, работу со светом, outpainting и финальное повышение качества. Особое внимание уделялось консистентности протезов: их конструкции, пропорциям и положению относительно тела в разных сценах. Такой подход позволял менять отдельные параметры кадра, не перегенерируя изображение целиком и не разрушая утвержденный арт-дирекшн.",
-              "en": "A node-based workflow for creating and refining images with several integrated AI models. Models were used for targeted editing, maintaining object consistency and final image enhancement."
-            }
-          },
-          {
-            "title": {
-              "ru": "Generative Brand Tool",
-              "en": "Graphics"
-            },
-            "tool": "Codex / собственный инструмент",
-            "text": {
-              "ru": "Отдельный инструмент кодирует правила графической системы Axonic и на их основе генерирует композиции и движение. Вместо готовой библиотеки декоративных элементов бренд получает механизм, способный создавать новые варианты внутри заданных ограничений. Код здесь становится частью дизайн-системы: он помогает поддерживать консистентность и ускоряет производство новых носителей.",
-              "en": "A custom tool developed with Codex. It generates Axonic compositions according to the visual system’s rules and makes it possible to adapt graphics quickly for different formats."
-            }
-          },
-          {
-            "title": {
-              "ru": "Motion и реализация",
-              "en": "Animation"
-            },
-            "tool": "Codex / Figma MCP / After Effects",
-            "text": {
-              "ru": "AI и код использовались для прототипирования motion, работы с макетами, построения выражений и автоматизации повторяющихся операций в After Effects. Это позволило быстрее тестировать движение на ранних этапах и затем переносить утвержденную логику в финальную анимацию. В результате AI работает в проекте на трех уровнях: помогает думать быстрее, производить точнее и масштабировать систему дальше.",
-              "en": "Codex supported motion work: through Figma MCP, it was used to work with layouts and animate interface elements; for After Effects, it supported animation logic, expressions and task automation."
-            }
-          }
         ]
       }
     ],
