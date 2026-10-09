@@ -249,14 +249,14 @@ function renderHeroSlideshow() {
   const target = document.getElementById("hero-slideshow");
   if (!target) return;
   destroyHeroSlideshow?.();
-  const selected = ["axonic", "saydo", "koto-myoto", "gfpa", "assoro"]
-    .map((slug) => projectStore.find((project) => project.slug === slug)).filter(Boolean);
+  const selected = projectStore.filter((project) =>
+    ["axonic", "redsoft", "wow-lan", "saydo", "koto-myoto", "gfpa", "assoro"].includes(project.slug));
   if (!selected.length) return;
   heroSlideIndex %= selected.length;
   target.setAttribute("aria-label", currentLanguage === "ru" ? "Избранные проекты" : "Selected projects");
   target.innerHTML = `<div class="hero-slides">${selected.map((project, index) => `
     <div class="hero-slide ${index === heroSlideIndex ? "is-active" : ""}" role="group" aria-roledescription="slide" aria-label="${index + 1} / ${selected.length}: ${escapeHtml(project.title)}" aria-hidden="${index !== heroSlideIndex}">
-      <a href="project.html?slug=${encodeURIComponent(project.slug)}" tabindex="${index === heroSlideIndex ? "0" : "-1"}" style="--project-accent:${escapeHtml(project.accent)}" aria-label="${escapeHtml(project.title)} — ${phrase("viewCase")}">
+      <a href="project.html?slug=${encodeURIComponent(project.slug)}" tabindex="${index === heroSlideIndex ? "0" : "-1"}" style="--project-accent:${escapeHtml(project.accent || "var(--ink)")}" aria-label="${escapeHtml(project.title)} — ${phrase("viewCase")}">
         ${project.coverEmbed ? `<iframe data-hero-video="${escapeHtml(project.coverEmbed)}" ${index === heroSlideIndex ? `src="${escapeHtml(project.coverEmbed)}"` : ""} title="${escapeHtml(project.title)}" tabindex="-1" aria-hidden="true" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" loading="lazy"></iframe>` : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" ${index === 0 ? 'fetchpriority="high"' : 'decoding="async"'} />` : `<strong>${escapeHtml(project.title)}</strong>`}
       </a>
     </div>`).join("")}</div>
@@ -452,15 +452,14 @@ function renderWork() {
   const target = document.getElementById("work-grid");
   if (!target) return;
   const matches = projectStore
-    .filter((project) => !project.pending && (currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter)))
-    .sort((a, b) => Number(b.slug === "axonic") - Number(a.slug === "axonic"));
+    .filter((project) => currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter));
   target.innerHTML = matches.map((project, index) => `
     <a class="work-card" href="project.html?slug=${encodeURIComponent(project.slug)}">
-      <div class="work-media ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent)}">
+      <div class="work-media ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent || "var(--ink)")}">
         ${project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" loading="lazy" />` : `<strong>${escapeHtml(project.title)}</strong>`}
         <span class="work-number">${String(index + 1).padStart(2, "0")}</span>
       </div>
-      <div class="work-card-info"><div><h2>${escapeHtml(project.title)}</h2><span class="eyebrow">${escapeHtml(localize(project.category))} / ${escapeHtml(project.year)}</span><p>${escapeHtml(localize(project.summary))}</p></div><span class="round-arrow">${arrowIcon()}</span></div>
+      <div class="work-card-info"><div><h2>${escapeHtml(project.title)}</h2>${project.category || project.year ? `<span class="eyebrow">${[localize(project.category), project.year].filter(Boolean).map(escapeHtml).join(" / ")}</span>` : ""}<p>${escapeHtml(localize(project.summary))}</p></div><span class="round-arrow">${arrowIcon()}</span></div>
     </a>`).join("");
   document.querySelectorAll("[data-filter]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === currentFilter)));
 }

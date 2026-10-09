@@ -1193,4 +1193,5 @@ projects.push({
   }
 });
 
-window.PROJECTS = projects;
+const projectPriority = new Map(["axonic", "redsoft", "wow-lan", "saydo"].map((slug, index) => [slug, index]));
+window.PROJECTS = projects.sort((a, b) => (projectPriority.get(a.slug) ?? projectPriority.size) - (projectPriority.get(b.slug) ?? projectPriority.size));
