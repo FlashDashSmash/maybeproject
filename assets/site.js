@@ -462,8 +462,8 @@ function renderWork() {
 
 function renderProjectNavigation(previous, next) {
   return `<section class="case-next-screen" id="case-navigation"><nav class="case-project-navigation" aria-label="${currentLanguage === "ru" ? "Навигация по проектам" : "Project navigation"}">
-    <a class="case-project-link case-project-link--previous" href="project.html?slug=${encodeURIComponent(previous.slug)}"><span class="eyebrow">${phrase("previous")}</span><strong>${escapeHtml(previous.title)}</strong></a>
-    <a class="case-project-link case-project-link--next" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong>${escapeHtml(next.title)}</strong></a>
+    <a class="case-project-link case-project-link--previous" href="project.html?slug=${encodeURIComponent(previous.slug)}"><span class="eyebrow">${phrase("previous")}</span><strong>${arrowIcon("left")}<span class="case-project-name">${escapeHtml(previous.title)}</span></strong></a>
+    <a class="case-project-link case-project-link--next" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong><span class="case-project-name">${escapeHtml(next.title)}</span>${arrowIcon("right")}</strong></a>
   </nav></section>`;
 }
 
