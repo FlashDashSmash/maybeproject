@@ -1,13 +1,10 @@
 const projectStore = window.PROJECTS || [];
 const projectGroups = {
-  gfpa: ["branding", "communications"],
   veld: ["branding", "communications"],
   saydo: ["branding", "communications", "packaging", "ai"],
   axonic: ["branding", "communications", "packaging", "digital", "ai"],
-  assoro: ["branding", "communications"],
   "gpn-custom-type-test": ["branding", "communications"],
   "koto-myoto": ["branding", "communications", "packaging"],
-  ecotek: ["branding", "communications"],
   "iron-bolt": ["branding", "communications"],
   bulat: ["branding", "communications"],
   "wow-lan": ["branding", "communications", "digital"]
