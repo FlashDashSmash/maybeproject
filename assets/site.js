@@ -249,8 +249,7 @@ function renderHeroSlideshow() {
   const target = document.getElementById("hero-slideshow");
   if (!target) return;
   destroyHeroSlideshow?.();
-  const selected = projectStore.filter((project) =>
-    ["axonic", "redsoft", "wow-lan", "saydo", "koto-myoto", "gfpa", "assoro"].includes(project.slug));
+  const selected = projectStore.slice(0, 5);
   if (!selected.length) return;
   heroSlideIndex %= selected.length;
   target.setAttribute("aria-label", currentLanguage === "ru" ? "Избранные проекты" : "Selected projects");
