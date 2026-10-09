@@ -72,7 +72,7 @@ const projects = [
     "coverEmbed": "https://kinescope.io/embed/rZMBnw32v3BxvCwgQm6HxQ",
     "layout": "chapters",
     "textSide": "left",
-    "title": "AXONIC",
+    "title": "Axonic",
     "category": {
       "ru": "Стратегия и визуальная система нейротехнологического бренда",
       "en": "Neurotechnology Brand Visual System"
@@ -100,8 +100,8 @@ const projects = [
       "en": "A neurotechnology brand concept: from the idea of an impulse to a symbol, generative graphics and a communication system."
     },
     "intro": {
-      "ru": "AXONIC — концепция нейротехнологического бренда, который разрабатывает протезные системы и нейроинтерфейсы, преобразующие нервные сигналы в движение и сенсорную обратную связь.\n\nБольшая часть коммуникации в категории строится вокруг восстановления функции: снова двигаться, держать предметы, ходить, заниматься спортом. Но потеря конечности меняет не только способность действовать. Она меняет сам способ чувствовать мир — прикосновение, давление, температуру, присутствие собственного тела.\n\nПоэтому в основе AXONIC не компенсация утраченной функции, а восстановление связи между человеком и окружающим миром. Так появилась идея бренда — «Ощущение жизни, которое ты помнишь».\n\nНазвание AXONIC отсылает к аксону — проводнику нервного импульса. Эта логика стала основой всей системы: Signal → Connection → Sensation. От нейронного сигнала — к контакту, движению и ощущению.",
-      "en": "AXONIC is a concept for a neurotechnology brand developing prosthetic systems and neural interfaces that translate neural signals into movement and sensory feedback.\n\nBy combining biomechanical engineering, sensory interfaces and adaptive technologies, AXONIC aims to restore the connection between the body and the surrounding world."
+      "ru": "Axonic — концепция нейротехнологического бренда, который разрабатывает протезные системы и нейроинтерфейсы, преобразующие нервные сигналы в движение и сенсорную обратную связь.\n\nБольшая часть коммуникации в категории строится вокруг восстановления функции: снова двигаться, держать предметы, ходить, заниматься спортом. Но потеря конечности меняет не только способность действовать. Она меняет сам способ чувствовать мир — прикосновение, давление, температуру, присутствие собственного тела.\n\nПоэтому в основе Axonic не компенсация утраченной функции, а восстановление связи между человеком и окружающим миром. Так появилась идея бренда — «Ощущение жизни, которое ты помнишь».\n\nНазвание Axonic отсылает к аксону — проводнику нервного импульса. Эта логика стала основой всей системы: Signal → Connection → Sensation. От нейронного сигнала — к контакту, движению и ощущению.",
+      "en": "Axonic is a concept for a neurotechnology brand developing prosthetic systems and neural interfaces that translate neural signals into movement and sensory feedback.\n\nBy combining biomechanical engineering, sensory interfaces and adaptive technologies, Axonic aims to restore the connection between the body and the surrounding world."
     },
     "caseBlocks": [
       {
@@ -112,29 +112,29 @@ const projects = [
         "media": [{
           "embed": "https://kinescope.io/embed/v9ZnXjjUSDPFN5Bxpbs34j",
           "alt": {
-            "ru": "Семантика знака AXONIC: от импульса к контакту",
-            "en": "AXONIC symbol semantics: from impulse to contact"
+            "ru": "Семантика знака Axonic: от импульса к контакту",
+            "en": "Axonic symbol semantics: from impulse to contact"
           }
         }, {
           "src": "assets/projects/axonic/axonic-impulse.png?v=20261005-frame251",
           "alt": {
-            "ru": "Построение знака и логотипа AXONIC: кривые и опорные точки",
-            "en": "AXONIC symbol and logotype construction: curves and anchor points"
+            "ru": "Построение знака и логотипа Axonic: кривые и опорные точки",
+            "en": "Axonic symbol and logotype construction: curves and anchor points"
           }
         }, {
           "src": "assets/projects/axonic/axonic-symbol-grid.png",
           "alt": {
-            "ru": "Пропорции знака AXONIC на модульной сетке: 5X и 2.5X",
-            "en": "AXONIC symbol proportions on a modular grid: 5X and 2.5X"
+            "ru": "Пропорции знака Axonic на модульной сетке: 5X и 2.5X",
+            "en": "Axonic symbol proportions on a modular grid: 5X and 2.5X"
           }
         }],
         "paragraphs": [
           {
-            "ru": "Если ощущение начинается с сигнала, знак AXONIC должен был говорить о восстановлении этой связи, а не буквально изображать протез, тело или нейрон.",
+            "ru": "Если ощущение начинается с сигнала, знак Axonic должен был говорить о восстановлении этой связи, а не буквально изображать протез, тело или нейрон.",
             "en": "The symbol is built around a simple idea: everything starts with an impulse."
           },
           {
-            "ru": "В основе символа — две траектории, которые пересекаются и продолжают движение. Это одновременно импульс и ответ, контакт двух систем, связь человека и технологии. В точке пересечения появляется X — центральный знак AXONIC.",
+            "ru": "В основе символа — две траектории, которые пересекаются и продолжают движение. Это одновременно импульс и ответ, контакт двух систем, связь человека и технологии. В точке пересечения появляется X — центральный знак Axonic.",
             "en": "Signals connect and interact to form a response, turning neural activity into something a person can feel."
           },
           {
@@ -153,27 +153,27 @@ const projects = [
         "media": [{
           "embed": "https://kinescope.io/embed/8U4njiWwk3FwrZiiWRU6Vj",
           "alt": {
-            "ru": "AXONIC: от знака к визуальной системе",
-            "en": "AXONIC: from the symbol to the visual system"
+            "ru": "Axonic: от знака к визуальной системе",
+            "en": "Axonic: from the symbol to the visual system"
           }
         }, {
           "embed": "https://kinescope.io/embed/0kYeR1NvBHFUsmKy3yKKZp",
           "alt": {
-            "ru": "Визуальная система AXONIC: второй кадр",
-            "en": "AXONIC visual system: second frame"
+            "ru": "Визуальная система Axonic: второй кадр",
+            "en": "Axonic visual system: second frame"
           }
         }],
         "paragraphs": [
           {
-            "ru": "Визуальная система AXONIC продолжает логику знака. Его траектории становятся основой графики, пропорции определяют сетку, а геометрия пересечения переходит в построение текстовых блоков. Так система сохраняет узнаваемость даже без логотипа.",
-            "en": "AXONIC’s visual constants extend the logic of its symbol. Typography and colour establish a hierarchy, organising information and maintaining recognition across formats."
+            "ru": "Визуальная система Axonic продолжает логику знака. Его траектории становятся основой графики, пропорции определяют сетку, а геометрия пересечения переходит в построение текстовых блоков. Так система сохраняет узнаваемость даже без логотипа.",
+            "en": "Axonic’s visual constants extend the logic of its symbol. Typography and colour establish a hierarchy, organising information and maintaining recognition across formats."
           },
           {
             "ru": "Типографика объединяет три роли: Libre Caslon отвечает за эмоциональные высказывания, Onest — за основную коммуникацию и интерфейсы, Roboto Mono — за техническую информацию и протоколы. Вместе они соединяют человеческий и инженерный языки бренда.",
             "en": "The application grid connects text, images and open space. Text blocks take their shape from the geometry of the logotype, bringing its character into the composition."
           },
           {
-            "ru": "Вместо привычной холодной палитры медицинских технологий — светлые и глубокие оттенки зеленого: Axon Green, Synaptic Mint, Neural Mist и Deep Signal. Цвет подчеркивает главную идею AXONIC: в центре не технология, а человек и его связь с окружающим миром.",
+            "ru": "Вместо привычной холодной палитры медицинских технологий — светлые и глубокие оттенки зеленого: Axon Green, Synaptic Mint, Neural Mist и Deep Signal. Цвет подчеркивает главную идею Axonic: в центре не технология, а человек и его связь с окружающим миром.",
             "en": "The graphics also emerge from the symbol, like its imprint. The logo becomes the basis of a visual language that develops from one application to the next."
           }
         ]
@@ -188,14 +188,14 @@ const projects = [
           "width": 2400,
           "height": 1640,
           "alt": {
-            "ru": "Инструмент генеративной графики AXONIC на экране iPad",
-            "en": "AXONIC generative graphics tool on an iPad screen"
+            "ru": "Инструмент генеративной графики Axonic на экране iPad",
+            "en": "Axonic generative graphics tool on an iPad screen"
           }
         },
         "paragraphs": [
           {
-            "ru": "В основе графики AXONIC лежит набор правил, а не коллекция заранее подготовленных макетов. Чтобы эта система могла масштабироваться, я разработал собственный инструмент для генерации и анимации фирменной графики.",
-            "en": "I developed a tool that generates and animates AXONIC graphics."
+            "ru": "В основе графики Axonic лежит набор правил, а не коллекция заранее подготовленных макетов. Чтобы эта система могла масштабироваться, я разработал собственный инструмент для генерации и анимации фирменной графики.",
+            "en": "I developed a tool that generates and animates Axonic graphics."
           },
           {
             "ru": "Инструмент работает с теми же параметрами, что и сама айдентика: направлением линий, плотностью, масштабом, точками пересечения и движением. Меняя их, можно получать большое количество композиций, не выходя за рамки системы.",
@@ -220,8 +220,8 @@ const projects = [
             "width": 2388,
             "height": 1620,
             "alt": {
-              "ru": "Фирменные носители AXONIC: документы, папки и визитки",
-              "en": "AXONIC branded applications: documents, folders and business cards"
+              "ru": "Фирменные носители Axonic: документы, папки и визитки",
+              "en": "Axonic branded applications: documents, folders and business cards"
             }
           },
           {
@@ -229,8 +229,8 @@ const projects = [
             "width": 2400,
             "height": 1360,
             "alt": {
-              "ru": "Визитка AXONIC и папка с протоколами интерфейса",
-              "en": "AXONIC business card and interface protocol folder"
+              "ru": "Визитка Axonic и папка с протоколами интерфейса",
+              "en": "Axonic business card and interface protocol folder"
             }
           },
           {
@@ -238,8 +238,8 @@ const projects = [
             "width": 2400,
             "height": 1362,
             "alt": {
-              "ru": "Папка AXONIC с техническим протоколом и документацией системы",
-              "en": "AXONIC folder with technical protocols and system documentation"
+              "ru": "Папка Axonic с техническим протоколом и документацией системы",
+              "en": "Axonic folder with technical protocols and system documentation"
             }
           },
           {
@@ -247,8 +247,8 @@ const projects = [
             "width": 2400,
             "height": 1545,
             "alt": {
-              "ru": "Обзор системы AXONIC и фирменная медицинская форма",
-              "en": "AXONIC system overview and branded medical uniform"
+              "ru": "Обзор системы Axonic и фирменная медицинская форма",
+              "en": "Axonic system overview and branded medical uniform"
             }
           },
           {
@@ -256,8 +256,8 @@ const projects = [
             "width": 2400,
             "height": 1606,
             "alt": {
-              "ru": "Наружная реклама AXONIC: Чувствовать мир как прежде",
-              "en": "AXONIC outdoor advertising: feel the world as before"
+              "ru": "Наружная реклама Axonic: Чувствовать мир как прежде",
+              "en": "Axonic outdoor advertising: feel the world as before"
             }
           },
           {
@@ -265,8 +265,8 @@ const projects = [
             "width": 2560,
             "height": 1622,
             "alt": {
-              "ru": "Сайт AXONIC на экране MacBook",
-              "en": "AXONIC website on a MacBook screen"
+              "ru": "Сайт Axonic на экране MacBook",
+              "en": "Axonic website on a MacBook screen"
             }
           },
           {
@@ -274,8 +274,8 @@ const projects = [
             "width": 2560,
             "height": 1706,
             "alt": {
-              "ru": "AXONIC: коммуникации бренда",
-              "en": "AXONIC brand communication"
+              "ru": "Axonic: коммуникации бренда",
+              "en": "Axonic brand communication"
             }
           },
           {
@@ -283,8 +283,8 @@ const projects = [
             "width": 2560,
             "height": 1440,
             "alt": {
-              "ru": "AXONIC: схемы протеза кисти и велосипедист с протезом руки",
-              "en": "AXONIC: prosthetic hand drawings and a cyclist with a prosthetic arm"
+              "ru": "Axonic: схемы протеза кисти и велосипедист с протезом руки",
+              "en": "Axonic: prosthetic hand drawings and a cyclist with a prosthetic arm"
             }
           },
           {
@@ -292,19 +292,19 @@ const projects = [
             "width": 2560,
             "height": 1440,
             "alt": {
-              "ru": "AXONIC: футболист с протезом ноги и технические схемы протеза",
-              "en": "AXONIC: football player with a prosthetic leg and technical prosthesis drawings"
+              "ru": "Axonic: футболист с протезом ноги и технические схемы протеза",
+              "en": "Axonic: football player with a prosthetic leg and technical prosthesis drawings"
             }
           }
         ],
         "paragraphs": [
           {
-            "ru": "AXONIC должен одинаково убедительно говорить с разными аудиториями — от специалистов и исследователей до людей, которые впервые сталкиваются с технологией бренда.",
+            "ru": "Axonic должен одинаково убедительно говорить с разными аудиториями — от специалистов и исследователей до людей, которые впервые сталкиваются с технологией бренда.",
             "en": "The visual system extends across research documentation, interface protocols, packaging and branded materials."
           },
           {
             "ru": "В исследовательской документации, клинических протоколах и материалах Neural Sensory Interface система становится точнее и спокойнее: строгая иерархия, техническая маркировка, схемы и моноширинная типографика помогают структурировать сложную информацию.",
-            "en": "Beyond its core applications, AXONIC’s visual language extends into public communication: campaigns, outdoor advertising and digital formats."
+            "en": "Beyond its core applications, Axonic’s visual language extends into public communication: campaigns, outdoor advertising and digital formats."
           },
           {
             "ru": "В публичной коммуникации на первый план выходит человеческий опыт. Кампания «Чувствовать мир как прежде» переводит технологию с языка характеристик на язык результата — прикосновения, движения, спорта и обычных повседневных действий."
@@ -313,7 +313,7 @@ const projects = [
             "ru": "Фотостиль строится на соединении human experience и engineered precision. Протез не становится футуристическим объектом или главным героем кадра — он естественно существует вместе с человеком. Поэтому технология воспринимается не как замена тела, а как способ вернуть связь с ним."
           },
           {
-            "ru": "Сайт, наружная реклама, документы, интерфейсы и брендированные материалы используют разные пропорции системы, но сохраняют одну логику. Так AXONIC может переходить от лабораторной точности к эмоциональной коммуникации, не меняя характер бренда."
+            "ru": "Сайт, наружная реклама, документы, интерфейсы и брендированные материалы используют разные пропорции системы, но сохраняют одну логику. Так Axonic может переходить от лабораторной точности к эмоциональной коммуникации, не меняя характер бренда."
           }
         ]
       },
@@ -324,7 +324,7 @@ const projects = [
         },
         "paragraphs": [
           {
-            "ru": "В AXONIC AI использовался не как способ автоматически получить готовый дизайн, а как инфраструктура для исследования, производства и масштабирования системы. Для разных этапов проекта были собраны отдельные процессы — от проверки смысловых гипотез до работы с изображениями, генеративной графикой и motion."
+            "ru": "В Axonic AI использовался не как способ автоматически получить готовый дизайн, а как инфраструктура для исследования, производства и масштабирования системы. Для разных этапов проекта были собраны отдельные процессы — от проверки смысловых гипотез до работы с изображениями, генеративной графикой и motion."
           },
           {
             "ru": "Ключевые решения — позиционирование, дизайн-принципы, типографика, композиция и финальный отбор — оставались дизайнерской задачей. AI ускорял проверку и производство там, где ручной процесс ограничивал количество итераций или масштаб."
@@ -360,8 +360,8 @@ const projects = [
             },
             "tool": "Codex / собственный инструмент",
             "text": {
-              "ru": "Отдельный инструмент кодирует правила графической системы AXONIC и на их основе генерирует композиции и движение. Вместо готовой библиотеки декоративных элементов бренд получает механизм, способный создавать новые варианты внутри заданных ограничений. Код здесь становится частью дизайн-системы: он помогает поддерживать консистентность и ускоряет производство новых носителей.",
-              "en": "A custom tool developed with Codex. It generates AXONIC compositions according to the visual system’s rules and makes it possible to adapt graphics quickly for different formats."
+              "ru": "Отдельный инструмент кодирует правила графической системы Axonic и на их основе генерирует композиции и движение. Вместо готовой библиотеки декоративных элементов бренд получает механизм, способный создавать новые варианты внутри заданных ограничений. Код здесь становится частью дизайн-системы: он помогает поддерживать консистентность и ускоряет производство новых носителей.",
+              "en": "A custom tool developed with Codex. It generates Axonic compositions according to the visual system’s rules and makes it possible to adapt graphics quickly for different formats."
             }
           },
           {
@@ -385,18 +385,18 @@ const projects = [
       },
       "paragraphs": [
         {
-          "ru": "AXONIC — концепция нейротехнологического бренда, который разрабатывает протезные системы и нейроинтерфейсы, преобразующие нервные сигналы в движение и сенсорную обратную связь.",
-          "en": "AXONIC is a concept for a neurotechnology brand developing prosthetic systems and neural interfaces that translate neural signals into movement and sensory feedback."
+          "ru": "Axonic — концепция нейротехнологического бренда, который разрабатывает протезные системы и нейроинтерфейсы, преобразующие нервные сигналы в движение и сенсорную обратную связь.",
+          "en": "Axonic is a concept for a neurotechnology brand developing prosthetic systems and neural interfaces that translate neural signals into movement and sensory feedback."
         },
         {
           "ru": "Большая часть коммуникации в категории строится вокруг восстановления функции: снова двигаться, держать предметы, ходить, заниматься спортом. Но потеря конечности меняет не только способность действовать. Она меняет сам способ чувствовать мир — прикосновение, давление, температуру, присутствие собственного тела.",
-          "en": "By combining biomechanical engineering, sensory interfaces and adaptive technologies, AXONIC aims to restore the connection between the body and the surrounding world."
+          "en": "By combining biomechanical engineering, sensory interfaces and adaptive technologies, Axonic aims to restore the connection between the body and the surrounding world."
         },
         {
-          "ru": "Поэтому в основе AXONIC не компенсация утраченной функции, а восстановление связи между человеком и окружающим миром. Так появилась идея бренда — «Ощущение жизни, которое ты помнишь»."
+          "ru": "Поэтому в основе Axonic не компенсация утраченной функции, а восстановление связи между человеком и окружающим миром. Так появилась идея бренда — «Ощущение жизни, которое ты помнишь»."
         },
         {
-          "ru": "Название AXONIC отсылает к аксону — проводнику нервного импульса. Эта логика стала основой всей системы: Signal → Connection → Sensation. От нейронного сигнала — к контакту, движению и ощущению."
+          "ru": "Название Axonic отсылает к аксону — проводнику нервного импульса. Эта логика стала основой всей системы: Signal → Connection → Sensation. От нейронного сигнала — к контакту, движению и ощущению."
         }
       ]
     }
