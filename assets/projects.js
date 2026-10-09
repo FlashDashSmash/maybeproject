@@ -252,6 +252,15 @@ const projects = [
             }
           },
           {
+            "src": "assets/projects/axonic/axonic-billboard-impulse-contact.png",
+            "width": 2560,
+            "height": 1440,
+            "alt": {
+              "ru": "Наружная реклама Axonic: от импульса к движению, от движения к контакту",
+              "en": "Axonic outdoor advertising: from impulse to movement, from movement to connection"
+            }
+          },
+          {
             "src": "assets/projects/axonic/axonic-billboard.png",
             "width": 2400,
             "height": 1606,
@@ -555,6 +564,7 @@ const projects = [
   },
   {
     slug: "wow-lan",
+    cover: "assets/projects/wow-lan/wow-lan-cover.png",
     title: "WOW-LAN",
     category: {
       ru: "Айдентика digital-портала",
