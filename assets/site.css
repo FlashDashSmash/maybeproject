@@ -733,7 +733,7 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
 .case-project-link .eyebrow{color:#b7b7b0}
 .case-project-link strong{display:flex;align-items:center;gap:16px;max-width:100%;font-size:52px;font-weight:600;line-height:1.2;letter-spacing:-.04em}
 .case-project-name{min-width:0;overflow-wrap:anywhere}
-.case-project-link strong .ui-arrow{font-size:.75em}
+.case-project-link strong .ui-arrow{font-size:.6em}
 .case-project-link:hover strong,.case-project-link:focus-visible strong{color:var(--accent)}
 @media(max-width:820px){
   .case-project-navigation{gap:24px;padding-block:40px}
