@@ -304,6 +304,15 @@ const projects = [
               "ru": "Axonic: футболист с протезом ноги и технические схемы протеза",
               "en": "Axonic: football player with a prosthetic leg and technical prosthesis drawings"
             }
+          },
+          {
+            "src": "assets/projects/axonic/axonic-presentation-stage.png",
+            "width": 2560,
+            "height": 1603,
+            "alt": {
+              "ru": "Презентация Axonic на сцене: от импульса к движению",
+              "en": "Axonic stage presentation: from impulse to movement"
+            }
           }
         ],
         "paragraphs": [
