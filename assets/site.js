@@ -102,7 +102,7 @@ function renderShell() {
   const footer = document.getElementById("site-footer");
   if (header) {
     header.innerHTML = `
-      <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="header-glass" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".015 .08" numOctaves="2" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+      ${headerGlassFilterMarkup()}
       <div class="header-inner">
         <a class="brand-link" href="index.html" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
         <nav class="desktop-nav" aria-label="Primary navigation">
@@ -190,6 +190,61 @@ let headerContrastStarted = false;
 let headerContrastFrame = 0;
 let headerSurfaces = [];
 
+// Reference controls use a 0–100 range. Keep distortion in the backdrop only.
+const headerGlassSettings = Object.freeze({ refraction: 100, depth: 100, dispersion: 51, frost: 14, splay: 100 });
+
+function headerGlassFilterMarkup() {
+  const strength = 40 * headerGlassSettings.refraction / 100;
+  const dispersion = 8 * headerGlassSettings.dispersion / 100;
+  const channels = [
+    ["red", strength + dispersion, "1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"],
+    ["green", strength, "0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0"],
+    ["blue", strength - dispersion, "0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0"]
+  ];
+  return `<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="header-glass" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feImage id="header-glass-map" preserveAspectRatio="none" result="lens"/>
+    ${channels.map(([channel, scale, matrix]) => `<feDisplacementMap in="SourceGraphic" in2="lens" scale="${scale}" xChannelSelector="R" yChannelSelector="G" result="${channel}-shift"/><feColorMatrix in="${channel}-shift" type="matrix" values="${matrix}" result="${channel}"/>`).join("")}
+    <feBlend in="red" in2="green" mode="screen" result="red-green"/><feBlend in="red-green" in2="blue" mode="screen"/>
+  </filter></defs></svg>`;
+}
+
+function updateHeaderGlassMap(header) {
+  if (window.innerWidth <= 820) return;
+  const map = header.querySelector("#header-glass-map");
+  const width = Math.round(Math.min(960, window.innerWidth - 48));
+  const height = 64;
+  if (!map || map.dataset.width === String(width)) return;
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const context = canvas.getContext("2d");
+  if (!context) return;
+  const pixels = context.createImageData(width, height);
+  const radius = height / 2;
+  const edgeWidth = radius * (.2 + .45 * headerGlassSettings.depth / 100);
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const dx = x + .5 - Math.max(radius, Math.min(width - radius, x + .5));
+      const dy = y + .5 - radius;
+      const distance = Math.hypot(dx, dy);
+      const inset = radius - distance;
+      // A smooth rounded lens bends most strongly near the perimeter.
+      const bend = inset >= 0 && inset < edgeWidth ? Math.sin((1 - inset / edgeWidth) * Math.PI / 2) : 0;
+      const spread = headerGlassSettings.splay / 100;
+      const offset = (y * width + x) * 4;
+      pixels.data[offset] = Math.round(128 - 127 * (distance ? dx / distance : 0) * bend * spread);
+      pixels.data[offset + 1] = Math.round(128 - 127 * (distance ? dy / distance : 0) * bend);
+      pixels.data[offset + 2] = 128;
+      pixels.data[offset + 3] = 255;
+    }
+  }
+  context.putImageData(pixels, 0, 0);
+  map.setAttribute("href", canvas.toDataURL());
+  map.setAttribute("width", width);
+  map.setAttribute("height", height);
+  map.dataset.width = String(width);
+}
+
 function queueHeaderContrast() {
   if (headerContrastFrame) return;
   headerContrastFrame = requestAnimationFrame(() => {
@@ -201,6 +256,8 @@ function queueHeaderContrast() {
 function updateHeaderContrast() {
   const header = document.getElementById("site-header");
   if (!header) return;
+  header.style.setProperty("--glass-frost", `${headerGlassSettings.frost}px`);
+  updateHeaderGlassMap(header);
   const railBox = document.querySelector("main .wrap")?.getBoundingClientRect();
   if (railBox) {
     const rail = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--content-rail")) / 100;
