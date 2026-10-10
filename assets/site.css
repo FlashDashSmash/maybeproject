@@ -715,7 +715,7 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
 
 /* Match the services and brief introductions to the contact invitation. */
 .services-section .service-intro,.brief-section .brief-intro{font-size:26px}
-@media(max-width:820px){.brief-list{grid-row:4}}
+@media(max-width:820px){.brief-list{grid-row:5}}
 
 /* One weight for display headings across pages and major sections. */
 :root{--display-weight:700}
