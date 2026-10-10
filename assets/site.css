@@ -799,6 +799,6 @@ body.menu-open .cookie-notice,body:has(.about-dialog[open]) .cookie-notice{displ
 }
 
 /* Explicit editorial type sizes for the approach and project brief. */
-.statement .approach-copy h2,.statement .approach-copy>.approach-body{font-size:32pt}
-.brief-list h3{font-size:24pt}
-.brief-section .brief-note{font-size:16pt;font-weight:400;line-height:1.45;color:var(--muted);letter-spacing:normal}
+.statement .approach-copy h2,.statement .approach-copy>.approach-body{font-size:32px}
+.brief-list h3{font-size:24px}
+.brief-section .brief-note{font-size:16px;font-weight:400;line-height:1.45;color:var(--muted);letter-spacing:normal}
