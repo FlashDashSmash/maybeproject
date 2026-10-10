@@ -257,40 +257,17 @@ function updateHeaderContrast() {
   const header = document.getElementById("site-header");
   if (!header) return;
   updateHeaderGlassMap(header);
-  if (window.innerWidth > 820) {
-    // One scroll position has one geometry, including when scrolling reverses.
-    // There is no timed transition that can lag behind the page.
-    const distance = Math.min(1, Math.max(0, window.scrollY / 120));
-    const progress = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ? Number(window.scrollY > 48) : distance * distance * (3 - 2 * distance);
-    const railBox = document.querySelector("main .wrap")?.getBoundingClientRect();
-    const gutter = railBox?.left ?? 18;
-    const rail = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--content-rail")) / 100;
-    const left = (window.innerWidth - Math.min(960, window.innerWidth - 48)) / 2 * progress;
-    const inset = gutter * (1 - progress);
-    const padding = 24 * progress;
-    const properties = {
-      "--header-collapse": progress,
-      "--header-left": `${left}px`,
-      "--header-width": `${window.innerWidth - 2 * left}px`,
-      "--header-top": `${16 * progress}px`,
-      "--header-height": `${72 - 8 * progress}px`,
-      "--header-radius": `${32 * progress}px`,
-      "--header-inset": `${inset}px`,
-      "--header-padding": `${padding}px`,
-      "--header-rail": `${Math.max(80, gutter + (railBox?.width ?? window.innerWidth - 2 * gutter) * rail - left - inset - padding)}px`,
-      // Keep the logo's tail behind the outer mask at every intermediate frame.
-      "--header-logo-left": `${-24 - inset - padding}px`,
-      "--glass-frost": `${headerGlassSettings.frost * progress}px`
-    };
-    for (const [property, value] of Object.entries(properties)) header.style.setProperty(property, value);
-    header.querySelectorAll("feDisplacementMap").forEach((filter, index) => {
-      filter.setAttribute("scale", (40 + (1 - index) * 8 * headerGlassSettings.dispersion / 100) * progress);
-    });
-    header.classList.toggle("header--compact", progress > 0);
-  } else {
-    header.classList.remove("header--compact");
-  }
+  // Match the reference: leaving the first 4px starts one timed contraction.
+  const compact = window.innerWidth > 820 && window.scrollY >= 4;
+  const railBox = document.querySelector("main .wrap")?.getBoundingClientRect();
+  const gutter = railBox?.left ?? 18;
+  const rail = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--content-rail")) / 100;
+  const left = (window.innerWidth - Math.min(960, window.innerWidth - 48)) / 2;
+  header.style.setProperty("--header-compact-rail", `${Math.max(80, gutter + (railBox?.width ?? window.innerWidth - 2 * gutter) * rail - left - 24)}px`);
+  header.querySelectorAll("feDisplacementMap").forEach((filter, index) => {
+    filter.setAttribute("scale", compact ? 40 + (1 - index) * 8 * headerGlassSettings.dispersion / 100 : 0);
+  });
+  header.classList.toggle("header--compact", compact);
   const headerBox = header.querySelector(".header-inner").getBoundingClientRect();
   const sampleY = headerBox.top + headerBox.height / 2;
   const surface = headerSurfaces.find((element) => {
