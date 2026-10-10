@@ -760,7 +760,7 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
   .site-header .header-inner{padding:0 0;background:transparent;border-radius:0;transition:width .5s cubic-bezier(.22,1,.36,1),height .5s cubic-bezier(.22,1,.36,1),padding .5s cubic-bezier(.22,1,.36,1),margin-top .5s cubic-bezier(.22,1,.36,1),border-radius .5s cubic-bezier(.22,1,.36,1),background-color .25s,box-shadow .5s}
   .site-header.header--compact .header-inner{width:min(960px,calc(100% - 48px));height:64px;margin-top:16px;padding:0 24px;background:rgba(243,243,238,.68);border-radius:999px;box-shadow:inset 0 1px 0 #ffffffb3,inset 0 -1px 0 #ffffff40,0 8px 32px #00000012;-webkit-backdrop-filter:blur(22px) saturate(165%);backdrop-filter:blur(22px) saturate(165%);grid-template-columns:var(--compact-rail) minmax(0,1fr) auto;gap:0;pointer-events:auto}
   .site-header.header--compact.header--light .header-inner{background:rgba(17,17,16,.64);box-shadow:inset 0 1px 0 #ffffff30,inset 0 -1px 0 #ffffff12,0 8px 32px #00000026}
-  .site-header.header--compact .brand-link{visibility:hidden;pointer-events:none}
+  .site-header.header--compact .brand-link{left:0;visibility:visible;pointer-events:auto}
   .site-header.header--compact .desktop-nav{gap:clamp(14px,2vw,28px)}
   .site-header.header--compact .header-cta{font-size:14px;min-height:40px;padding:12px 16px}
 }
