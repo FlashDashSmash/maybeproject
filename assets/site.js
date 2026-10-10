@@ -102,6 +102,7 @@ function renderShell() {
   const footer = document.getElementById("site-footer");
   if (header) {
     header.innerHTML = `
+      <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="header-glass" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".015 .08" numOctaves="2" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
       <div class="header-inner">
         <a class="brand-link" href="index.html" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
         <nav class="desktop-nav" aria-label="Primary navigation">
@@ -200,7 +201,15 @@ function queueHeaderContrast() {
 function updateHeaderContrast() {
   const header = document.getElementById("site-header");
   if (!header) return;
-  const sampleY = header.getBoundingClientRect().height / 2;
+  const railBox = document.querySelector("main .wrap")?.getBoundingClientRect();
+  if (railBox) {
+    const rail = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--content-rail")) / 100;
+    const capsuleLeft = (window.innerWidth - Math.min(960, window.innerWidth - 48)) / 2;
+    header.style.setProperty("--compact-rail", `${Math.max(80, railBox.left + railBox.width * rail - capsuleLeft - 24)}px`);
+  }
+  header.classList.toggle("header--compact", window.innerWidth > 820 && window.scrollY > 48);
+  const headerBox = header.querySelector(".header-inner").getBoundingClientRect();
+  const sampleY = headerBox.top + headerBox.height / 2;
   const surface = headerSurfaces.find((element) => {
     const box = element.getBoundingClientRect();
     return box.top <= sampleY && box.bottom > sampleY;
@@ -478,14 +487,13 @@ function renderProjectChapters(project, previous, next) {
   return `<section class="case-opening wrap" id="case-intro">
     <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
     <div class="case-opening-heading">
-      <p class="eyebrow">${phrase("project")} / ${escapeHtml(project.year)}</p>
       <h1>${escapeHtml(project.title)}</h1>
+      <dl class="case-meta case-title-meta"><div><dt>${phrase("role")}</dt><dd>${escapeHtml(localize(project.role))}</dd></div><div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div></dl>
       <p class="case-opening-subtitle">${escapeHtml(localize(project.category))}</p>
       ${project.type ? `<p class="case-kind">${escapeHtml(localize(project.type))}</p>` : ""}
     </div>
     <div class="case-opening-details">
       ${project.caseIntro ? `<div class="case-opening-description"><h2>${escapeHtml(localize(project.caseIntro.title))}</h2>${project.caseIntro.paragraphs.map(paragraph => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}</div>` : `<p>${escapeHtml(localize(project.summary))}</p>`}
-      <dl class="case-meta"><div><dt>${phrase("role")}</dt><dd>${escapeHtml(localize(project.role))}</dd></div><div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div></dl>
     </div>
   </section>
   <section class="case-opening-cover${project.coverEmbed ? " case-opening-cover--video" : ""}" id="case-cover">
@@ -1019,6 +1027,7 @@ function applyLanguage() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupCookieNotice();
   document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => { currentFilter = button.dataset.filter; renderWork(); applyTypography(document.getElementById("work-grid")); setupMotion(); }));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
@@ -1039,3 +1048,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.fonts?.status !== "loaded") document.fonts?.ready.then(() => setupMotion());
   if (location.hash === "#about" || new URLSearchParams(location.search).get("figma-capture") === "about-panel") document.querySelector("[data-open-about]")?.click();
 });
+
+function setupCookieNotice() {
+  const key = "maybe-cookie-consent-v1";
+  try { if (localStorage.getItem(key) === "accepted") return; } catch (_) { /* Storage may be unavailable in private browsing. */ }
+  const notice = document.createElement("aside");
+  notice.className = "cookie-notice";
+  notice.setAttribute("aria-label", "Использование cookies");
+  notice.innerHTML = `<div><p class="eyebrow">Cookies /</p><p>На сайте используются cookies и локальное хранилище, чтобы сохранять ваши настройки. Нажмите «Принять», чтобы скрыть это уведомление.</p></div><button class="cookie-accept" type="button">Принять ${arrowIcon()}</button>`;
+  document.body.append(notice);
+  notice.querySelector("button").addEventListener("click", () => {
+    try { localStorage.setItem(key, "accepted"); } catch (_) { /* Dismiss for this page even if persistence is unavailable. */ }
+    const buttonHadFocus = document.activeElement === notice.querySelector("button");
+    notice.remove();
+    if (buttonHadFocus) document.querySelector(".brand-link")?.focus({ preventScroll: true });
+  });
+}
