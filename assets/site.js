@@ -264,7 +264,8 @@ function updateHeaderContrast() {
     const capsuleLeft = (window.innerWidth - Math.min(960, window.innerWidth - 48)) / 2;
     header.style.setProperty("--compact-rail", `${Math.max(80, railBox.left + railBox.width * rail - capsuleLeft - 24)}px`);
   }
-  header.classList.toggle("header--compact", window.innerWidth > 820 && window.scrollY > 48);
+  const compactThreshold = header.classList.contains("header--compact") ? 32 : 48;
+  header.classList.toggle("header--compact", window.innerWidth > 820 && window.scrollY > compactThreshold);
   const headerBox = header.querySelector(".header-inner").getBoundingClientRect();
   const sampleY = headerBox.top + headerBox.height / 2;
   const surface = headerSurfaces.find((element) => {
