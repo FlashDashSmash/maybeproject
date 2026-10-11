@@ -308,7 +308,7 @@ function closeAboutDialog(dialog) {
 
 const heroSlideDuration = 7000;
 let heroSlideIndex = 0;
-let heroSlideshowPaused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const heroReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let destroyHeroSlideshow;
 
 function renderHeroSlideshow() {
@@ -327,13 +327,11 @@ function renderHeroSlideshow() {
     </div>`).join("")}</div>
     <div class="hero-slide-progress" role="progressbar" aria-label="${currentLanguage === "ru" ? "Время до следующего проекта" : "Time until the next project"}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="hero-slide-progress-fill"></div></div>
     <div class="hero-slide-controls"><a class="hero-slide-caption" href="project.html?slug=${encodeURIComponent(selected[heroSlideIndex].slug)}"><span>${escapeHtml(selected[heroSlideIndex].title)}</span>${arrowIcon()}</a>
-      <div class="hero-slide-pagination">${selected.map((project, index) => `<button type="button" data-hero-slide="${index}" aria-label="${escapeHtml(project.title)}" aria-pressed="${index === heroSlideIndex}">${String(index + 1).padStart(2, "0")}</button>`).join("")}
-      <button class="hero-slide-pause" type="button"></button></div>
+      <div class="hero-slide-pagination">${selected.map((project, index) => `<button type="button" data-hero-slide="${index}" aria-label="${escapeHtml(project.title)}" aria-pressed="${index === heroSlideIndex}">${String(index + 1).padStart(2, "0")}</button>`).join("")}</div>
     </div>`;
   const slides = [...target.querySelectorAll(".hero-slide")];
   const buttons = [...target.querySelectorAll("[data-hero-slide]")];
   const caption = target.querySelector(".hero-slide-caption");
-  const pause = target.querySelector(".hero-slide-pause");
   const progress = target.querySelector(".hero-slide-progress");
   const progressFill = target.querySelector(".hero-slide-progress-fill");
   let frame = 0;
@@ -367,7 +365,7 @@ function renderHeroSlideshow() {
       if (visible && !video.hasAttribute("src")) video.src = video.dataset.heroVideo;
       if (!visible && video.hasAttribute("src")) video.removeAttribute("src");
     });
-    if (!heroSlideshowPaused && inView && !focused && !document.hidden && !transitionAnimation) {
+    if (!heroReducedMotion && inView && !focused && !document.hidden && !transitionAnimation) {
       frame = requestAnimationFrame(tick);
     }
   };
@@ -407,13 +405,7 @@ function renderHeroSlideshow() {
     }
     schedule();
   };
-  const updatePause = () => {
-    pause.textContent = heroSlideshowPaused ? "▶" : "Ⅱ";
-    pause.setAttribute("aria-label", currentLanguage === "ru" ? (heroSlideshowPaused ? "Продолжить слайдшоу" : "Приостановить слайдшоу") : (heroSlideshowPaused ? "Play slideshow" : "Pause slideshow"));
-    pause.setAttribute("aria-pressed", String(heroSlideshowPaused));
-  };
   buttons.forEach((button) => button.addEventListener("click", () => show(Number(button.dataset.heroSlide))));
-  pause.addEventListener("click", () => { heroSlideshowPaused = !heroSlideshowPaused; updatePause(); schedule(); });
   const focus = () => { focused = true; stop(); };
   const blur = (event) => { focused = target.contains(event.relatedTarget); schedule(); };
   target.addEventListener("focusin", focus);
@@ -428,7 +420,6 @@ function renderHeroSlideshow() {
     target.removeEventListener("focusout", blur);
     document.removeEventListener("visibilitychange", schedule);
   };
-  updatePause();
 }
 
 let approachStatIndex = 0;
