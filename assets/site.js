@@ -590,7 +590,7 @@ function renderProject() {
     target.innerHTML = `<section class="case-opening wrap" id="case-intro">
       <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
       <div class="case-opening-heading"><p class="eyebrow">${phrase("project")}</p><h1>${escapeHtml(project.title)}</h1><p class="case-opening-subtitle">${escapeHtml(descriptionText)}</p></div>
-    </section>${renderProjectNavigation(previous, next)}`;
+    </section>${project.showCoverPreview && project.cover ? `<section class="case-opening-cover" id="case-cover"><img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" /></section>` : ""}${renderProjectNavigation(previous, next)}`;
     return;
   }
   if (chapters) {

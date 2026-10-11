@@ -953,6 +953,8 @@ if (saydoProject) {
 projects.push({
   slug: "redsoft",
   title: "Redsoft",
+  cover: "assets/projects/redsoft/redsoft-cover.webp",
+  showCoverPreview: true,
   pending: true,
   summary: {
     ru: "Кейс готовится.",
