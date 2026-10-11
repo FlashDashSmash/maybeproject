@@ -1,0 +1,89 @@
+/* Homepage typography: six roles, shared across sections and UI states.
+   Display up to 64/700, editorial up to 44/700, subheading 24/600,
+   body 16/400, UI 16/600, caption 11/500 (Roboto Mono).
+   Mobile changes only the first three sizes: 36, 32, 22.
+   Project artwork and vector icon dimensions are independent of text roles. */
+body[data-page="home"] {
+  --type-display: clamp(2.25rem, 4.35vw, 4rem);
+  --type-editorial: clamp(2rem, 3vw, 2.75rem);
+  --type-subheading: 1.5rem;
+  --type-body: 1rem;
+  --type-ui: 1rem;
+  --type-caption: .6875rem;
+  font-size: var(--type-body);
+  font-weight: 400;
+}
+
+/* Display: the main heading, section headings, invitation and numeric fact. */
+body[data-page="home"] :is(.home-hero .hero-aside h1, .section-title h2, .brief-heading h2, .home-cta h2, .approach-stat-number:not(.approach-stat-number--text), .mobile-menu-primary > a, .mobile-menu-primary > button) {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: var(--type-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+/* Editorial: both paragraphs form one statement, with room for Cyrillic. */
+body[data-page="home"] .statement .approach-copy :is(h2, .approach-body) {
+  font-size: var(--type-editorial);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.04em;
+  text-wrap: pretty;
+}
+
+/* Subheading: introductions, service names and brief questions. */
+body[data-page="home"] :is(.service-intro, .brief-intro, .service-item summary h3, .brief-list h3, .approach-stat-number.approach-stat-number--text, .about-dialog-heading, .about-dialog-row h2, .about-dialog-row li, .about-dialog-principles h3, .about-dialog-contact) {
+  font-size: var(--type-subheading);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  text-wrap: pretty;
+}
+
+/* Body: ordinary reading copy, including the author signature. */
+body[data-page="home"] :is(.home-hero .hero-aside > p:not(.eyebrow), .service-scope, .service-description > p, .brief-section .brief-note, .brief-list li > p, .approach-stat-label, .approach-signature, .cookie-notice p:not(.eyebrow), .about-dialog-intro, .about-dialog-intro p, .about-dialog-principles p) {
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+body[data-page="home"] .service-description > p { max-width: 70ch; }
+
+/* UI: one weight and size at both ends of the header animation. */
+body[data-page="home"] :is(.site-header .desktop-nav a, .site-header .desktop-nav button, .site-header .header-cta, .site-header .menu-toggle, .service-cta.text-button, .hero-aside .scroll-cue, .approach-clients h3, .cookie-accept, .mobile-menu-socials a, .about-dialog-close) {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+
+/* Caption: labels, metadata and counters use a single readable mono style. */
+body[data-page="home"] :is(.eyebrow, .hero-label, .hero-slide-controls, .hero-slide-pagination button, .hero-slideshow .hero-slide-caption, .approach-stat-count, .service-number, .client-logos li > span, .footer-inner, .footer-copyright, .footer-links a, .about-dialog-meta, .about-dialog-close kbd) {
+  font-family: "Roboto Mono", Consolas, monospace;
+  font-size: var(--type-caption);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: .025em;
+}
+body[data-page="home"] .footer-inner { white-space: normal; }
+
+@media (max-width: 820px) {
+  body[data-page="home"] {
+    --type-display: 2.25rem;
+    --type-editorial: 2rem;
+    --type-subheading: 1.375rem;
+  }
+  body[data-page="home"] .footer-inner {
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+  body[data-page="home"] .footer-links {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px 16px;
+  }
+  body[data-page="home"] .hero-slide-controls { flex-wrap: wrap; }
+}
