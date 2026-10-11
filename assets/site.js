@@ -441,8 +441,7 @@ function renderApproachStats() {
   const stats = [
     { title: "50+", numeric: true, ru: "реализованных проектов", en: "completed projects" },
     { title: "Direct / Agency / In-house", ru: "работаю напрямую и в составе команд", en: "working directly and as part of teams" },
-    { title: "From zero → Beyond launch", ru: "от поиска идеи до развития системы после внедрения", en: "from finding the idea to evolving the system after implementation" },
-    { title: "Available", ru: "открыт к новым проектам", en: "open to new projects" }
+    { title: "From zero → Beyond launch", ru: "от поиска идеи до развития системы после внедрения", en: "from finding the idea to evolving the system after implementation" }
   ];
   const duration = 7000;
   const content = target.querySelector(".approach-stat-content");
