@@ -104,10 +104,10 @@ function renderShell() {
     header.innerHTML = `
       ${headerGlassFilterMarkup()}
       <div class="header-inner">
-        <a class="brand-link" href="index.html" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
+        <a class="brand-link" href="/" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
         <nav class="desktop-nav" aria-label="Primary navigation">
           <button type="button" data-open-about>${phrase("navAbout")}</button>
-          <a href="index.html#services">${phrase("navServices")}</a>
+          <a href="/#services">${phrase("navServices")}</a>
           <a href="work.html">${phrase("navWork")}</a>
         </nav>
         <div class="header-actions"><a class="header-cta" href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
@@ -116,7 +116,7 @@ function renderShell() {
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
         <div class="mobile-menu-primary">
         <button type="button" data-open-about><span class="menu-item-reveal">${phrase("navAbout")} ${arrowIcon()}</span></button>
-        <a href="index.html#services"><span class="menu-item-reveal">${phrase("navServices")} ${arrowIcon()}</span></a>
+        <a href="/#services"><span class="menu-item-reveal">${phrase("navServices")} ${arrowIcon()}</span></a>
         <a href="work.html"><span class="menu-item-reveal">${phrase("navWork")} ${arrowIcon()}</span></a>
         <a href="contact.html"><span class="menu-item-reveal">${phrase("navContact")} ${arrowIcon()}</span></a>
         </div>

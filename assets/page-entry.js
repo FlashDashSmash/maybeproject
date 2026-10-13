@@ -1,3 +1,8 @@
+// Keep legacy homepage links on the short URL, preserving fragments and queries.
+if (/^https?:$/.test(location.protocol) && location.pathname.endsWith("/index.html")) {
+  history.replaceState(history.state, "", location.pathname.slice(0, -10) + location.search + location.hash);
+}
+
 // Register before the first paint, including when a page returns from BFCache.
 document.documentElement.classList.add("page-entering");
 let entryLoaded = document.readyState === "complete";
