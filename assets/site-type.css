@@ -76,12 +76,41 @@ body.has-case-chapters :is(.case-chapter-text, .case-chapter-pipeline p, .case-o
 body.has-case-chapters .case-chapter-pipeline .case-pipeline-tool { color: var(--paper); }
 body.has-case-chapters .case-chapter-media--video { background: var(--dark); }
 body.has-case-chapters #case-cover {
+  display: block;
+  min-height: 0;
   padding-top: var(--hero-top);
   background: var(--dark);
 }
+body.has-case-chapters .case-opening-cover-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--cover-radius);
+  background: var(--dark);
+}
+body.has-case-chapters .case-opening-cover-frame > :is(iframe, img) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: 0;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+body.has-case-chapters .case-opening-cover-frame > iframe { pointer-events: none; }
 @media (min-width: 821px) {
-  body.has-case-chapters #case-cover > :is(iframe, img) {
-    width: min(100%, calc((100svh - var(--hero-top) - 16px) * 16 / 9));
+  body.has-case-chapters .case-opening-cover-frame {
+    container-type: size;
+    height: calc(100svh - var(--hero-top) - 16px);
+    aspect-ratio: auto;
+  }
+  body.has-case-chapters .case-opening-cover-frame > iframe {
+    width: max(100cqw, calc(100cqh * 16 / 9));
+    height: max(100cqh, calc(100cqw * 9 / 16));
   }
 }
 
@@ -225,6 +254,6 @@ body[data-page="project"] #case-intro.case-opening--editorial .case-opening-mess
 
 /* A modest step up on 2K viewports; Full HD, mobile and 4K keep their sizing. */
 @media(min-width:2000px) and (max-width:2879px){
-  body.has-case-chapters .case-chapter { --case-body-size: 16px; }
+  body.has-case-chapters .case-chapter { --case-body-size: 16px; --intro-width: 520px; }
   body.has-case-chapters .case-chapter h2 { font-size: 22px; }
 }
