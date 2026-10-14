@@ -534,7 +534,10 @@ function renderProjectChapters(project, previous, next) {
   const mediaList = (block) => Array.isArray(block.media) ? block.media : [block.media];
   const renderVideo = (src, title) => `<iframe src="${escapeHtml(src)}" title="${escapeHtml(title)}" tabindex="-1" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock" allowfullscreen loading="lazy"></iframe>`;
   const renderMedia = (media, index, title) => media?.embed ? `<figure class="case-chapter-media case-chapter-media--video">${renderVideo(media.embed, localize(media.alt || title))}</figure>` : media?.src ? `<figure class="case-chapter-media case-chapter-media--image"${media.naturalRatio && media.width && media.height ? ` style="--case-media-ratio:${Number(media.width) / Number(media.height)};aspect-ratio:${Number(media.width)} / ${Number(media.height)}"` : ""}><img${media.width && media.height ? ` width="${Number(media.width)}" height="${Number(media.height)}"` : ""} src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt || title))}" loading="lazy" decoding="async" /></figure>` : placeholder(index, title);
-  return `<section class="case-opening case-opening--editorial wrap" id="case-intro">
+  return `<section class="case-opening-cover${project.coverEmbed ? " case-opening-cover--video" : ""}" id="case-cover">
+    ${project.coverEmbed ? renderVideo(project.coverEmbed, `${project.title} — ${localize(project.category)}`) : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(localize(project.category))}" />` : placeholder(0, project.category)}
+  </section>
+  <section class="case-opening case-opening--editorial wrap" id="case-intro">
     <div class="case-opening-layout">
       <div class="case-opening-facts">
         <h1>${escapeHtml(project.title)}</h1>
@@ -556,9 +559,6 @@ function renderProjectChapters(project, previous, next) {
       </div>
     </div>
   </section>
-  <section class="case-opening-cover${project.coverEmbed ? " case-opening-cover--video" : ""}" id="case-cover">
-    ${project.coverEmbed ? renderVideo(project.coverEmbed, `${project.title} — ${localize(project.category)}`) : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(localize(project.category))}" />` : placeholder(0, project.category)}
-  </section>
   ${blocks.map((block, index) => `<section class="case-chapter wrap${block.items?.length ? " case-chapter--pipeline" : ""}${mediaList(block).length > 1 ? " case-chapter--sequence" : ""}" id="case-chapter-${index + 1}" aria-labelledby="case-chapter-title-${index + 1}">
     <div class="case-chapter-copy">
       <p class="eyebrow case-chapter-label">${String(index + 1).padStart(2, "0")} / ${escapeHtml(project.title)}</p>
@@ -567,6 +567,10 @@ function renderProjectChapters(project, previous, next) {
       ${block.items?.length ? `<div class="case-chapter-pipeline">${block.items.map((item) => `<div><h3>${escapeHtml(localize(item.title))}</h3><p class="case-pipeline-tool">${escapeHtml(item.tool)}</p><p>${escapeHtml(localize(item.text))}</p></div>`).join("")}</div>` : ""}
     </div>${mediaList(block).length > 1 ? `<div class="case-chapter-visuals">${mediaList(block).map((media, slideIndex) => `<div class="case-chapter-slide" data-case-slide>${renderMedia(media, `${index + 1}.${slideIndex + 1}`, block.title)}</div>`).join("")}</div>` : renderMedia(mediaList(block)[0], index + 1, block.title)}
   </section>`).join("")}
+  <section class="case-closing" id="case-closing">
+    <p>${currentLanguage === "ru" ? "От нейронного сигнала —<br /> к контакту, движению и ощущению." : "From neural signals —<br /> to contact, movement and sensation."}</p>
+    <a href="contact.html" class="case-closing-contact">${phrase("navContact")} ${arrowIcon()}</a>
+  </section>
   ${renderProjectNavigation(previous, next)}`;
 }
 

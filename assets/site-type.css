@@ -1,5 +1,5 @@
-/* The six approved homepage roles. Project typography is scoped to its intro;
-   chapters, project navigation, media and case footer retain their own styles. */
+/* The six approved homepage roles. Axonic keeps its chapter text styles;
+   its opening, closing, navigation and footer use the shared role scale. */
 :root {
   --type-display: clamp(2.25rem, 4.35vw, 4rem);
   --type-editorial: clamp(2rem, 3vw, 2.75rem);
@@ -63,6 +63,87 @@ body[data-page="project"] #case-intro :is(.eyebrow, .back-link, .case-kind, .cas
   letter-spacing: .025em;
 }
 body:is([data-page="work"], [data-page="contact"]) .footer-inner { white-space: normal; }
+
+/* Axonic uses the same horizontal gutters as its test composition. */
+body.has-case-chapters { --gutter: clamp(20px, 5vw, 100px); }
+body.has-case-chapters #case-cover {
+  padding-top: var(--hero-top);
+  background: var(--dark);
+}
+@media (min-width: 821px) {
+  body.has-case-chapters #case-cover > :is(iframe, img) {
+    width: min(100%, calc((100svh - var(--hero-top) - 16px) * 16 / 9));
+  }
+}
+
+/* Axonic ending: the test composition translated onto white. */
+body.has-case-chapters .case-closing {
+  padding: 96px var(--gutter);
+  background: #fff;
+  color: var(--ink);
+  text-align: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+body.has-case-chapters .case-closing > p {
+  max-width: 1000px;
+  margin-inline: auto;
+  font-size: var(--type-editorial);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+body.has-case-chapters .case-closing-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #ecece7;
+  color: var(--ink);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  line-height: 1.25;
+}
+body.has-case-chapters .case-closing-contact:is(:hover, :focus-visible) { background: var(--accent); }
+body.has-case-chapters .case-closing-contact:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+body.has-case-chapters .case-project-navigation {
+  position: relative;
+  padding: 40px var(--gutter);
+  background: #fff;
+  color: var(--ink);
+}
+body.has-case-chapters .case-project-navigation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  border-top: 1px solid var(--line);
+}
+body.has-case-chapters .case-project-link { gap: 12px; }
+body.has-case-chapters .case-project-link .eyebrow {
+  color: var(--muted);
+  font: 500 var(--type-caption)/1.35 "Roboto Mono", Consolas, monospace;
+  letter-spacing: .025em;
+  text-transform: none;
+}
+body.has-case-chapters .case-project-link strong {
+  font-size: var(--type-subheading);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+body.has-case-chapters .case-project-link strong .ui-arrow { font-size: .75em; }
+body.has-case-chapters .site-footer { background: #fff; color: var(--ink); }
+body.has-case-chapters .footer-inner {
+  min-height: 0;
+  font: 500 var(--type-caption)/1.35 "Roboto Mono", Consolas, monospace;
+  letter-spacing: .025em;
+  white-space: normal;
+}
 
 /* Axonic opening only: white, two-column editorial introduction.
    Chapter descriptions and media below remain on their existing layout. */
@@ -159,4 +240,9 @@ body[data-page="project"] #case-intro.case-opening--editorial .case-opening-mess
   #case-intro.case-opening--editorial .case-opening-layout { grid-template-columns: 1fr; gap: 48px; }
   body[data-page="project"] #case-intro.case-opening--editorial { padding-bottom: 48px; }
   #case-intro.case-opening--editorial .case-opening-message br { display: none; }
+  body.has-case-chapters .case-closing { padding-block: 64px; }
+  body.has-case-chapters .case-closing > p br { display: none; }
+  body.has-case-chapters .case-project-navigation { padding-block: 32px; }
+  body.has-case-chapters .footer-inner { flex-wrap: wrap; gap: 12px 24px; }
+  body.has-case-chapters .footer-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 }
