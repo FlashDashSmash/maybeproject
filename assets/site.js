@@ -208,11 +208,20 @@ function headerGlassFilterMarkup() {
   </filter></defs></svg>`;
 }
 
-function updateHeaderGlassMap(header) {
+function headerCompactDimensions(header) {
+  const style = getComputedStyle(header);
+  return {
+    width: Math.min(parseFloat(style.getPropertyValue("--header-compact-width")) || 880, window.innerWidth - 48),
+    height: parseFloat(style.getPropertyValue("--header-compact-height")) || 56,
+    padding: parseFloat(style.getPropertyValue("--header-compact-padding")) || 20
+  };
+}
+
+function updateHeaderGlassMap(header, dimensions) {
   if (window.innerWidth <= 820) return;
   const map = header.querySelector("#header-glass-map");
-  const width = Math.round(Math.min(960, window.innerWidth - 48));
-  const height = 64;
+  const width = Math.round(dimensions.width);
+  const height = dimensions.height;
   if (!map || map.dataset.width === String(width)) return;
   const canvas = document.createElement("canvas");
   canvas.width = width;
@@ -256,14 +265,15 @@ function queueHeaderContrast() {
 function updateHeaderContrast() {
   const header = document.getElementById("site-header");
   if (!header) return;
-  updateHeaderGlassMap(header);
+  const dimensions = headerCompactDimensions(header);
+  updateHeaderGlassMap(header, dimensions);
   // Match the reference: leaving the first 4px starts one timed contraction.
   const compact = window.innerWidth > 820 && window.scrollY >= 4;
   const railBox = document.querySelector("main .wrap")?.getBoundingClientRect();
   const gutter = railBox?.left ?? 18;
   const rail = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--content-rail")) / 100;
-  const left = (window.innerWidth - Math.min(960, window.innerWidth - 48)) / 2;
-  header.style.setProperty("--header-compact-rail", `${Math.max(80, gutter + (railBox?.width ?? window.innerWidth - 2 * gutter) * rail - left - 24)}px`);
+  const left = (window.innerWidth - dimensions.width) / 2;
+  header.style.setProperty("--header-compact-rail", `${Math.max(80, gutter + (railBox?.width ?? window.innerWidth - 2 * gutter) * rail - left - dimensions.padding)}px`);
   header.querySelectorAll("feDisplacementMap").forEach((filter, index) => {
     filter.setAttribute("scale", compact ? 40 + (1 - index) * 8 * headerGlassSettings.dispersion / 100 : 0);
   });
@@ -538,16 +548,16 @@ function renderProjectChapters(project, previous, next) {
     ${project.coverEmbed ? renderVideo(project.coverEmbed, `${project.title} — ${localize(project.category)}`) : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(localize(project.category))}" />` : placeholder(0, project.category)}
   </section>
   <section class="case-opening case-opening--editorial wrap" id="case-intro">
+    <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
     <div class="case-opening-layout">
       <div class="case-opening-facts">
         <h1>${escapeHtml(project.title)}</h1>
         <dl class="case-meta">
-          <div><dt>${currentLanguage === "ru" ? "Сфера" : "Industry"}</dt><dd>${currentLanguage === "ru" ? "Нейротехнологии" : "Neurotechnology"}</dd></div>
-          <div><dt>${currentLanguage === "ru" ? "Что сделано" : "What we did"}</dt><dd>${escapeHtml(localize(project.role))}</dd></div>
           <div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div>
+          <div><dt>${currentLanguage === "ru" ? "Сфера" : "Industry"}</dt><dd>${currentLanguage === "ru" ? "Нейротехнологии" : "Neurotechnology"}</dd></div>
+          <div class="case-meta-role"><dt>${currentLanguage === "ru" ? "Что сделано" : "What we did"}</dt><dd>${escapeHtml(localize(project.role))}</dd></div>
         </dl>
         ${project.type ? `<p class="case-kind">${escapeHtml(localize(project.type))}</p>` : ""}
-        <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
       </div>
       <div class="case-opening-story">
         <h2 class="case-opening-message">${currentLanguage === "ru" ? "Ощущение жизни,<br /> которое ты помнишь." : "The feeling of life<br /> you remember."}</h2>
@@ -567,10 +577,6 @@ function renderProjectChapters(project, previous, next) {
       ${block.items?.length ? `<div class="case-chapter-pipeline">${block.items.map((item) => `<div><h3>${escapeHtml(localize(item.title))}</h3><p class="case-pipeline-tool">${escapeHtml(item.tool)}</p><p>${escapeHtml(localize(item.text))}</p></div>`).join("")}</div>` : ""}
     </div>${mediaList(block).length > 1 ? `<div class="case-chapter-visuals">${mediaList(block).map((media, slideIndex) => `<div class="case-chapter-slide" data-case-slide>${renderMedia(media, `${index + 1}.${slideIndex + 1}`, block.title)}</div>`).join("")}</div>` : renderMedia(mediaList(block)[0], index + 1, block.title)}
   </section>`).join("")}
-  <section class="case-closing" id="case-closing">
-    <p>${currentLanguage === "ru" ? "От нейронного сигнала —<br /> к контакту, движению и ощущению." : "From neural signals —<br /> to contact, movement and sensation."}</p>
-    <a href="contact.html" class="case-closing-contact">${phrase("navContact")} ${arrowIcon()}</a>
-  </section>
   ${renderProjectNavigation(previous, next)}`;
 }
 
