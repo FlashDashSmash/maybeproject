@@ -10,7 +10,7 @@ body[data-page="home"] {
 }
 
 /* Display: the main heading, section headings, invitation and numeric fact. */
-body[data-page="home"] :is(.home-hero .hero-aside h1, .section-title h2, .brief-heading h2, .home-cta h2, .approach-stat-number:not(.approach-stat-number--text), .mobile-menu-primary > a, .mobile-menu-primary > button) {
+body[data-page="home"] :is(.home-hero .hero-aside h1, .section-title h2, .brief-heading h2, .home-cta h2, .approach-stat-number:not(.approach-stat-number--text)) {
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   font-size: var(--type-display);
   font-weight: 700;
@@ -57,8 +57,8 @@ body[data-page="home"] :is(.home-hero .hero-aside > p:not(.eyebrow), .service-sc
 }
 body[data-page="home"] .service-description > p { max-width: 70ch; }
 
-/* UI: one weight and size at both ends of the header animation. */
-body[data-page="home"] :is(.site-header .desktop-nav a, .site-header .desktop-nav button, .site-header .header-cta, .site-header .menu-toggle, .service-cta.text-button, .hero-aside .scroll-cue, .approach-clients h3, .cookie-accept, .mobile-menu-socials a, .about-dialog-close) {
+/* UI outside the shared header. */
+body[data-page="home"] :is(.service-cta.text-button, .hero-aside .scroll-cue, .approach-clients h3, .cookie-accept, .about-dialog-close) {
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   font-size: var(--type-ui);
   font-weight: 600;

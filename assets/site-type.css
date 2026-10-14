@@ -10,7 +10,8 @@
 }
 
 /* Display: page titles and the closing invitation. */
-body:is([data-page="work"], [data-page="contact"]) :is(.work-hero h1, .work-cta h2, .contact-hero h1.contact-heading, .mobile-menu-primary > a, .mobile-menu-primary > button),
+body .site-header .mobile-menu-primary > :is(a, button),
+body:is([data-page="work"], [data-page="contact"]) :is(.work-hero h1, .work-cta h2, .contact-hero h1.contact-heading),
 body[data-page="project"] #case-intro h1 {
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   font-size: var(--type-display);
@@ -44,8 +45,9 @@ body[data-page="project"] #case-intro :is(.case-opening-description p, .case-ope
 }
 body[data-page="project"] #case-intro .case-opening-description { max-width: 75ch; }
 
-/* UI: the same navigation and button style as the homepage. */
-body:is([data-page="work"], [data-page="contact"]) :is(.site-header .desktop-nav a, .site-header .desktop-nav button, .site-header .header-cta, .site-header .menu-toggle, .filter-buttons button, .cookie-accept, .mobile-menu-socials a, .about-dialog-close) {
+/* Header typography is shared by every page and both header states. */
+body .site-header :is(.desktop-nav a, .desktop-nav button, .header-cta, .menu-toggle, .mobile-menu-socials a),
+body:is([data-page="work"], [data-page="contact"]) :is(.filter-buttons button, .cookie-accept, .about-dialog-close) {
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   font-size: var(--type-ui);
   font-weight: 600;
