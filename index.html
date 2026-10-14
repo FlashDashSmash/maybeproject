@@ -13,10 +13,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css?v=20261014-header-case" /><link rel="stylesheet" href="assets/site-type.css?v=20261014-shared-header-type" />
-  <link rel="stylesheet" href="assets/home-type.css?v=20261014-adaptive-approach" />
+  <link rel="stylesheet" href="assets/site.css?v=20261014-client-rotation" /><link rel="stylesheet" href="assets/site-type.css?v=20261014-client-rotation" />
+  <link rel="stylesheet" href="assets/home-type.css?v=20261014-client-rotation" />
   <script src="assets/page-entry.js?v=20261013-short-home"></script>
-  <script src="assets/projects.js?v=20261012-redsoft-cover" defer></script><script src="assets/site.js?v=20261014-header-case" defer></script>
+  <script src="assets/projects.js?v=20261012-redsoft-cover" defer></script><script src="assets/site.js?v=20261014-client-rotation" defer></script>
 
 </head>
 <body id="top" data-page="home" data-title-ru="Илья Зубков — Brand Designer / Art Director" data-title-en="Ilya Zubkov — Brand Designer / Art Director" data-description-ru="Илья Зубков — Brand Designer / Art Director. Стратегия и позиционирование, фирменный стиль, коммуникационный дизайн, упаковка, AI-продакшен." data-description-en="Portfolio of Ilya Zubkov: brand identity, art direction, visual systems and AI-assisted production.">
@@ -54,17 +54,35 @@
           <div class="approach-signature"><img src="assets/about-photo.png" alt="Илья Зубков" loading="lazy" /><div><span data-ru="Илья Зубков" data-en="Ilya Zubkov">Илья Зубков</span><span>Brand Designer / Art Director</span></div></div>
         </div>
       </div>
-      <div class="wrap approach-clients" aria-labelledby="clients-title">
+      <div class="wrap approach-clients" id="clients" aria-labelledby="clients-title">
         <h3 id="clients-title"><span class="about-dot" aria-hidden="true"></span><span data-ru="С кем работал" data-en="Brands I’ve worked with">С кем работал</span></h3>
-        <ul class="client-logos">
-          <li><div class="client-logo-slot"><img src="assets/clients/rwb.svg" alt="RWB" loading="lazy" /></div><span>RWB</span></li>
-          <li><div class="client-logo-slot"><img src="assets/clients/wb.svg" alt="WB" loading="lazy" /></div><span>WB</span></li>
-          <li><div class="client-logo-slot"><img src="assets/clients/sportmaster.svg" alt="Спортмастер" loading="lazy" /></div><span>Спортмастер</span></li>
-          <li><div class="client-logo-slot"><img src="assets/clients/russ.svg" alt="Russ" loading="lazy" /></div><span>Russ</span></li>
-          <li><div class="client-logo-slot"><img src="assets/clients/savushkin.svg" alt="Савушкин" loading="lazy" /></div><span>Савушкин</span></li>
-          <li><div class="client-logo-slot"><img src="assets/clients/utair.svg" alt="Utair" loading="lazy" /></div><span>Utair</span></li>
-          <li><div class="client-logo-slot"><img src="assets/clients/maxsem.svg" alt="Maxsem" loading="lazy" /></div><span>Maxsem</span></li>
-          <li><div class="client-logo-slot"><img class="client-logo--magnit" src="assets/clients/magnit-apteka.svg" alt="Магнит Аптека" loading="lazy" /></div><span>Магнит Аптека</span></li>
+        <div class="client-logo-rotator" data-client-rotator aria-hidden="true">
+          <ul class="client-logos is-active" data-client-group>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/rwb.svg" alt="RWB" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/endy.svg" alt="ENDY" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/sportmaster.svg" alt="Спортмастер" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/russ.svg" alt="Russ" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/utair.svg" alt="Utair" /></div></li>
+          </ul>
+          <ul class="client-logos" data-client-group>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/gazprom.svg" alt="Газпром нефть" /></div></li>
+            <li><div class="client-logo-slot"><img class="client-logo--magnit" src="assets/clients/v2/magnit-apteka.svg" alt="Магнит Аптека" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/identica.svg" alt="Идентика" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/wb.svg" alt="WB" /></div></li>
+            <li><div class="client-logo-slot"><img src="assets/clients/v2/savushkin.svg" alt="Савушкин" /></div></li>
+          </ul>
+        </div>
+        <ul class="client-brands-accessible">
+          <li>RWB</li>
+          <li>ENDY</li>
+          <li>Спортмастер</li>
+          <li>Russ</li>
+          <li>Utair</li>
+          <li>Газпром нефть</li>
+          <li>Магнит Аптека</li>
+          <li>Идентика</li>
+          <li>WB</li>
+          <li>Савушкин</li>
         </ul>
       </div>
     </section>

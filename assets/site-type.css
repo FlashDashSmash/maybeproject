@@ -250,6 +250,8 @@ body[data-page="project"] #case-intro.case-opening--editorial .case-opening-mess
   body[data-page="project"] #case-intro.case-opening--editorial { padding-bottom: 48px; }
   #case-intro.case-opening--editorial .case-opening-message br { display: none; }
   body.has-case-chapters .case-project-navigation { padding-block: 32px; }
+  body.has-case-chapters .case-chapter { --intro-width: 100%; }
+  body.has-case-chapters .case-chapter-copy { max-width: none; }
   body.has-case-chapters .footer-inner { flex-wrap: wrap; gap: 12px 24px; }
   body.has-case-chapters .footer-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 }

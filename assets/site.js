@@ -433,6 +433,52 @@ function renderHeroSlideshow() {
 }
 
 let approachStatIndex = 0;
+let destroyClientLogos;
+
+function setupClientLogos() {
+  destroyClientLogos?.();
+  const target = document.querySelector("[data-client-rotator]");
+  if (!target) return;
+  const groups = [...target.querySelectorAll("[data-client-group]")];
+  if (groups.length < 2) return;
+  const reduced = matchMedia("(prefers-reduced-motion:reduce)");
+  let index = 0, timer = 0, inView = false, hovered = false;
+  const activate = () => groups.forEach((group, groupIndex) => group.classList.toggle("is-active", groupIndex === index));
+  const stop = () => { clearTimeout(timer); timer = 0; };
+  const schedule = () => {
+    stop();
+    if (!inView || document.hidden || hovered || reduced.matches) return;
+    // Two seconds of rest and a one-second dissolve, as in the reference.
+    timer = setTimeout(() => {
+      index = (index + 1) % groups.length;
+      activate(); schedule();
+    }, 3000);
+  };
+  const enter = (event) => { if (event.pointerType === "mouse") { hovered = true; schedule(); } };
+  const leave = () => { hovered = false; schedule(); };
+  const changeMotion = () => { index = 0; activate(); schedule(); };
+  const observer = new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting && entry.intersectionRatio >= .15;
+    schedule();
+  }, { threshold: .15 });
+  activate(); observer.observe(target);
+  target.addEventListener("pointerenter", enter);
+  target.addEventListener("pointerleave", leave);
+  document.addEventListener("visibilitychange", schedule);
+  window.addEventListener("pagehide", stop);
+  window.addEventListener("pageshow", schedule);
+  reduced.addEventListener("change", changeMotion);
+  destroyClientLogos = () => {
+    stop(); observer.disconnect();
+    target.removeEventListener("pointerenter", enter);
+    target.removeEventListener("pointerleave", leave);
+    document.removeEventListener("visibilitychange", schedule);
+    window.removeEventListener("pagehide", stop);
+    window.removeEventListener("pageshow", schedule);
+    reduced.removeEventListener("change", changeMotion);
+  };
+}
+
 let destroyApproachStats;
 
 function renderApproachStats() {
@@ -1090,7 +1136,7 @@ function applyLanguage() {
   if (document.body.dataset.page !== "project") document.title = document.body.dataset[`title${languageSuffix}`] || document.title;
   const description = document.querySelector('meta[name="description"]');
   if (description && document.body.dataset.page !== "project") description.content = document.body.dataset[`description${languageSuffix}`] || description.content;
-  renderShell(); renderHeroSlideshow(); setupServices(); renderApproachStats(); renderWork(); renderProject();
+  renderShell(); renderHeroSlideshow(); setupServices(); renderApproachStats(); setupClientLogos(); renderWork(); renderProject();
   applyTypography();
   setupHeaderContrast();
   setupMotion();
