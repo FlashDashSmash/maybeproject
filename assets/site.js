@@ -534,16 +534,26 @@ function renderProjectChapters(project, previous, next) {
   const mediaList = (block) => Array.isArray(block.media) ? block.media : [block.media];
   const renderVideo = (src, title) => `<iframe src="${escapeHtml(src)}" title="${escapeHtml(title)}" tabindex="-1" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock" allowfullscreen loading="lazy"></iframe>`;
   const renderMedia = (media, index, title) => media?.embed ? `<figure class="case-chapter-media case-chapter-media--video">${renderVideo(media.embed, localize(media.alt || title))}</figure>` : media?.src ? `<figure class="case-chapter-media case-chapter-media--image"${media.naturalRatio && media.width && media.height ? ` style="--case-media-ratio:${Number(media.width) / Number(media.height)};aspect-ratio:${Number(media.width)} / ${Number(media.height)}"` : ""}><img${media.width && media.height ? ` width="${Number(media.width)}" height="${Number(media.height)}"` : ""} src="${escapeHtml(media.src)}" alt="${escapeHtml(localize(media.alt || title))}" loading="lazy" decoding="async" /></figure>` : placeholder(index, title);
-  return `<section class="case-opening wrap" id="case-intro">
-    <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
-    <div class="case-opening-heading">
-      <h1>${escapeHtml(project.title)}</h1>
-      <dl class="case-meta case-title-meta"><div><dt>${phrase("role")}</dt><dd>${escapeHtml(localize(project.role))}</dd></div><div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div></dl>
-      <p class="case-opening-subtitle">${escapeHtml(localize(project.category))}</p>
-      ${project.type ? `<p class="case-kind">${escapeHtml(localize(project.type))}</p>` : ""}
-    </div>
-    <div class="case-opening-details">
-      ${project.caseIntro ? `<div class="case-opening-description"><h2>${escapeHtml(localize(project.caseIntro.title))}</h2>${project.caseIntro.paragraphs.map(paragraph => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}</div>` : `<p>${escapeHtml(localize(project.summary))}</p>`}
+  return `<section class="case-opening case-opening--editorial wrap" id="case-intro">
+    <div class="case-opening-layout">
+      <div class="case-opening-facts">
+        <h1>${escapeHtml(project.title)}</h1>
+        <dl class="case-meta">
+          <div><dt>${currentLanguage === "ru" ? "Сфера" : "Industry"}</dt><dd>${currentLanguage === "ru" ? "Нейротехнологии" : "Neurotechnology"}</dd></div>
+          <div><dt>${currentLanguage === "ru" ? "Что сделано" : "What we did"}</dt><dd>${escapeHtml(localize(project.role))}</dd></div>
+          <div><dt>${phrase("year")}</dt><dd>${escapeHtml(project.year)}</dd></div>
+        </dl>
+        ${project.type ? `<p class="case-kind">${escapeHtml(localize(project.type))}</p>` : ""}
+        <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+      </div>
+      <div class="case-opening-story">
+        <h2 class="case-opening-message">${currentLanguage === "ru" ? "Ощущение жизни,<br /> которое ты помнишь." : "The feeling of life<br /> you remember."}</h2>
+        <p class="case-opening-lead">${escapeHtml(localize(project.caseIntro?.paragraphs[0] || project.summary))}</p>
+        ${project.caseIntro?.paragraphs.length > 1 ? `<details class="case-opening-more">
+          <summary><span class="case-opening-more-label">${currentLanguage === "ru" ? "Подробнее" : "More info"}</span><span class="case-opening-less-label">${currentLanguage === "ru" ? "Свернуть описание" : "Less info"}</span>${arrowIcon("down")}</summary>
+          <div class="case-opening-description">${project.caseIntro.paragraphs.slice(1).map(paragraph => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}</div>
+        </details>` : ""}
+      </div>
     </div>
   </section>
   <section class="case-opening-cover${project.coverEmbed ? " case-opening-cover--video" : ""}" id="case-cover">
