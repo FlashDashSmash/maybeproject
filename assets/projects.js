@@ -69,6 +69,8 @@ const projects = [
   {
     "slug": "axonic",
     "nextProject": "redsoft",
+    "cover": "assets/projects/axonic/axonic-cover-square.webp",
+    "heroCover": "assets/projects/axonic/axonic-cover-wide.webp",
     "coverEmbed": "https://kinescope.io/embed/rZMBnw32v3BxvCwgQm6HxQ",
     "layout": "chapters",
     "textSide": "left",
