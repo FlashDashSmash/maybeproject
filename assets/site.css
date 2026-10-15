@@ -777,7 +777,8 @@ body[data-page="contact"] .site-header.header--light{background:var(--dark)}
 
 /* A solid mobile surface keeps navigation clear of the scrolling content. */
 @media(max-width:820px){
-  .site-header{height:62px;background:var(--header-bg);pointer-events:auto}
+  .site-header{--header-bg:var(--bg);height:62px;background:var(--header-bg);pointer-events:auto}
+  .site-header.header--light{--header-bg:var(--dark)}
   .site-header .brand-link,.site-header .menu-toggle{min-height:44px}
   .site-header .menu-toggle{min-width:44px}
 }
