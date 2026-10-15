@@ -38,7 +38,7 @@
           <div><dt>Что сделано</dt><dd>${safe(project.role)}</dd></div>
           <div><dt>Год</dt><dd>${safe(project.year)}</dd></div>
         </dl>
-        <a class="ax-test-original" href="project.html?slug=axonic">Исходная версия кейса ${arrow()}</a>
+        <a class="ax-test-original" href="/projects/axonic/">Исходная версия кейса ${arrow()}</a>
       </div>
       <div class="ax-test-story">
         <h2>Ощущение жизни,<br /> которое ты помнишь.</h2>
@@ -55,10 +55,10 @@
     <section class="ax-test-gallery" aria-label="Знак, визуальная система и коммуникации Axonic">${gallery}</section>
     <section class="ax-test-closing">
       <p>От нейронного сигнала —<br /> к контакту, движению и ощущению.</p>
-      <a class="ax-test-contact" href="contact.html">Обсудить проект ${arrow()}</a>
+      <a class="ax-test-contact" href="/contact/">Обсудить проект ${arrow()}</a>
     </section>
     <nav class="ax-test-navigation" aria-label="Навигация по кейсам">
-      <a href="project.html?slug=axonic"><span>Исходный кейс</span><strong>${arrow("left")} Axonic</strong></a>
-      <a href="project.html?slug=redsoft"><span>Следующий проект</span><strong>Redsoft ${arrow("right")}</strong></a>
+      <a href="/projects/axonic/"><span>Исходный кейс</span><strong>${arrow("left")} Axonic</strong></a>
+      <a href="/projects/redsoft/"><span>Следующий проект</span><strong>Redsoft ${arrow("right")}</strong></a>
     </nav>`;
 })();

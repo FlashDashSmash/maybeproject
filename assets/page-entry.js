@@ -1,6 +1,18 @@
-// Keep legacy homepage links on the short URL, preserving fragments and queries.
-if (/^https?:$/.test(location.protocol) && location.pathname.endsWith("/index.html")) {
-  history.replaceState(history.state, "", location.pathname.slice(0, -10) + location.search + location.hash);
+// These short URLs have real directory entry points, so refresh and direct links work.
+if (/^https?:$/.test(location.protocol)) {
+  const routes = { "/work.html": "/projects/", "/contact.html": "/contact/", "/axonic-test.html": "/axonic-test/" };
+  const params = new URLSearchParams(location.search);
+  let path = routes[location.pathname];
+  if (location.pathname === "/project.html") {
+    path = `/projects/${encodeURIComponent(params.get("slug") || "axonic")}/`;
+    params.delete("slug");
+  } else if (location.pathname.endsWith("/index.html")) {
+    path = location.pathname.slice(0, -10);
+  }
+  if (path) {
+    const query = params.toString();
+    history.replaceState(history.state, "", path + (query ? `?${query}` : "") + location.hash);
+  }
 }
 
 // Register before the first paint, including when a page returns from BFCache.

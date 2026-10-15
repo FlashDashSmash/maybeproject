@@ -28,6 +28,9 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Generate clean page URLs
+        run: node scripts/build-routes.mjs
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:

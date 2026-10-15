@@ -69,8 +69,8 @@ const projects = [
   {
     "slug": "axonic",
     "nextProject": "redsoft",
-    "cover": "assets/projects/axonic/axonic-cover-square.webp",
-    "heroCover": "assets/projects/axonic/axonic-cover-wide.webp",
+    "cover": "/assets/projects/axonic/axonic-cover-square.webp",
+    "heroCover": "/assets/projects/axonic/axonic-cover-wide.webp",
     "coverEmbed": "https://kinescope.io/embed/rZMBnw32v3BxvCwgQm6HxQ",
     "layout": "chapters",
     "textSide": "left",
@@ -118,13 +118,13 @@ const projects = [
             "en": "Axonic symbol semantics: from impulse to contact"
           }
         }, {
-          "src": "assets/projects/axonic/axonic-impulse.png?v=20261005-frame251",
+          "src": "/assets/projects/axonic/axonic-impulse.png?v=20261005-frame251",
           "alt": {
             "ru": "Построение знака и логотипа Axonic: кривые и опорные точки",
             "en": "Axonic symbol and logotype construction: curves and anchor points"
           }
         }, {
-          "src": "assets/projects/axonic/axonic-symbol-grid.png",
+          "src": "/assets/projects/axonic/axonic-symbol-grid.png",
           "alt": {
             "ru": "Пропорции знака Axonic на модульной сетке: 5X и 2.5X",
             "en": "Axonic symbol proportions on a modular grid: 5X and 2.5X"
@@ -186,7 +186,7 @@ const projects = [
           "en": "Generative graphics tool"
         },
         "media": {
-          "src": "assets/projects/axonic/axonic-graphic-tool-ipad.png",
+          "src": "/assets/projects/axonic/axonic-graphic-tool-ipad.png",
           "width": 2400,
           "height": 1640,
           "alt": {
@@ -218,7 +218,7 @@ const projects = [
         },
         "media": [
           {
-            "src": "assets/projects/axonic/axonic-branding-set.png",
+            "src": "/assets/projects/axonic/axonic-branding-set.png",
             "width": 2388,
             "height": 1620,
             "alt": {
@@ -227,7 +227,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-card-interface-folder.png",
+            "src": "/assets/projects/axonic/axonic-card-interface-folder.png",
             "width": 2400,
             "height": 1360,
             "alt": {
@@ -236,7 +236,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-technical-protocol.png",
+            "src": "/assets/projects/axonic/axonic-technical-protocol.png",
             "width": 2400,
             "height": 1362,
             "alt": {
@@ -245,7 +245,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-system-overview-uniform.png",
+            "src": "/assets/projects/axonic/axonic-system-overview-uniform.png",
             "width": 2400,
             "height": 1545,
             "alt": {
@@ -254,7 +254,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-billboard-impulse-contact.png",
+            "src": "/assets/projects/axonic/axonic-billboard-impulse-contact.png",
             "width": 2560,
             "height": 1440,
             "alt": {
@@ -263,7 +263,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-billboard.png",
+            "src": "/assets/projects/axonic/axonic-billboard.png",
             "width": 2400,
             "height": 1606,
             "alt": {
@@ -272,7 +272,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-website-macbook.png",
+            "src": "/assets/projects/axonic/axonic-website-macbook.png",
             "width": 2560,
             "height": 1622,
             "alt": {
@@ -290,7 +290,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-prosthesis-cyclist.png",
+            "src": "/assets/projects/axonic/axonic-prosthesis-cyclist.png",
             "width": 2560,
             "height": 1440,
             "alt": {
@@ -299,7 +299,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-prosthesis-football.png",
+            "src": "/assets/projects/axonic/axonic-prosthesis-football.png",
             "width": 2560,
             "height": 1440,
             "alt": {
@@ -308,7 +308,7 @@ const projects = [
             }
           },
           {
-            "src": "assets/projects/axonic/axonic-presentation-stage.png",
+            "src": "/assets/projects/axonic/axonic-presentation-stage.png",
             "width": 2560,
             "height": 1603,
             "alt": {
@@ -337,7 +337,7 @@ const projects = [
           "en": "The project’s AI workflow"
         },
         "media": {
-          "src": "assets/projects/axonic/axonic-ai-production-collage.png",
+          "src": "/assets/projects/axonic/axonic-ai-production-collage.png",
           "width": 2560,
           "height": 1757,
           "naturalRatio": true,
@@ -585,7 +585,7 @@ const projects = [
   },
   {
     slug: "wow-lan",
-    cover: "assets/projects/wow-lan/wow-lan-cover.png",
+    cover: "/assets/projects/wow-lan/wow-lan-cover.png",
     title: "WOW-LAN",
     category: {
       ru: "Айдентика digital-портала",
@@ -672,7 +672,7 @@ if (kotoMyotoProject) {
     },
     tags: ["Visual identity", "Packaging", "Brand system"],
     accent: "linear-gradient(145deg, #071f19 0%, #075142 56%, #ff5f86 135%)",
-    cover: "assets/projects/koto-myoto/877ebd153848275.633730eb4958b.png",
+    cover: "/assets/projects/koto-myoto/877ebd153848275.633730eb4958b.png",
     summary: {
       ru: "Яркая айдентика для бренда корейской уличной еды: выразительная типографика, контрастная палитра, упаковка, меню и запоминаемая система носителей.",
       en: "A vivid identity for a Korean street-food brand built around expressive typography, a high-contrast palette and a flexible language of circular forms."
@@ -714,17 +714,17 @@ if (kotoMyotoProject) {
       { ru: "Упаковка и брендированные предметы", en: "Packaging and branded objects" }
     ],
     media: [
-      { src: "assets/projects/koto-myoto/5f80fc153848275.6336f09dcd58c.png", alt: { ru: "Постеры KOTO MYOTO", en: "KOTO MYOTO posters" } },
-      { src: "assets/projects/koto-myoto/c9d4e0153848275.6336f09dcb633.png", alt: { ru: "Постеры открытия", en: "Grand opening posters" } },
-      { src: "assets/projects/koto-myoto/602dde153848275.633718a980aaf.png", alt: { ru: "Меню и печатные материалы", en: "Menus and printed materials" } },
-      { src: "assets/projects/koto-myoto/6d8da3153848275.633730c64fa37.png", alt: { ru: "Палочки и посуда", en: "Chopsticks and tableware" } },
-      { src: "assets/projects/koto-myoto/75d5eb153848275.633730c64ec1c.png", alt: { ru: "Бумажная упаковка", en: "Paper packaging" } },
-      { src: "assets/projects/koto-myoto/dfa629153848275.6336f09dcc597.png", alt: { ru: "Упаковка блюда", en: "Food packaging" } },
-      { src: "assets/projects/koto-myoto/e439fa153848275.6336f09dcf291.png", alt: { ru: "Пакеты KOTO MYOTO", en: "KOTO MYOTO shopping bags" } },
-      { src: "assets/projects/koto-myoto/677421153848275.6336f09dca786.png", alt: { ru: "Карточки о корейской еде", en: "Korean food information cards" } },
-      { src: "assets/projects/koto-myoto/be910c153848275.6336f09dce290.png", alt: { ru: "Серия социальных публикаций", en: "Social media series" } },
-      { src: "assets/projects/koto-myoto/ba3584153848275.6336f4ea2f885.png", alt: { ru: "Футболка с логотипом", en: "Logo T-shirt" }, portrait: true },
-      { src: "assets/projects/koto-myoto/eaefc1153848275.6336f4ea30943.png", alt: { ru: "Брендированный пакет в городской среде", en: "Branded bag in an urban setting" }, portrait: true }
+      { src: "/assets/projects/koto-myoto/5f80fc153848275.6336f09dcd58c.png", alt: { ru: "Постеры KOTO MYOTO", en: "KOTO MYOTO posters" } },
+      { src: "/assets/projects/koto-myoto/c9d4e0153848275.6336f09dcb633.png", alt: { ru: "Постеры открытия", en: "Grand opening posters" } },
+      { src: "/assets/projects/koto-myoto/602dde153848275.633718a980aaf.png", alt: { ru: "Меню и печатные материалы", en: "Menus and printed materials" } },
+      { src: "/assets/projects/koto-myoto/6d8da3153848275.633730c64fa37.png", alt: { ru: "Палочки и посуда", en: "Chopsticks and tableware" } },
+      { src: "/assets/projects/koto-myoto/75d5eb153848275.633730c64ec1c.png", alt: { ru: "Бумажная упаковка", en: "Paper packaging" } },
+      { src: "/assets/projects/koto-myoto/dfa629153848275.6336f09dcc597.png", alt: { ru: "Упаковка блюда", en: "Food packaging" } },
+      { src: "/assets/projects/koto-myoto/e439fa153848275.6336f09dcf291.png", alt: { ru: "Пакеты KOTO MYOTO", en: "KOTO MYOTO shopping bags" } },
+      { src: "/assets/projects/koto-myoto/677421153848275.6336f09dca786.png", alt: { ru: "Карточки о корейской еде", en: "Korean food information cards" } },
+      { src: "/assets/projects/koto-myoto/be910c153848275.6336f09dce290.png", alt: { ru: "Серия социальных публикаций", en: "Social media series" } },
+      { src: "/assets/projects/koto-myoto/ba3584153848275.6336f4ea2f885.png", alt: { ru: "Футболка с логотипом", en: "Logo T-shirt" }, portrait: true },
+      { src: "/assets/projects/koto-myoto/eaefc1153848275.6336f4ea30943.png", alt: { ru: "Брендированный пакет в городской среде", en: "Branded bag in an urban setting" }, portrait: true }
     ]
   });
 }
@@ -754,8 +754,8 @@ if (saydoProject) {
       aspectRatio: "16 / 9",
       zoom: "1.22"
     },
-    cover: "assets/projects/saydo/saydo-cover-static.png",
-    coverAnimated: "assets/projects/saydo/saydo-cover.gif",
+    cover: "/assets/projects/saydo/saydo-cover-static.png",
+    coverAnimated: "/assets/projects/saydo/saydo-cover.gif",
     summary: {
       ru: "Айдентика для бренда батареек SAYDO: чистая система, яркий синий код, технологичный характер и понятная retail-коммуникация.",
       en: "A sharp identity for SAYDO, combining a technological tone with a clean packaging system and a vivid electric-blue code."
@@ -836,42 +836,42 @@ if (saydoProject) {
     ],
     media: [
       {
-        src: "assets/projects/saydo/Battery_PS.png",
+        src: "/assets/projects/saydo/Battery_PS.png",
         alt: {
           ru: "Линейка батареек SAYDO",
           en: "SAYDO battery lineup"
         }
       },
       {
-        src: "assets/projects/saydo/coin-battery.png",
+        src: "/assets/projects/saydo/coin-battery.png",
         alt: {
           ru: "Кнопочные батарейки SAYDO",
           en: "SAYDO coin battery composition"
         }
       },
       {
-        src: "assets/projects/saydo/dna-aa.png",
+        src: "/assets/projects/saydo/dna-aa.png",
         alt: {
           ru: "DNA-композиция с батарейками SAYDO",
           en: "SAYDO battery DNA composition"
         }
       },
       {
-        src: "assets/projects/saydo/sloy-4-packaging.png",
+        src: "/assets/projects/saydo/sloy-4-packaging.png",
         alt: {
           ru: "Разворот упаковочной системы SAYDO",
           en: "SAYDO packaging system spread"
         }
       },
       {
-        src: "assets/projects/saydo/free-billboard-mockup.png",
+        src: "/assets/projects/saydo/free-billboard-mockup.png",
         alt: {
           ru: "Билборд SAYDO",
           en: "SAYDO billboard"
         }
       },
       {
-        src: "assets/projects/saydo/hoodie.png",
+        src: "/assets/projects/saydo/hoodie.png",
         alt: {
           ru: "Худи SAYDO",
           en: "SAYDO hoodie"
@@ -880,7 +880,7 @@ if (saydoProject) {
         portrait: true
       },
       {
-        src: "assets/projects/saydo/snapback-pouch.png",
+        src: "/assets/projects/saydo/snapback-pouch.png",
         alt: {
           ru: "Аксессуар SAYDO",
           en: "SAYDO accessory pouch"
@@ -889,14 +889,14 @@ if (saydoProject) {
         portrait: true
       },
       {
-        src: "assets/projects/saydo/laptop-sticker.png",
+        src: "/assets/projects/saydo/laptop-sticker.png",
         alt: {
           ru: "Стикер-пак SAYDO на ноутбуке",
           en: "SAYDO sticker pack on laptop"
         }
       },
       {
-        src: "assets/projects/saydo/saydo-color-crop.gif",
+        src: "/assets/projects/saydo/saydo-color-crop.gif",
         alt: {
           ru: "Цветовая система SAYDO",
           en: "SAYDO color system"
@@ -906,35 +906,35 @@ if (saydoProject) {
         position: "center center"
       },
       {
-        src: "assets/projects/saydo/saydo-fonts.gif",
+        src: "/assets/projects/saydo/saydo-fonts.gif",
         alt: {
           ru: "Типографика SAYDO",
           en: "SAYDO typography"
         }
       },
       {
-        src: "assets/projects/saydo/mask-group.png",
+        src: "/assets/projects/saydo/mask-group.png",
         alt: {
           ru: "Блистерная упаковка SAYDO",
           en: "SAYDO blister packaging"
         }
       },
       {
-        src: "assets/projects/saydo/woman-holding-bottle.png",
+        src: "/assets/projects/saydo/woman-holding-bottle.png",
         alt: {
           ru: "Lifestyle-носитель SAYDO",
           en: "SAYDO lifestyle bottle"
         }
       },
       {
-        src: "assets/projects/saydo/A_large_white_wall_with.png",
+        src: "/assets/projects/saydo/A_large_white_wall_with.png",
         alt: {
           ru: "SAYDO в выставочном пространстве",
           en: "SAYDO in exhibition space"
         }
       },
       {
-        src: "assets/projects/saydo/packaging-2.png",
+        src: "/assets/projects/saydo/packaging-2.png",
         alt: {
           ru: "SAYDO coin battery blister packaging",
           en: "SAYDO coin battery blister packaging"
@@ -942,7 +942,7 @@ if (saydoProject) {
         portrait: true
       },
       {
-        src: "assets/projects/saydo/bag-ps-1-be.png",
+        src: "/assets/projects/saydo/bag-ps-1-be.png",
         alt: {
           ru: "SAYDO canvas bag",
           en: "SAYDO canvas bag"
@@ -955,7 +955,7 @@ if (saydoProject) {
 projects.push({
   slug: "redsoft",
   title: "Redsoft",
-  cover: "assets/projects/redsoft/redsoft-cover.webp",
+  cover: "/assets/projects/redsoft/redsoft-cover.webp",
   showCoverPreview: true,
   pending: true,
   summary: {

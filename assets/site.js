@@ -104,21 +104,21 @@ function renderShell() {
     header.innerHTML = `
       ${headerGlassFilterMarkup()}
       <div class="header-inner">
-        <a class="brand-link" href="/" aria-label="Maybe — Ilya Zubkov"><img src="assets/maybe-logo.svg" alt="Maybe" /></a>
+        <a class="brand-link" href="/" aria-label="Maybe — Ilya Zubkov"><img src="/assets/maybe-logo.svg" alt="Maybe" /></a>
         <nav class="desktop-nav" aria-label="Primary navigation">
           <button type="button" data-open-about>${phrase("navAbout")}</button>
           <a href="/#services">${phrase("navServices")}</a>
-          <a href="work.html">${phrase("navWork")}</a>
+          <a href="/projects/">${phrase("navWork")}</a>
         </nav>
-        <div class="header-actions"><a class="header-cta" href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
+        <div class="header-actions"><a class="header-cta" href="/contact/">${phrase("navContact")} ${arrowIcon()}</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">${phrase("menu")}</button></div>
       </div>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
         <div class="mobile-menu-primary">
         <button type="button" data-open-about><span class="menu-item-reveal">${phrase("navAbout")} ${arrowIcon()}</span></button>
         <a href="/#services"><span class="menu-item-reveal">${phrase("navServices")} ${arrowIcon()}</span></a>
-        <a href="work.html"><span class="menu-item-reveal">${phrase("navWork")} ${arrowIcon()}</span></a>
-        <a href="contact.html"><span class="menu-item-reveal">${phrase("navContact")} ${arrowIcon()}</span></a>
+        <a href="/projects/"><span class="menu-item-reveal">${phrase("navWork")} ${arrowIcon()}</span></a>
+        <a href="/contact/"><span class="menu-item-reveal">${phrase("navContact")} ${arrowIcon()}</span></a>
         </div>
         <div class="mobile-menu-socials" aria-label="Социальные сети">
           <a href="https://t.me/maybe_project" target="_blank" rel="noreferrer">Telegram ${arrowIcon()}</a>
@@ -169,11 +169,11 @@ function renderShell() {
     <div class="about-dialog-heading"><span class="about-dot" aria-hidden="true"></span><span id="about-dialog-title">${phrase("aboutStudio")}</span></div>
     <div class="about-dialog-intro"><p>${escapeHtml(phrase("aboutIntro"))}</p><p>${escapeHtml(phrase("aboutStory2"))}</p><p>${escapeHtml(phrase("aboutStory3"))}</p></div>
     <div class="about-dialog-meta"><span>${escapeHtml(phrase("aboutSignature"))}</span><span>${escapeHtml(phrase("aboutSince"))}</span><span>${escapeHtml(phrase("aboutBased"))}</span></div>
-    <figure class="about-dialog-photo"><img src="assets/about-photo.png" alt="${currentLanguage === "ru" ? "Портрет Ильи Зубкова" : "Portrait of Ilya Zubkov"}" /></figure>
+    <figure class="about-dialog-photo"><img src="/assets/about-photo.png" alt="${currentLanguage === "ru" ? "Портрет Ильи Зубкова" : "Portrait of Ilya Zubkov"}" /></figure>
     <section class="about-dialog-row" aria-labelledby="about-disciplines"><h2 id="about-disciplines"><span class="about-dot" aria-hidden="true"></span>${phrase("aboutDisciplines")}</h2><ul>${listItems(copy[currentLanguage].aboutDisciplineItems)}</ul></section>
     <section class="about-dialog-row about-dialog-experience" aria-labelledby="about-experience"><h2 id="about-experience"><span class="about-dot" aria-hidden="true"></span>${phrase("aboutExperience")}</h2><ul>${listItems(copy[currentLanguage].aboutExperienceItems)}</ul></section>
     <section class="about-dialog-row about-dialog-principles" aria-labelledby="about-principles"><h2 id="about-principles"><span class="about-dot" aria-hidden="true"></span>${phrase("aboutPrinciples")}</h2><div>${copy[currentLanguage].aboutPrincipleItems.map(([title, body]) => `<article><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body)}</p></article>`).join("")}</div></section>
-    <a class="about-dialog-contact" href="contact.html">${phrase("navContact")} ${arrowIcon()}</a>
+    <a class="about-dialog-contact" href="/contact/">${phrase("navContact")} ${arrowIcon()}</a>
   </div>`;
   aboutDialog.setAttribute("aria-labelledby", "about-dialog-title");
   aboutDialog.querySelector(".about-dialog-close")?.addEventListener("click", () => closeAboutDialog(aboutDialog));
@@ -331,12 +331,12 @@ function renderHeroSlideshow() {
   target.setAttribute("aria-label", currentLanguage === "ru" ? "Избранные проекты" : "Selected projects");
   target.innerHTML = `<div class="hero-slides">${selected.map((project, index) => `
     <div class="hero-slide ${index === heroSlideIndex ? "is-active" : ""}" role="group" aria-roledescription="slide" aria-label="${index + 1} / ${selected.length}: ${escapeHtml(project.title)}" aria-hidden="${index !== heroSlideIndex}">
-      <a href="project.html?slug=${encodeURIComponent(project.slug)}" tabindex="${index === heroSlideIndex ? "0" : "-1"}" style="--project-accent:${escapeHtml(project.accent || "var(--ink)")}" aria-label="${escapeHtml(project.title)} — ${phrase("viewCase")}">
+      <a href="/projects/${encodeURIComponent(project.slug)}/" tabindex="${index === heroSlideIndex ? "0" : "-1"}" style="--project-accent:${escapeHtml(project.accent || "var(--ink)")}" aria-label="${escapeHtml(project.title)} — ${phrase("viewCase")}">
         ${project.coverEmbed && !project.heroCover ? `<iframe data-hero-video="${escapeHtml(project.coverEmbed)}" ${index === heroSlideIndex ? `src="${escapeHtml(project.coverEmbed)}"` : ""} title="${escapeHtml(project.title)}" tabindex="-1" aria-hidden="true" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" loading="lazy"></iframe>` : project.heroCover || project.cover ? `<img src="${escapeHtml(project.heroCover || project.cover)}" alt="${escapeHtml(project.title)}" ${index === 0 ? 'fetchpriority="high"' : 'decoding="async"'} />` : `<strong>${escapeHtml(project.title)}</strong>`}
       </a>
     </div>`).join("")}</div>
     <div class="hero-slide-progress" role="progressbar" aria-label="${currentLanguage === "ru" ? "Время до следующего проекта" : "Time until the next project"}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="hero-slide-progress-fill"></div></div>
-    <div class="hero-slide-controls"><a class="hero-slide-caption" href="project.html?slug=${encodeURIComponent(selected[heroSlideIndex].slug)}"><span>${escapeHtml(selected[heroSlideIndex].title)}</span>${arrowIcon()}</a>
+    <div class="hero-slide-controls"><a class="hero-slide-caption" href="/projects/${encodeURIComponent(selected[heroSlideIndex].slug)}/"><span>${escapeHtml(selected[heroSlideIndex].title)}</span>${arrowIcon()}</a>
       <div class="hero-slide-pagination">${selected.map((project, index) => `<button type="button" data-hero-slide="${index}" aria-label="${escapeHtml(project.title)}" aria-pressed="${index === heroSlideIndex}">${String(index + 1).padStart(2, "0")}</button>`).join("")}</div>
     </div>`;
   const slides = [...target.querySelectorAll(".hero-slide")];
@@ -396,7 +396,7 @@ function renderHeroSlideshow() {
       buttons[position].setAttribute("aria-pressed", String(active));
     });
     previousSlide.classList.add("is-previous");
-    caption.href = `project.html?slug=${encodeURIComponent(selected[index].slug)}`;
+    caption.href = `/projects/${encodeURIComponent(selected[index].slug)}/`;
     caption.querySelector("span").textContent = selected[index].title;
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       transitionAnimation = slides[index].animate(
@@ -565,7 +565,7 @@ function renderWork() {
   const matches = projectStore
     .filter((project) => currentFilter === "all" || projectGroups[project.slug]?.includes(currentFilter));
   target.innerHTML = matches.map((project, index) => `
-    <a class="work-card" href="project.html?slug=${encodeURIComponent(project.slug)}">
+    <a class="work-card" href="/projects/${encodeURIComponent(project.slug)}/">
       <div class="work-media ${project.cover ? "has-cover" : "is-type"}" style="--project-accent:${escapeHtml(project.accent || "var(--ink)")}">
         ${project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" loading="lazy" />` : `<strong>${escapeHtml(project.title)}</strong>`}
         <span class="work-number">${String(index + 1).padStart(2, "0")}</span>
@@ -577,8 +577,8 @@ function renderWork() {
 
 function renderProjectNavigation(previous, next) {
   return `<section class="case-next-screen" id="case-navigation"><nav class="case-project-navigation" aria-label="${currentLanguage === "ru" ? "Навигация по проектам" : "Project navigation"}">
-    <a class="case-project-link case-project-link--previous" href="project.html?slug=${encodeURIComponent(previous.slug)}"><span class="eyebrow">${phrase("previous")}</span><strong>${arrowIcon("left")}<span class="case-project-name">${escapeHtml(previous.title)}</span></strong></a>
-    <a class="case-project-link case-project-link--next" href="project.html?slug=${encodeURIComponent(next.slug)}"><span class="eyebrow">${phrase("next")}</span><strong><span class="case-project-name">${escapeHtml(next.title)}</span>${arrowIcon("right")}</strong></a>
+    <a class="case-project-link case-project-link--previous" href="/projects/${encodeURIComponent(previous.slug)}/"><span class="eyebrow">${phrase("previous")}</span><strong>${arrowIcon("left")}<span class="case-project-name">${escapeHtml(previous.title)}</span></strong></a>
+    <a class="case-project-link case-project-link--next" href="/projects/${encodeURIComponent(next.slug)}/"><span class="eyebrow">${phrase("next")}</span><strong><span class="case-project-name">${escapeHtml(next.title)}</span>${arrowIcon("right")}</strong></a>
   </nav></section>`;
 }
 
@@ -594,7 +594,7 @@ function renderProjectChapters(project, previous, next) {
     <div class="case-opening-cover-frame">${project.coverEmbed ? renderVideo(project.coverEmbed, `${project.title} — ${localize(project.category)}`) : project.cover ? `<img src="${escapeHtml(project.cover)}" alt="${escapeHtml(localize(project.category))}" />` : placeholder(0, project.category)}</div>
   </section>
   <section class="case-opening case-opening--editorial wrap" id="case-intro">
-    <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+    <a class="back-link" href="/projects/">${arrowIcon("left")} ${phrase("backWork")}</a>
     <div class="case-opening-layout">
       <div class="case-opening-facts">
         <h1>${escapeHtml(project.title)}</h1>
@@ -629,7 +629,8 @@ function renderProjectChapters(project, previous, next) {
 function renderProject() {
   const target = document.getElementById("project-content");
   if (!target || !projectStore.length) return;
-  const slug = new URLSearchParams(location.search).get("slug");
+  const pathSlug = location.pathname.match(/^\/projects\/([^/]+)\/?$/)?.[1];
+  const slug = pathSlug ? decodeURIComponent(pathSlug) : new URLSearchParams(location.search).get("slug");
   const project = projectStore.find((item) => item.slug === slug || item.aliases?.includes(slug)) || projectStore[0];
   const projectIndex = projectStore.indexOf(project);
   const previous = projectStore[(projectIndex - 1 + projectStore.length) % projectStore.length];
@@ -654,7 +655,7 @@ function renderProject() {
   target.classList.toggle("case-chapters--text-right", chapters && project.textSide === "right");
   if (isCasePending) {
     target.innerHTML = `<section class="case-opening wrap" id="case-intro">
-      <a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+      <a class="back-link" href="/projects/">${arrowIcon("left")} ${phrase("backWork")}</a>
       <div class="case-opening-heading"><p class="eyebrow">${phrase("project")}</p><h1>${escapeHtml(project.title)}</h1><p class="case-opening-subtitle">${escapeHtml(descriptionText)}</p></div>
     </section>${project.showCoverPreview && project.cover ? `<section class="case-opening-cover" id="case-cover"><img src="${escapeHtml(project.cover)}" alt="${escapeHtml(project.title)}" /></section>` : ""}${renderProjectNavigation(previous, next)}`;
     return;
@@ -665,7 +666,7 @@ function renderProject() {
   }
   target.innerHTML = `
     <section class="case-hero wrap">
-      <aside class="case-aside"><a class="back-link" href="work.html">${arrowIcon("left")} ${phrase("backWork")}</a>
+      <aside class="case-aside"><a class="back-link" href="/projects/">${arrowIcon("left")} ${phrase("backWork")}</a>
         ${project.caseIntro ? `<div class="case-aside-story"><h2>${escapeHtml(localize(project.caseIntro.title))}</h2>${project.caseIntro.paragraphs.map((paragraph) => `<p>${escapeHtml(localize(paragraph))}</p>`).join("")}</div>` : `<p class="case-intro-text">${escapeHtml(localize(project.intro))}</p>`}
       </aside>
       <div class="case-heading"><p class="hero-label">${phrase("project")} / ${escapeHtml(project.year)}</p><h1>${escapeHtml(project.title)}</h1>
