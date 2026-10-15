@@ -694,6 +694,8 @@ let motionStarted = false;
 let lineObserver;
 let dialogObserver;
 let motionResizeTimer;
+let motionLayoutWidth = 0;
+let motionViewportHeight = 0;
 
 function motionEnabled() {
   return !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !new URLSearchParams(location.search).has("figma-capture");
@@ -785,7 +787,8 @@ function queueMotionUpdate() {
 }
 
 function updateMotion() {
-  const height = window.innerHeight || 1;
+  // Mobile browser chrome changes height while scrolling, without changing text layout.
+  const height = (motionLayoutWidth <= 820 ? motionViewportHeight : window.innerHeight) || 1;
   const scrollTop = window.scrollY;
   const maxScroll = Math.max(0, document.documentElement.scrollHeight - height);
   const smoothFill = document.documentElement.classList.contains("home-smooth-scroll") && motionEnabled();
@@ -857,6 +860,8 @@ function setupAboutMotion(dialog) {
 
 function setupMotion() {
   if (!motionEnabled()) return;
+  motionLayoutWidth = window.innerWidth;
+  motionViewportHeight = window.innerHeight;
   lineObserver?.disconnect();
   const segmenter = typeof Intl.Segmenter === "function" ? new Intl.Segmenter(document.documentElement.lang, { granularity: "grapheme" }) : null;
   motionTargets = [];
@@ -883,8 +888,12 @@ function setupMotion() {
   window.addEventListener("scroll", queueMotionUpdate, { passive: true });
   document.addEventListener("visibilitychange", () => { if (!document.hidden) queueMotionUpdate(); });
   window.addEventListener("resize", () => {
+    if (window.innerWidth === motionLayoutWidth) { queueMotionUpdate(); return; }
     clearTimeout(motionResizeTimer);
-    motionResizeTimer = window.setTimeout(() => { setupMotion(); queueMotionUpdate(); }, 180);
+    motionResizeTimer = window.setTimeout(() => {
+      if (window.innerWidth !== motionLayoutWidth) setupMotion();
+      queueMotionUpdate();
+    }, 180);
   }, { passive: true });
 }
 

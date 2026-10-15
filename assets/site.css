@@ -834,7 +834,7 @@ body[data-page="home"] .statement{display:flex;flex-direction:column}
   .client-logos{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px}
   .client-logo-rotator{min-height:256px}
   .client-logo-slot{height:64px}
-  .client-logo-slot img{max-width:min(100%,200px);max-height:56px}
+  .client-logo-slot img{max-width:min(72%,144px);max-height:40px}
 }
 @media(max-width:360px){.approach-stat-content{min-height:144px}}
 @media(prefers-reduced-motion:reduce){.client-logo-rotator{row-gap:16px}.client-logos{grid-area:auto;grid-column:1;opacity:1;transition:none}}
